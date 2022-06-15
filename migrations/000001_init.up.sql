@@ -1,0 +1,1 @@
+-- тут тільки category, employee, customer_card

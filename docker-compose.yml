@@ -1,60 +1,36 @@
 version: "3"
 
 services:
-  mainapi:
-    image: mainapi
-    build: ./mainAPI
-    ports:
-      - 8080:8080
-    depends_on:
-      - "postgres"
-      - "redis"
-    environment:
-      FILE_PATH_API: "docerized.json"
-
   postgres:
     image: postgres
     container_name: 'postgres'
     ports:
-      - 5432:5432
+      - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: secret
+      POSTGRES_DB: test
 
-  authapi:
-    image: authapi
-    build: ./authAPI
+  api:
+    build:
+      context: ./
+    container_name: api
+    restart: always
+    working_dir: /app
     ports:
-      - 5000:5000
+      - "8080:8080"
     depends_on:
-      - "redis"
+      - postgres
     environment:
-      FILE_PATH_AUTH: "docerized.json"
-
-  redis:
-    image: docker.io/bitnami/redis:6.0-debian-10
-    container_name: 'redis'
-    environment:
-      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - 6379:6379
-    volumes:
-      - ./redis_data:/bitnami/redis/data
-      
-  proxy: 
-    image: proxy
-    build: ./proxy
-    ports:
-      - 2345:80
-    depends_on:
-      - "authapi"
-      - "postgres"
-      - "mainapi"
-    environment:
-      FILE_PATH_PROXY: "dockerized.json"
+      LISTEN_PORT: 8080
+      USERS_FILE_PATH: ./
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: secret
+      DB_NAME: postgres
+    command: ./server
 volumes:
   pgdata:
-  redis:
