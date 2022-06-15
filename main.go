@@ -1,7 +1,19 @@
 package ais
 
-import "fmt"
+import (
+	"ais/config"
+	"fmt"
+	"log"
+)
+
+const (
+	fileName = "config.json"
+)
 
 func main() {
-	fmt.Println(1234)
+	jsonConfig, err := config.New(fileName)
+	fmt.Println(jsonConfig)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
