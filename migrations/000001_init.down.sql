@@ -1,0 +1,5 @@
+DROP TABLE IF EXISTS category;
+
+DROP TABLE IF EXISTS employee;
+
+DROP TABLE IF EXISTS customer_card;
