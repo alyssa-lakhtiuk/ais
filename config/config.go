@@ -5,6 +5,7 @@ import (
 )
 
 var SigningKey string
+var Salt string
 
 type (
 	Config struct {
@@ -16,10 +17,10 @@ type (
 
 	Postgresql struct {
 		Password string `mapstructure:"Password"`
-		Username string `mapstructure:"User"`
+		User     string `mapstructure:"User"`
 		Host     string `mapstructure:"Host"`
 		Port     int    `mapstructure:"Port"`
-		DBname   string `mapstructure:"DB"`
+		DBName   string `mapstructure:"DB"`
 	}
 )
 

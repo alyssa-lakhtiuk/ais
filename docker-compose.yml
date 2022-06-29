@@ -5,32 +5,21 @@ services:
     image: postgres
     container_name: 'postgres'
     ports:
-      - "5432:5432"
+      - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: secret
-      POSTGRES_DB: test
 
   api:
-    build:
-      context: ./
-    container_name: api
+    image: aisapi
+    build: ./
     restart: always
-    working_dir: /app
     ports:
-      - "8080:8080"
+      - 8080:8080
     depends_on:
-      - postgres
-    environment:
-      LISTEN_PORT: 8080
-      USERS_FILE_PATH: ./
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_USER: postgres
-      DB_PASSWORD: secret
-      DB_NAME: postgres
-    command: ./server
+      - "postgres"
+
 volumes:
   pgdata:
