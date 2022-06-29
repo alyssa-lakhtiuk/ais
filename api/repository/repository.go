@@ -7,13 +7,13 @@ import (
 
 // tableNames:
 const (
-	employeeTable     = "Employee"
-	categoryTable     = "Category"
-	productTable      = "Product"
-	storeProductTable = "Store_Product"
-	saleTable         = "Sale"
-	customerCardTable = "Customer_Card"
-	checkTable        = "Check"
+	employeeTable     = "employee"
+	categoryTable     = "category"
+	productTable      = "product"
+	storeProductTable = "store_product"
+	saleTable         = "sale"
+	customerCardTable = "customer_Card"
+	checkTable        = "bill"
 )
 
 // all repository interfaces:

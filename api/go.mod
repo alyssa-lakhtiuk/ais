@@ -4,8 +4,8 @@ go 1.17
 
 require (
 	github.com/gin-gonic/gin v1.8.1
-	github.com/golang/mock v1.4.4
 	github.com/jmoiron/sqlx v1.3.5
+	github.com/lib/pq v1.10.6
 	github.com/spf13/viper v1.12.0
 )
 
@@ -16,6 +16,7 @@ require (
 	github.com/go-playground/universal-translator v0.18.0 // indirect
 	github.com/go-playground/validator/v10 v10.10.0 // indirect
 	github.com/goccy/go-json v0.9.7 // indirect
+	github.com/golang/mock v1.4.4 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect

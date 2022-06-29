@@ -17,15 +17,15 @@ const (
 	getAllEmployees   = "SELECT * FROM " + employeeTable + ";"
 )
 
-type EmployeePostgres struct {
+type employeePostgres struct {
 	db *sqlx.DB
 }
 
-func NewEmployeePostgres(db *sqlx.DB) *EmployeePostgres {
-	return &EmployeePostgres{db: db}
+func NewEmployeePostgres(db *sqlx.DB) *employeePostgres {
+	return &employeePostgres{db: db}
 }
 
-func (er *EmployeePostgres) CreateEmployee(employee entities.Employee) (int, error) {
+func (er *employeePostgres) CreateEmployee(employee entities.Employee) (int, error) {
 	var id int
 	row := er.db.QueryRow(createEmployee, employee.ID, employee.FirstName, employee.SurName, employee.Patronymic,
 		employee.Role, employee.Salary, employee.DateOfBirth, employee.DateOfStart, employee.PhoneNumber, employee.Street, employee.ZipCode)
@@ -36,19 +36,19 @@ func (er *EmployeePostgres) CreateEmployee(employee entities.Employee) (int, err
 	return id, nil
 }
 
-func (er *EmployeePostgres) UpdateEmployee(idEmployee string, employee entities.EmployeeInput) error {
+func (er *employeePostgres) UpdateEmployee(idEmployee string, employee entities.EmployeeInput) error {
 	_, err := er.db.Exec(updateEmployee, idEmployee, employee.SurName, employee.FirstName, employee.Patronymic,
 		employee.Role, employee.Salary, employee.DateOfBirth, employee.DateOfStart, employee.PhoneNumber, employee.City,
 		employee.Street, employee.ZipCode)
 	return err
 }
 
-func (er *EmployeePostgres) DeleteEmployee(id string) error {
+func (er *employeePostgres) DeleteEmployee(id string) error {
 	_, err := er.db.Exec(deleteEmployee, id)
 	return err
 }
 
-func (er *EmployeePostgres) GetEmployeeByName(name string) (entities.Employee, error) {
+func (er *employeePostgres) GetEmployeeByName(name string) (entities.Employee, error) {
 	var employee entities.Employee
 	if err := er.db.Get(&employee, getEmployeeByName, name); err != nil {
 		return entities.Employee{}, err
@@ -56,7 +56,7 @@ func (er *EmployeePostgres) GetEmployeeByName(name string) (entities.Employee, e
 	return employee, nil
 }
 
-func (er *EmployeePostgres) GetAllEmployees() ([]entities.Employee, error) {
+func (er *employeePostgres) GetAllEmployees() ([]entities.Employee, error) {
 	var employees []entities.Employee
 	if err := er.db.Select(&employees, getAllEmployees); err != nil {
 		return []entities.Employee{}, err

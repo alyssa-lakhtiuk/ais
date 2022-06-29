@@ -41,6 +41,7 @@ func New(fileName string) (Config, error) {
 	if err != nil {
 		return Config{}, err
 	}
+	Salt = conf.Salt
 	SigningKey = conf.SigningKey
 	return conf, nil
 }

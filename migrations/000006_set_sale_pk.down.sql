@@ -1,0 +1,1 @@
+ALTER TABLE sale DROP CONSTRAINT sale_pkey;

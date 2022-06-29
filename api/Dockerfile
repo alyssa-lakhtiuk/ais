@@ -2,7 +2,7 @@ FROM golang:1.17
 
 WORKDIR /dockerapp
 
-COPY . .
+COPY .. .
 
 RUN go mod vendor
 

@@ -3,6 +3,8 @@ package main
 import (
 	"ais/config"
 	"ais/repository"
+	"ais/web/controller"
+	"ais/web/service"
 	"fmt"
 	"github.com/jmoiron/sqlx"
 	"log"
@@ -25,4 +27,13 @@ func main() {
 		log.Fatal()
 	}
 	fmt.Println(db)
+	repos := repository.NewRepository(db)
+	services := service.NewService(repos)
+	handler := controller.NewHandler(services)
+
+	router := handler.NewRoutes()
+	router.Run()
+	//if err = http.ListenAndServe(jsonConfig.ListenUrl, handler); err != nil {
+	//	log.Fatal(err.Error())
+	//}
 }

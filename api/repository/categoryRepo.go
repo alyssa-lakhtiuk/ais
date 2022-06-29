@@ -15,15 +15,15 @@ const (
 	getAllCategories  = "SELECT * FROM " + categoryTable + ";"
 )
 
-type CategoryPostgres struct {
+type categoryPostgres struct {
 	db *sqlx.DB
 }
 
-func NewCategoryRepo(db *sqlx.DB) *CategoryPostgres {
-	return &CategoryPostgres{db: db}
+func NewCategoryRepo(db *sqlx.DB) *categoryPostgres {
+	return &categoryPostgres{db: db}
 }
 
-func (er *CategoryPostgres) CreateCategory(category entities.Category) (int, error) {
+func (er *categoryPostgres) CreateCategory(category entities.Category) (int, error) {
 	var id int
 	row := er.db.QueryRow(createCategory, category.Number, category.Name)
 	if err := row.Scan(&id); err != nil {
@@ -33,18 +33,18 @@ func (er *CategoryPostgres) CreateCategory(category entities.Category) (int, err
 	return id, nil
 }
 
-func (er *CategoryPostgres) UpdateCategory(numberCategory int, category entities.CategoryInput) error {
+func (er *categoryPostgres) UpdateCategory(numberCategory int, category entities.CategoryInput) error {
 	_, err := er.db.Exec(updateCategory, numberCategory, category.Name)
 	return err
 	return nil
 }
 
-func (er *CategoryPostgres) DeleteCategory(name string) error {
+func (er *categoryPostgres) DeleteCategory(name string) error {
 	_, err := er.db.Exec(deleteCategory, name)
 	return err
 }
 
-func (er *CategoryPostgres) GetCategoryByName(name string) (entities.Category, error) {
+func (er *categoryPostgres) GetCategoryByName(name string) (entities.Category, error) {
 	var employee entities.Category
 	if err := er.db.Get(&employee, getCategoryByName, name); err != nil {
 		return entities.Category{}, err
@@ -52,7 +52,7 @@ func (er *CategoryPostgres) GetCategoryByName(name string) (entities.Category, e
 	return employee, nil
 }
 
-func (er *CategoryPostgres) GetAllCategories() ([]entities.Category, error) {
+func (er *categoryPostgres) GetAllCategories() ([]entities.Category, error) {
 	var categories []entities.Category
 	if err := er.db.Select(&categories, getAllCategories); err != nil {
 		return []entities.Category{}, err

@@ -34,7 +34,7 @@ func (h *Handler) getAllCategories(c *gin.Context) {
 }
 
 func (h *Handler) getCategoryByName(c *gin.Context) {
-	categoryName := c.Param("Name")
+	categoryName := c.Param("name")
 	category, err := h.services.Category.GetByName(categoryName)
 	if err != nil {
 		// throw error response
@@ -57,8 +57,8 @@ func (h *Handler) updateCategory(c *gin.Context) {
 	c.JSON(http.StatusOK, "updated")
 }
 
-func (h *Handler) deleteCategory(c gin.Context) {
-	categoryName := c.Param("Name")
+func (h *Handler) deleteCategory(c *gin.Context) {
+	categoryName := c.Param("name")
 	err := h.services.Category.Delete(categoryName)
 	if err != nil {
 		// throw error response

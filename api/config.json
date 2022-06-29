@@ -1,5 +1,5 @@
 {
-  "ListeningURL": "localhost:8080",
+  "ListeningURL": ":8080",
   "SigningKey": "abrakadabra031647lkpoyc",
   "Salt" : "sameblaicrumblecomletely45687",
   "Postgresql": {
@@ -7,6 +7,6 @@
     "Password" : "secret",
     "DB" : "postgres",
     "Port" : 5432,
-    "Host": "localhost"
+    "Host": "postgres"
   }
 }

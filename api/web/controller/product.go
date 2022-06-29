@@ -1,6 +1,8 @@
 package controller
 
-import "ais/repository"
+import (
+	"ais/repository"
+)
 
 // це тільки контролер, який колає відповідні сервіси!
 // мейбі навіть зробити тут один файлик

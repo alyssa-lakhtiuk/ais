@@ -29,9 +29,12 @@ type Product struct {
 }
 
 type StoreProduct struct {
-	UPC       string `json:"upc" validate:"required"`
-	UPCProm   string `json:"UPCProm" validate:"required"`
-	IDProduct int    `json:"IDProduct" validate:"required"`
+	UPC                string  `json:"upc" validate:"required"`
+	SellingPrice       float64 `json:"selling_price" validate:"required"`
+	PromotionalProduct bool    `json:"promotional_product" validate:"required"`
+	UPCProm            string  `json:"UPCProm" validate:"required"`
+	IDProduct          int     `json:"IDProduct" validate:"required"`
+	ProductsNumber     int     `json:"products_number" validate:"required"`
 }
 
 type Category struct {

@@ -1,5 +1,3 @@
--- тут тільки category, employee, customer_card
-
 CREATE TABLE IF NOT EXISTS category (
     category_number  int PRIMARY KEY,
     category_name    varchar(50) NOT NULL
