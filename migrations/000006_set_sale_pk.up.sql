@@ -1,0 +1,1 @@
+ALTER TABLE sale ADD PRIMARY KEY (fk_upc, fk_check_number);

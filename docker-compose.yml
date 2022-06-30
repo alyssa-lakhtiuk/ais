@@ -1,6 +1,14 @@
 version: "3"
 
 services:
+  api:
+    image: aisapi
+    build: ./api
+    ports:
+      - 8080:8080
+    depends_on:
+      - "postgres"
+
   postgres:
     image: postgres
     container_name: 'postgres'
@@ -11,15 +19,5 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: secret
-
-  api:
-    image: aisapi
-    build: ./
-    restart: always
-    ports:
-      - 8080:8080
-    depends_on:
-      - "postgres"
-
 volumes:
   pgdata:
