@@ -2,6 +2,7 @@ package repository
 
 import (
 	"ais/entities"
+	"fmt"
 	"github.com/jmoiron/sqlx"
 )
 
@@ -10,9 +11,10 @@ const (
 		"VALUES ($1, $2);"
 	updateCategory = "UPDATE " + categoryTable + " SET category_name=$2 " +
 		"WHERE category_number=$1;"
-	deleteCategory    = "DELETE FROM " + categoryTable + " WHERE category_name = $1;"
-	getCategoryByName = "SELECT * FROM " + categoryTable + " WHERE category_name=$1;"
-	getAllCategories  = "SELECT * FROM " + categoryTable + ";"
+	deleteCategory      = "DELETE FROM " + categoryTable + " WHERE category_name = $1;"
+	getCategoryByName   = "SELECT * FROM " + categoryTable + " WHERE category_name=$1;"
+	getCategoryByNumber = "SELECT * FROM " + categoryTable + " WHERE category_number=$1;"
+	getAllCategories    = "SELECT * FROM " + categoryTable + ";"
 )
 
 type categoryPostgres struct {
@@ -45,11 +47,19 @@ func (er *categoryPostgres) DeleteCategory(name string) error {
 }
 
 func (er *categoryPostgres) GetCategoryByName(name string) (entities.Category, error) {
-	var employee entities.Category
-	if err := er.db.Get(&employee, getCategoryByName, name); err != nil {
-		return entities.Category{}, err
+	var category entities.Category
+	if err := er.db.Get(&category, getCategoryByName, name); err != nil {
+		return entities.Category{}, fmt.Errorf("such category doesn't exist")
 	}
-	return employee, nil
+	return category, nil
+}
+
+func (er *categoryPostgres) GetCategoryByNumber(number int) (entities.Category, error) {
+	var category entities.Category
+	if err := er.db.Get(&category, getCategoryByNumber, number); err != nil {
+		return entities.Category{}, fmt.Errorf("such category doesn't exist")
+	}
+	return category, nil
 }
 
 func (er *categoryPostgres) GetAllCategories() ([]entities.Category, error) {

@@ -39,7 +39,7 @@ func (p *SalePostgres) DeleteSale(upc string, checkNumber string) error {
 	return err
 }
 
-func (p *SalePostgres) GetSaleByName(upc, checkNumber string) (entities.Sale, error) {
+func (p *SalePostgres) GetSaleByUpcCheck(upc, checkNumber string) (entities.Sale, error) {
 	var product entities.Sale
 	if err := p.db.Get(&product, getSaleByUpcCheckNum, upc, checkNumber); err != nil {
 		return entities.Sale{}, err

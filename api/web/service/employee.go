@@ -3,6 +3,7 @@ package service
 import (
 	"ais/entities"
 	"ais/repository"
+	"time"
 )
 
 type EmployeeService struct {
@@ -30,5 +31,10 @@ func NewEmployeeService(repo repository.EmployeeRepo) *EmployeeService {
 }
 
 func (s *EmployeeService) Create(employee entities.Employee) (int, error) {
+	if time.Now().Year()-employee.DateOfBirth.Year() < 18 {
+		// return err "Employee must be adult"
+	}
+	phone := employee.PhoneNumber
+	ValidPhone(phone)
 	return s.repo.CreateEmployee(employee)
 }

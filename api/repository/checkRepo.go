@@ -34,13 +34,14 @@ func (er *checkPostgres) CreateCheck(check entities.Check) (int, error) {
 }
 
 func (er *checkPostgres) UpdateCheck(numberCheck string, check entities.Check) error {
+	// ????????????????????
 	_, err := er.db.Exec(updateCheck, numberCheck, check.PrintDate, check.SumTotal, check.Vat, check.IdEmployee, check.CardNumber)
 	return err
 	return nil
 }
 
-func (er *checkPostgres) DeleteCheck(name string) error {
-	_, err := er.db.Exec(deleteCheck, name)
+func (er *checkPostgres) DeleteCheck(num string) error {
+	_, err := er.db.Exec(deleteCheck, num)
 	return err
 }
 

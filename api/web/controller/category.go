@@ -21,7 +21,8 @@ func (h *Handler) createCategory(c *gin.Context) {
 		// throw error response
 	}
 	c.JSON(http.StatusOK, map[string]interface{}{
-		"id": id,
+		"categoryNumber": input.Number,
+		"id":             id,
 	})
 }
 
@@ -40,6 +41,10 @@ func (h *Handler) getCategoryByName(c *gin.Context) {
 		// throw error response
 	}
 	c.JSON(http.StatusOK, category)
+	//err = respondWithJSON(h, http.StatusOK, category)
+	//if err != nil {
+	//	respondWithErrorLog(t.log, w, http.StatusInternalServerError, err)
+	//}
 }
 
 func (h *Handler) updateCategory(c *gin.Context) {

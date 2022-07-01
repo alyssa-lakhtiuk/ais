@@ -10,9 +10,10 @@ const (
 		"VALUES ($1, $2, $3, $4);"
 	updateProduct = "UPDATE " + productTable + " SET category_number=$2, product_name=$3, description=$4 " +
 		"WHERE id_product=$1;"
-	deleteProduct    = "DELETE FROM " + productTable + " WHERE id_product = $1;"
-	getProductByName = "SELECT * FROM " + productTable + " WHERE product_name=$1;"
-	getAllProducts   = "SELECT * FROM " + productTable + ";"
+	deleteProduct      = "DELETE FROM " + productTable + " WHERE id_product = $1;"
+	getProductByName   = "SELECT * FROM " + productTable + " WHERE product_name=$1;"
+	getProductByNumber = "SELECT * FROM " + productTable + " WHERE id_product=$1;"
+	getAllProducts     = "SELECT * FROM " + productTable + ";"
 )
 
 type ProductPostgres struct {
@@ -42,6 +43,14 @@ func (p *ProductPostgres) DeleteProduct(productId int) error {
 func (p *ProductPostgres) GetProductByName(name string) (entities.Product, error) {
 	var product entities.Product
 	if err := p.db.Get(&product, getProductByName, name); err != nil {
+		return entities.Product{}, err
+	}
+	return product, nil
+}
+
+func (p *ProductPostgres) GetProductByNumber(number int) (entities.Product, error) {
+	var product entities.Product
+	if err := p.db.Get(&product, getProductByNumber, number); err != nil {
 		return entities.Product{}, err
 	}
 	return product, nil

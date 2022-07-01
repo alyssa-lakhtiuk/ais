@@ -14,6 +14,7 @@ const (
 		"WHERE card_number=$1;"
 	deleteCustomerCard      = "DELETE FROM " + customerCardTable + " WHERE card_number = $1;"
 	getCustomerCardByNumber = "SELECT * FROM " + customerCardTable + " WHERE card_number=$1;"
+	getCustomerCardByName   = "SELECT * FROM " + customerCardTable + " WHERE cust_name=$1;"
 	getAllCustomerCards     = "SELECT * FROM " + customerCardTable + ";"
 )
 
@@ -27,7 +28,7 @@ func NewCustomerCardPostgres(db *sqlx.DB) *customerCardPostgres {
 
 func (er *customerCardPostgres) CreateCustomerCard(customerCard entities.CustomerCard) (int, error) {
 	var id int
-	row := er.db.QueryRow(createEmployee, customerCard.Number, customerCard.CustomerSurname, customerCard.CustomerName,
+	row := er.db.QueryRow(createCustomerCard, customerCard.Number, customerCard.CustomerSurname, customerCard.CustomerName,
 		customerCard.CustomerPatronymic, customerCard.PhoneNumber, customerCard.City, customerCard.Street,
 		customerCard.ZipCode, customerCard.Percent)
 	if err := row.Scan(&id); err != nil {
@@ -38,20 +39,28 @@ func (er *customerCardPostgres) CreateCustomerCard(customerCard entities.Custome
 }
 
 func (er *customerCardPostgres) UpdateCustomerCard(cardNumber string, customerCard entities.CustomerCard) error {
-	_, err := er.db.Exec(updateEmployee, cardNumber, customerCard.CustomerSurname, customerCard.CustomerName,
+	_, err := er.db.Exec(updateCustomerCard, cardNumber, customerCard.CustomerSurname, customerCard.CustomerName,
 		customerCard.CustomerPatronymic, customerCard.PhoneNumber, customerCard.City, customerCard.Street,
 		customerCard.ZipCode, customerCard.Percent)
 	return err
 }
 
 func (er *customerCardPostgres) DeleteCustomerCard(num string) error {
-	_, err := er.db.Exec(deleteEmployee, num)
+	_, err := er.db.Exec(deleteCustomerCard, num)
 	return err
 }
 
 func (er *customerCardPostgres) GetCustomerCardByNumber(num string) (entities.CustomerCard, error) {
 	var cc entities.CustomerCard
-	if err := er.db.Get(&cc, getEmployeeByName, num); err != nil {
+	if err := er.db.Get(&cc, getCustomerCardByNumber, num); err != nil {
+		return entities.CustomerCard{}, err
+	}
+	return cc, nil
+}
+
+func (er *customerCardPostgres) GetCustomerCardByName(name string) (entities.CustomerCard, error) {
+	var cc entities.CustomerCard
+	if err := er.db.Get(&cc, getCustomerCardByName, name); err != nil {
 		return entities.CustomerCard{}, err
 	}
 	return cc, nil
@@ -59,7 +68,7 @@ func (er *customerCardPostgres) GetCustomerCardByNumber(num string) (entities.Cu
 
 func (er *customerCardPostgres) GetAllCustomerCards() ([]entities.CustomerCard, error) {
 	var cc []entities.CustomerCard
-	if err := er.db.Select(&cc, getAllEmployees); err != nil {
+	if err := er.db.Select(&cc, getAllCustomerCards); err != nil {
 		return []entities.CustomerCard{}, err
 	}
 	return cc, nil

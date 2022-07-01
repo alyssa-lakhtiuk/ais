@@ -6,10 +6,15 @@ import (
 )
 
 type productService struct {
-	repo repository.ProductRepo
+	repo         repository.ProductRepo
+	repoCategory repository.CategoryRepo
 }
 
 func (s *productService) Create(product entities.Product) (int, error) {
+	_, err := s.repoCategory.GetCategoryByNumber(product.CategoryNum)
+	if err != nil {
+		// throw err "Category of this product doesn't exist"
+	}
 	return s.repo.CreateProduct(product)
 }
 
@@ -29,6 +34,6 @@ func (s *productService) GetAll() ([]entities.Product, error) {
 	return s.repo.GetAllProducts()
 }
 
-func NewProductService(repo repository.ProductRepo) *productService {
-	return &productService{repo: repo}
+func NewProductService(repo repository.ProductRepo, repoCategory repository.CategoryRepo) *productService {
+	return &productService{repo: repo, repoCategory: repoCategory}
 }

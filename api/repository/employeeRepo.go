@@ -14,6 +14,7 @@ const (
 		"WHERE id_employee=$1;"
 	deleteEmployee    = "DELETE FROM " + employeeTable + " WHERE id_employee = $1;"
 	getEmployeeByName = "SELECT * FROM " + employeeTable + " WHERE empl_name=$1;"
+	getEmployeeById   = "SELECT * FROM " + employeeTable + " WHERE id_employee=$1;"
 	getAllEmployees   = "SELECT * FROM " + employeeTable + ";"
 )
 
@@ -51,6 +52,14 @@ func (er *employeePostgres) DeleteEmployee(id string) error {
 func (er *employeePostgres) GetEmployeeByName(name string) (entities.Employee, error) {
 	var employee entities.Employee
 	if err := er.db.Get(&employee, getEmployeeByName, name); err != nil {
+		return entities.Employee{}, err
+	}
+	return employee, nil
+}
+
+func (er *employeePostgres) GetEmployeeById(id string) (entities.Employee, error) {
+	var employee entities.Employee
+	if err := er.db.Get(&employee, getEmployeeById, id); err != nil {
 		return entities.Employee{}, err
 	}
 	return employee, nil

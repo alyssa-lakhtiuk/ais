@@ -23,6 +23,7 @@ type EmployeeRepo interface {
 	UpdateEmployee(idEmployee string, employee entities.EmployeeInput) error
 	DeleteEmployee(id string) error
 	GetEmployeeByName(name string) (entities.Employee, error)
+	GetEmployeeById(id string) (entities.Employee, error)
 	GetAllEmployees() ([]entities.Employee, error)
 }
 
@@ -31,15 +32,16 @@ type ProductRepo interface {
 	UpdateProduct(idProduct int, product entities.ProductInput) error
 	DeleteProduct(productId int) error
 	GetProductByName(name string) (entities.Product, error)
+	GetProductByNumber(number int) (entities.Product, error)
 	GetAllProducts() ([]entities.Product, error)
 }
 
 type StoreProductRepo interface {
-	createProduct(product entities.Product) (int, error)
-	updateProduct(idProduct string, product entities.Product) error
-	deleteProduct(idProduct string) error
-	getProductByID(idProduct string) (entities.Product, error)
-	getAllProducts() ([]entities.Product, error)
+	CreateStoreProduct(product entities.StoreProduct) (int, error)
+	UpdateStoreProduct(upc string, product entities.StoreProduct) error
+	DeleteStoreProduct(upc string) error
+	GetStoreProductByUpc(name string) (entities.StoreProduct, error)
+	GetAllStoreProducts() ([]entities.StoreProduct, error)
 }
 
 type CategoryRepo interface {
@@ -47,34 +49,51 @@ type CategoryRepo interface {
 	UpdateCategory(categoryNum int, category entities.CategoryInput) error
 	DeleteCategory(name string) error
 	GetCategoryByName(categoryName string) (entities.Category, error)
+	GetCategoryByNumber(categoryNumber int) (entities.Category, error)
 	GetAllCategories() ([]entities.Category, error)
 }
 
 type CheckRepo interface {
-	createCheck(check entities.Check) (int, error)
-	deleteCheck(check entities.Check) error
-	getCheckByNumber(checkId string) (entities.Check, error)
-	getAllChecks() ([]entities.Check, error)
+	CreateCheck(check entities.Check) (int, error)
+	DeleteCheck(name string) error
+	GetCheckByNumber(checkId string) (entities.Check, error)
+	GetAllChecks() ([]entities.Check, error)
 }
 
 type CustomerCardRepo interface {
-	createCustomerCard(cc entities.CustomerCard) (int, error)
-	updateCustomerCard(ccId string, category entities.CustomerCard) error
-	deleteCustomerCard(ccId string) error
-	getCustomerCardByName(ccId string) (entities.CustomerCard, error)
-	getAllCustomerCards() ([]entities.CustomerCard, error)
+	CreateCustomerCard(cc entities.CustomerCard) (int, error)
+	UpdateCustomerCard(ccId string, category entities.CustomerCard) error
+	DeleteCustomerCard(ccId string) error
+	GetCustomerCardByName(ccId string) (entities.CustomerCard, error)
+	GetCustomerCardByNumber(num string) (entities.CustomerCard, error)
+	GetAllCustomerCards() ([]entities.CustomerCard, error)
+}
+
+type SaleRepo interface {
+	CreateSale(sale entities.Sale) (int, error)
+	DeleteSale(upc string, checkNumber string) error
+	GetSaleByUpcCheck(upc, checkNumber string) (entities.Sale, error)
+	GetAllSales() ([]entities.Sale, error)
 }
 
 type Repository struct {
 	EmployeeRepo
 	ProductRepo
+	StoreProductRepo
 	CategoryRepo
+	CheckRepo
+	CustomerCardRepo
+	SaleRepo
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
-		EmployeeRepo: NewEmployeePostgres(db),
-		ProductRepo:  NewProductPostgres(db),
-		CategoryRepo: NewCategoryRepo(db),
+		EmployeeRepo:     NewEmployeePostgres(db),
+		ProductRepo:      NewProductPostgres(db),
+		StoreProductRepo: NewStoreProductRepo(db),
+		CategoryRepo:     NewCategoryRepo(db),
+		CheckRepo:        NewCheckRepo(db),
+		CustomerCardRepo: NewCustomerCardPostgres(db),
+		SaleRepo:         NewSalePostgres(db),
 	}
 }

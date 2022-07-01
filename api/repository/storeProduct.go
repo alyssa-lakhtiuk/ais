@@ -42,14 +42,14 @@ func (er *storeProductPostgres) UpdateStoreProduct(upc string, product entities.
 	return nil
 }
 
-func (er *storeProductPostgres) DeleteStoreProduct(id int) error {
-	_, err := er.db.Exec(deleteStoreProduct, id)
+func (er *storeProductPostgres) DeleteStoreProduct(upc string) error {
+	_, err := er.db.Exec(deleteStoreProduct, upc)
 	return err
 }
 
-func (er *storeProductPostgres) GetStoreProductByName(name string) (entities.StoreProduct, error) {
+func (er *storeProductPostgres) GetStoreProductByUpc(upc string) (entities.StoreProduct, error) {
 	var st_product entities.StoreProduct
-	if err := er.db.Get(&st_product, getStoreProductByName, name); err != nil {
+	if err := er.db.Get(&st_product, getStoreProductByName, upc); err != nil {
 		return entities.StoreProduct{}, err
 	}
 	return st_product, nil
