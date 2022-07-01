@@ -11,7 +11,15 @@ h1 {
     height: 20px;
     margin-left: 100px;
     margin-top: 80px;
-    margin-bottom: 130px;
+    margin-bottom: 20px;
+}
+
+.line1 {
+    width: 1250px;
+    margin-left: 100px;
+    margin-top: -25px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid black;
 }
 
 .title1 {
@@ -24,49 +32,99 @@ h1 {
     margin-top: 100px;
 }
 
-.line1 {
-    width: 400px;
-    margin-left: 100px;
-    margin-top: -25px;
-    margin-bottom: 50px;
-    border-bottom: 1px solid black;
-}
-
-.radio1 {
-    margin-top: 30px;
-    margin-left: 160px;
-    margin-bottom: 10px;
-}
-
-label {
+.button0 {
     font-family: cursive;
-    color: #92D050;
+    border: 1px solid #50742b;
+    background-color: #92D050;
+    color: #ffffff;
+    padding-left: 40px;
+    padding-right: 40px;
     text-align: center;
     font-size: 25px;
-    margin-left: 10px;
-    margin-bottom: 0px;
+    margin-top: 80px;
+    margin-left: 125px;
 }
-
-.line4 {
-    width: 400px;
-    margin-top: 40px;
-    margin-left: 100px;
-    margin-bottom: 30px;
-    border-bottom: 1px solid black;
+.button1 {
+    font-family: cursive;
+    border: 1px solid #50742b;
+    background-color: #92D050;
+    color: #ffffff;
+    padding-left: 40px;
+    padding-right: 40px;
+    text-align: center;
+    font-size: 25px;
+    margin-top: 80px;
+    margin-left: 22px;
 }
 
 .line2 {
-    height: 352px;
-    margin-top: -382px;
+    height: 200px;
     margin-left: 100px;
-    margin-bottom: 30px;
+    margin-right: 10px;
+    margin-top: -132px;
     border-left: 1px solid black;
 }
 
 .line3 {
-    height: 352px;
-    margin-top: -382px;
-    margin-left: 500px;
-    margin-bottom: 30px;
+    height: 200px;
+    margin-top: -200px;
+    margin-left: 1349px;
     border-left: 1px solid black;
+}
+
+.line4 {
+    width: 1250px;
+    margin-bottom: -30px;
+    margin-left: 100px;
+    border-bottom: 1px solid black;
+}
+
+.button2 {
+    font-family: cursive;
+    border: 1px solid #92D050;
+    background-color: #ffffff;
+    padding-left: 40px;
+    padding-right: 40px;
+    text-align: center;
+    font-size: 25px;
+    margin-top: 80px;
+    margin-left: 125px;
+}
+
+.button3 {
+    font-family: cursive;
+    border: 1px solid #92D050;
+    background-color: #ffffff;
+    padding-left: 40px;
+    padding-right: 40px;
+    text-align: center;
+    font-size: 25px;
+    margin-top: 80px;
+    margin-left: 22px;
+}
+
+.button4 {
+    font-family: cursive;
+    border: 1px solid #ffb14d;
+    background-color: #ffffff;
+    color: #ffb14d;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    font-size: 20px;
+    margin-top: 120px;
+    margin-left: 30px;
+}
+
+.button5 {
+    font-family: cursive;
+    border: 1px solid #ffb14d;
+    background-color: #ffffff;
+    color: #ffb14d;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    font-size: 20px;
+    margin-top: 80px;
+    margin-left: 20px;
 }

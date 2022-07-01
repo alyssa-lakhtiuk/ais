@@ -47,6 +47,12 @@ h3 {
     margin-bottom: 20px;
 }
 
+p {
+    color: #ee5331;
+    margin-left: 530px;
+    margin-bottom: 20px;
+}
+
 button {
     font-family: cursive;
     border: 1px solid #50742b;
@@ -56,9 +62,9 @@ button {
     padding-right: 80px;
     text-align: center;
     font-size: 25px;
-    margin-top: 60px;
+    margin-top: 5px;
     margin-left: 595px;
-    margin-bottom: 0px;
+
 }
 
 .line4 {
