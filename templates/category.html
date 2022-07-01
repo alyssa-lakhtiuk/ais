@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>category</title>
+    <link rel="stylesheet" href="category.css">
+</head>
+
+<body>
+
+<div class="heading">
+    <h1>Category 🧺</h1>
+</div>
+
+<form method="POST">
+    <button formaction="/add_category" class="button2">Add new category</button>
+    <button formaction="/print_report_category" class="button3">Print report</button>
+    </form>
+
+<form action="/sort_category_name" method="POST">
+    <select id="sort_category" name="sort_category_name">
+        <option value="asc">ASC</option>
+        <option value="desc">DESC</option>
+        <!--        <input type="submit" value="Submit">-->
+    </select>
+</form>
+
+<h3>Sort by Name: </h3>
+
+<table >
+    <!-- Table header -->
+    <thead>
+    <tr>
+        <th scope="col">Category ID</th>
+        <th scope="col">Category Name</th>
+
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <!-- Table footer -->
+    <tfoot>
+    <tr>
+        <td>END</td>
+    </tr>
+    </tfoot>
+    <!-- Table body -->
+    <tbody>
+    {{ range . }}
+    <tr>
+        <td>{{ .CategoryID }}</td>
+        <td>{{ .CategoryName }}</td>
+
+        <!--            <td><input type="button"-->
+        <!--                       value="submit" onclick="show()" /></td>-->
+        <!--                       formaction="" /></td>-->
+
+
+        <!-- може бути не назва атрибутів -->
+    </tr>
+
+    {{ end }}
+    </tbody>
+</table>
+
+<form method="POST">
+    <button formaction="/manager_homepage" class="button4">Homepage</button>
+    <button formaction="/log_out" class="button5">Log out</button>
+</form>
+<script>
+    function show() {
+        var rowId =
+            event.target.parentNode.parentNode.id;
+        //this gives id of tr whose button was clicked
+        var data =
+            document.getElementById(rowId).querySelectorAll(".row-data");
+        /*returns array of all elements with
+        "row-data" class within the row with given id*/
+
+        var name = data[0].innerHTML;
+        var age = data[1].innerHTML;
+
+        alert("Name: " + name + "\nAge: " + age);
+    }
+</script>
+</body>
+
+</html>

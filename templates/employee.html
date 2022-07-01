@@ -18,6 +18,7 @@
 <form method="POST">
     <button formaction="/add_employee" class="button2">Add new employee</button>
     <button formaction="/print_report_employee" class="button3">Print report</button>
+    <button formaction="/search_employee" class="button3">Specific search</button>
 </form>
 
 <form action="/sort_employee_surname" method="POST">
@@ -28,7 +29,7 @@
     </select>
 </form>
 
-<h3>Sort by: </h3>
+<h3>Sort by surname: </h3>
 
 <form action="/sort_employee_role" method="POST">
     <select class="sel2" id="sort_role" name="sort_role">
