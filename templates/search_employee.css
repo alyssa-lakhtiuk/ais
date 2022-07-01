@@ -6,61 +6,35 @@ h1 {
     height: 20px;
     margin-left: 50px;
     margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-
-.button2 {
-    font-family: cursive;
-    border: 1px solid #000000;
-    background-color: #ffffff;
-    padding-left: 40px;
-    padding-right: 40px;
-    text-align: center;
-    font-size: 25px;
-    margin-left: 525px;
-}
-
-.button3 {
-    font-family: cursive;
-    border: 1px solid #000000;
-    background-color: #ffffff;
-    padding-left: 40px;
-    padding-right: 40px;
-    text-align: center;
-    font-size: 25px;
-    margin-left: 40px;
-}
-
-.sel1 {
-    appearance: none;
-    -webkit-appearance: none;
-    -webkit-border-radius: 0px;
-    font-family: cursive;
-    border: 1px solid #000000;
-    padding-left: 30px;
-    padding-right: 30px;
-    text-align: center;
-    font-size: 25px;
-    margin-bottom: 20px;
-    margin-top: 50px;
-    margin-left: 150px;
+    margin-bottom: 100px;
 
 }
 
-.sel2 {
-    appearance: none;
-    -webkit-appearance: none;
-    -webkit-border-radius: 0px;
+.form-control {
     font-family: cursive;
     border: 1px solid #000000;
-    padding-left: 30px;
-    padding-right: 30px;
-    text-align: center;
-    font-size: 25px;
-    margin-bottom: 20px;
+    padding-left: 5px;
+    padding-right: 120px;
+    text-align: left;
+    font-size: 20px;
+    /*margin-bottom: 15px;*/
+    margin-left: 270px;
     margin-top: 10px;
-    margin-left: 150px;
+    margin-bottom: 30px;
+}
+
+.button1 {
+    font-family: cursive;
+    border: 1px solid #c27004;
+    background-color: #ffb14d;
+    color: #ffffff;
+    padding-left: 80px;
+    padding-right: 80px;
+    text-align: center;
+    font-size: 25px;
+    margin-left: 20px;
+    margin-top: 5px;
+
 }
 
 h3 {
@@ -70,9 +44,10 @@ h3 {
     color: #000000;
     height: 20px;
     margin-left: 50px;
-    margin-top: -60px;
-
+    margin-top: -70px;
+    margin-bottom: 30px;
 }
+
 th {
     font-size: 11px;
     font-family: cursive;

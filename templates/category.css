@@ -32,7 +32,7 @@ h1 {
     margin-left: 40px;
 }
 
-.sel1 {
+select {
     appearance: none;
     -webkit-appearance: none;
     -webkit-border-radius: 0px;
@@ -44,23 +44,8 @@ h1 {
     font-size: 25px;
     margin-bottom: 20px;
     margin-top: 50px;
-    margin-left: 150px;
+    margin-left: 250px;
 
-}
-
-.sel2 {
-    appearance: none;
-    -webkit-appearance: none;
-    -webkit-border-radius: 0px;
-    font-family: cursive;
-    border: 1px solid #000000;
-    padding-left: 30px;
-    padding-right: 30px;
-    text-align: center;
-    font-size: 25px;
-    margin-bottom: 20px;
-    margin-top: 10px;
-    margin-left: 150px;
 }
 
 h3 {
