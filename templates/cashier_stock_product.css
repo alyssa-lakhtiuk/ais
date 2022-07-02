@@ -6,9 +6,8 @@ h1 {
     height: 20px;
     margin-left: 50px;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 }
-
 
 .button2 {
     font-family: cursive;
@@ -19,6 +18,18 @@ h1 {
     text-align: center;
     font-size: 25px;
     margin-left: 525px;
+}
+.form-control {
+    font-family: cursive;
+    border: 1px solid #000000;
+    padding-left: 5px;
+    padding-right: 120px;
+    text-align: left;
+    font-size: 20px;
+    /*margin-bottom: 15px;*/
+    /*margin-left: 20px;*/
+    /*margin-top: 10px;*/
+    margin-bottom: 30px;
 }
 
 .button3 {
@@ -32,37 +43,30 @@ h1 {
     margin-left: 40px;
 }
 
-.sel1 {
+select {
     appearance: none;
     -webkit-appearance: none;
     -webkit-border-radius: 0px;
     font-family: cursive;
     border: 1px solid #000000;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
     text-align: center;
     font-size: 25px;
     margin-bottom: 20px;
     margin-top: 50px;
-    margin-left: 150px;
+    /*margin-left: 20px;*/
 
 }
-
-.sel2 {
-    appearance: none;
-    -webkit-appearance: none;
-    -webkit-border-radius: 0px;
+label{
     font-family: cursive;
-    border: 1px solid #000000;
-    padding-left: 30px;
-    padding-right: 30px;
+    /*padding-left: px;*/
+    /*padding-right: 20px;*/
     text-align: center;
     font-size: 25px;
-    margin-bottom: 20px;
-    margin-top: 10px;
-    margin-left: 150px;
+    margin-left: 10px;
+    margin-bottom: 15px;
 }
-
 h3 {
     font-size: 25px;
     font-family: cursive;
@@ -74,12 +78,26 @@ h3 {
 
 }
 th {
-    font-size: 11px;
+    font-size: 20px;
     font-family: cursive;
     font-weight: 50;
     color: #000000;
+    padding-right: 90px;
+    padding-left: 10px;
 }
+.button1 {
+    font-family: cursive;
+    border: 1px solid #c27004;
+    background-color: #ffb14d;
+    color: #ffffff;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    font-size: 25px;
+    margin-left: 20px;
+    margin-top: 5px;
 
+}
 .button4 {
     font-family: cursive;
     border: 1px solid #ffb14d;

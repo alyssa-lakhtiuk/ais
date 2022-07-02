@@ -6,7 +6,7 @@ h1 {
     height: 20px;
     margin-left: 50px;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 
@@ -44,7 +44,7 @@ select {
     font-size: 25px;
     margin-bottom: 20px;
     margin-top: 50px;
-    margin-left: 250px;
+    margin-left: 5px;
 
 }
 
@@ -89,4 +89,38 @@ th {
     font-size: 20px;
     margin-top: 160px;
     margin-left: 20px;
+}
+
+label{
+    font-family: cursive;
+
+    text-align: center;
+    font-size: 25px;
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.button1 {
+    font-family: cursive;
+    border: 1px solid #c27004;
+    background-color: #ffb14d;
+    color: #ffffff;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    font-size: 25px;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+.form-control {
+    font-family: cursive;
+    border: 1px solid #000000;
+    padding-left: 5px;
+    padding-right: 20px;
+    text-align: left;
+    font-size: 20px;
+    /*margin-bottom: 15px;*/
+    margin-left: 20px;
+    /*margin-top: 10px;*/
+    margin-bottom: 30px;
 }
