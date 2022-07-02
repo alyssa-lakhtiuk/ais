@@ -3,6 +3,7 @@ package service
 import (
 	"ais/entities"
 	"ais/repository"
+	"fmt"
 	"time"
 )
 
@@ -31,17 +32,25 @@ func NewEmployeeService(repo repository.EmployeeRepo) *EmployeeService {
 }
 
 func (s *EmployeeService) Create(employee entities.Employee) (int, error) {
+	for true {
+		emplId := GenerateRandomStr(10)
+		cat, _ := s.repo.GetEmployeeById(emplId)
+		if cat.ID != emplId {
+			employee.ID = emplId
+			break
+		}
+	}
 	if time.Now().Year()-employee.DateOfBirth.Year() < 18 {
-		// return err "Employee must be adult"
+		return 0, fmt.Errorf("employee must be adult")
 	}
 	phone := employee.PhoneNumber
 	err := ValidPhone(phone)
 	if err != nil {
-		return 0, err
+		return 0, fmt.Errorf("employee phone is invalid")
 	}
 	err = IsUnsigned(int(employee.Salary))
 	if err != nil {
-		return 0, err
+		return 0, fmt.Errorf("must employee pay us")
 	}
 	return s.repo.CreateEmployee(employee)
 }

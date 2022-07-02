@@ -12,7 +12,7 @@ const (
 	productTable      = "product"
 	storeProductTable = "store_product"
 	saleTable         = "sale"
-	customerCardTable = "customer_Card"
+	customerCardTable = "customer_card"
 	checkTable        = "bill"
 )
 

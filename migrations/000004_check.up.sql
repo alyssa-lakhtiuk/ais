@@ -4,8 +4,8 @@ CREATE TABLE IF NOT EXISTS bill
     print_date     timestamp NOT NULL,
     sum_total      decimal(13,4) NOT NULL,
     vat            decimal(13,4) NOT NULL,
-    fk_id_employee varchar(10) references employee(id_employee) ON UPDATE CASCADE ON DELETE NO ACTION,
-    fk_card_number varchar(12) references customer_card(card_number) ON UPDATE CASCADE ON DELETE CASCADE
+    fk_id_employee varchar(10) references employee(id_employee) ON UPDATE CASCADE ON DELETE NO ACTION NOT NULL,
+    fk_card_number varchar(12) references customer_card(card_number) ON UPDATE CASCADE ON DELETE CASCADE NULL
 
  --   CONSTRAINT fk_id_employee
    --     FOREIGN KEY(id_employee)

@@ -11,10 +11,11 @@ type productService struct {
 }
 
 func (s *productService) Create(product entities.Product) (int, error) {
-	_, err := s.repoCategory.GetCategoryByNumber(product.CategoryNum)
-	if err != nil {
-		// throw err "Category of this product doesn't exist"
-	}
+	//_, err := s.repoCategory.GetCategoryByNumber(product.CategoryNum)
+	//if err != nil {
+	//	return 0, err
+	//	// throw err "Category of this product doesn't exist"
+	//}
 	return s.repo.CreateProduct(product)
 }
 

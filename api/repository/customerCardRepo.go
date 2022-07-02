@@ -2,6 +2,7 @@ package repository
 
 import (
 	"ais/entities"
+	"fmt"
 	"github.com/jmoiron/sqlx"
 )
 
@@ -15,7 +16,7 @@ const (
 	deleteCustomerCard      = "DELETE FROM " + customerCardTable + " WHERE card_number = $1;"
 	getCustomerCardByNumber = "SELECT * FROM " + customerCardTable + " WHERE card_number=$1;"
 	getCustomerCardByName   = "SELECT * FROM " + customerCardTable + " WHERE cust_name=$1;"
-	getAllCustomerCards     = "SELECT * FROM " + customerCardTable + ";"
+	getAllCustomerCards     = "SELECT * FROM " + customerCardTable + " ;"
 )
 
 type customerCardPostgres struct {
@@ -68,10 +69,9 @@ func (er *customerCardPostgres) GetCustomerCardByName(name string) (entities.Cus
 
 func (er *customerCardPostgres) GetAllCustomerCards() ([]entities.CustomerCard, error) {
 	var cc []entities.CustomerCard
-
-	rows, err := er.db.Query(getAllChecks)
+	rows, err := er.db.Query(getAllCustomerCards)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("unable to execute the query")
 	}
 	defer rows.Close()
 	for rows.Next() {
@@ -84,9 +84,5 @@ func (er *customerCardPostgres) GetAllCustomerCards() ([]entities.CustomerCard, 
 		}
 		cc = append(cc, customerCard)
 	}
-
-	////if err := er.db.Select(&cc, getAllCustomerCards); err != nil {
-	//	return []entities.CustomerCard{}, err
-	//}
 	return cc, nil
 }

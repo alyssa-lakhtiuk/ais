@@ -2,8 +2,8 @@ CREATE TABLE IF NOT EXISTS sale
 (
     product_number    int NOT NULL,
     selling_price     decimal(13,4) NOT NULL,
-    fk_upc varchar(12) references store_product(upc) ON UPDATE CASCADE ON DELETE NO ACTION,
-    fk_check_number varchar(10) references bill(bill_number) ON UPDATE CASCADE ON DELETE CASCADE
+    fk_upc varchar(12) references store_product(upc) ON UPDATE CASCADE ON DELETE NO ACTION NOT NULL,
+    fk_check_number varchar(10) references bill(bill_number) ON UPDATE CASCADE ON DELETE CASCADE NOT NULL
    -- CONSTRAINT fk_upc
      --   FOREIGN KEY(upc)
        --     REFERENCES store_product(upc)

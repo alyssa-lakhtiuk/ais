@@ -9,6 +9,9 @@ const (
 	createStoreProduct = "INSERT INTO " + storeProductTable + " (upc, selling_price, promotional_product, product_number," +
 		" upc_prom, fk_id_product) " +
 		"VALUES ($1, $2, $3, $4, $5, $6);"
+	createStoreProductWithoutUpc = "INSERT INTO " + storeProductTable + " (upc, selling_price, promotional_product, product_number," +
+		" fk_id_product) " +
+		"VALUES ($1, $2, $3, $4, $5);"
 	updateStoreProduct = "UPDATE " + storeProductTable + " SET selling_price=$2, promotional_product=$3, product_number=$4," +
 		" upc_prom=$5, fk_id_product=$6 " +
 		"WHERE upc=$1;"
@@ -26,14 +29,27 @@ func NewStoreProductRepo(db *sqlx.DB) *storeProductPostgres {
 }
 
 func (er *storeProductPostgres) CreateStoreProduct(product entities.StoreProduct) (int, error) {
-	var id int
-	row := er.db.QueryRow(createStoreProduct, product.UPC, product.SellingPrice, product.PromotionalProduct,
-		product.ProductsNumber, product.UPCProm, product.IDProduct)
-	if err := row.Scan(&id); err != nil {
-		return 0, err
+	//var id int
+	if product.UPCProm == "" {
+		_, err := er.db.Exec(createStoreProduct, product.UPC, product.SellingPrice, product.PromotionalProduct,
+			product.ProductsNumber, product.IDProduct)
+		if err != nil {
+			return 0, err
+		}
+	} else {
+		_, err := er.db.Exec(createStoreProduct, product.UPC, product.SellingPrice, product.PromotionalProduct,
+			product.ProductsNumber, product.UPCProm, product.IDProduct)
+		if err != nil {
+			return 0, err
+		}
 	}
+	//row := er.db.QueryRow(createStoreProduct, product.UPC, product.SellingPrice, product.PromotionalProduct,
+	//	product.ProductsNumber, product.UPCProm, product.IDProduct)
+	//if err := row.Scan(&id); err != nil {
+	//	return 0, err
+	//}
 
-	return id, nil
+	return 1, nil
 }
 
 func (er *storeProductPostgres) UpdateStoreProduct(upc string, product entities.StoreProduct) error {

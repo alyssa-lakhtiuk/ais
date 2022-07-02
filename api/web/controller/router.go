@@ -22,28 +22,28 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	// Category pages
 	router.POST("category/", h.createCategory)
 	router.GET("categories/", h.getAllCategories)
-	router.DELETE("category/:id", h.deleteCategory)
+	router.DELETE("category/:name", h.deleteCategory)
 	router.PUT("category/:id", h.updateCategory)
+	// Product pages
+	router.POST("product", h.createProduct)
+	router.GET("products", h.getAllProducts)
+	router.DELETE("product/:id", h.deleteProduct)
+	router.PUT("product/:id", h.updateProduct)
 	// Customer card pages
-	router.POST("customer-card/", h.createCustomerCard)
-	router.GET("customer-cards/", h.getAllCustomerCards)
+	router.POST("customer-card", h.createCustomerCard)
+	router.GET("customer-cards", h.getAllCustomerCards)
 	router.DELETE("customer-cards/:id", h.deleteCustomerCard)
 	router.PUT("customer-card/:id", h.updateCustomerCard)
 	// Sale pages
 	// Check pages
 	router.POST("check", h.createCheck)
 	router.GET("checks", h.getAllChecks)
-	router.DELETE("check{id}", h.deleteCheck)
+	router.DELETE("check/:id", h.deleteCheck)
 	// Store product pages
 	router.POST("store-product", h.createStoreProduct)
 	router.GET("store-products", h.getAllStoreProducts)
 	router.DELETE("store-product/:id", h.deleteStoreProduct)
 	router.PUT("store-product/:id", h.updateStoreProduct)
-	// Store product pages
-	router.POST("product", h.createProduct)
-	router.GET("products", h.getAllProducts)
-	router.DELETE("product/:id", h.deleteProduct)
-	router.PUT("product/:id", h.updateProduct)
 
 	////router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	//

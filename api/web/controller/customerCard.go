@@ -24,37 +24,45 @@ func (h *Handler) getAllCustomerCards(c *gin.Context) {
 	cc, err := h.services.CustomerCard.GetAll()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
+		return
 		// throw error response
 	}
 	c.JSON(http.StatusOK, cc)
 }
 
 func (h *Handler) getCustomerCardByNumber(c *gin.Context) {
-	categoryName := c.Param("card_number")
+	categoryName := c.Param("id")
 	category, err := h.services.CustomerCard.GetByNumber(categoryName)
 	if err != nil {
+		respondWithError(c, http.StatusBadRequest, "unable to get customer card")
+		return
 		// throw error response
 	}
 	c.JSON(http.StatusOK, category)
 }
 
 func (h *Handler) updateCustomerCard(c *gin.Context) {
-	id := c.Param("card_number")
+	id := c.Param("id")
 	var input entities.CustomerCard
 	if err := c.BindJSON(&input); err != nil {
 		// throw error response
+		respondWithError(c, http.StatusBadRequest, "unable to parse input data")
+		return
 	}
 	if err := h.services.CustomerCard.Update(id, input); err != nil {
 		// throw error response
+		respondWithError(c, http.StatusBadRequest, "unable to update")
+		return
 	}
-	c.JSON(http.StatusOK, "updated")
+	c.JSON(http.StatusOK, id)
 }
 
 func (h *Handler) deleteCustomerCard(c *gin.Context) {
-	id := c.Param("productId")
+	id := c.Param("id")
 	err := h.services.CustomerCard.Delete(id)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
+		return
 	}
-	c.JSON(http.StatusOK, "deleted")
+	c.JSON(http.StatusOK, id)
 }

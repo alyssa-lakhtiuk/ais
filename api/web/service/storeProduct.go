@@ -11,15 +11,14 @@ type storeProductService struct {
 }
 
 func (s *storeProductService) Create(product entities.StoreProduct) (int, error) {
-	_, err := s.repoAdditional.GetProductByNumber(product.IDProduct)
-	if err != nil {
-		// throw err "Product of this store product doesn't exist"
-	}
-	err = IsUnsigned(int(product.SellingPrice))
+	//_, err := s.repoAdditional.GetProductByNumber(product.IDProduct)
+	//if err != nil {
+	//	// throw err "Product of this store product doesn't exist"
+	//}
+	err := IsUnsigned(int(product.SellingPrice))
 	if err != nil {
 		return 0, err
 	}
-
 	return s.repo.CreateStoreProduct(product)
 }
 

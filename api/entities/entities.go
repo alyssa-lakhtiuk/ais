@@ -1,6 +1,7 @@
 package entities
 
 import (
+	_ "github.com/lib/pq"
 	"time"
 )
 
@@ -77,7 +78,7 @@ type EmployeeInput struct {
 	SurName     string    `json:"lastname"`
 	Patronymic  string    `json:"patronymic"`
 	Role        string    `json:"role"`
-	Salary      int       `json:"salary"`
+	Salary      float64   `json:"salary"`
 	DateOfBirth time.Time `json:"DateOfBirth"`
 	DateOfStart time.Time `json:"DateOfStart"`
 	PhoneNumber string    `json:"phoneNumber"`

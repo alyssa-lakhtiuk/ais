@@ -1,40 +1,76 @@
 All test data
 Categories (cheese):
 {
-    "name":"semi-soft"
+    "name":"semi-soft_cheese"
 }
 
 {
-    "name":"hard"  
+    "name":"soft_cheese"
 }
 
 {
-    "name":"medium-hard"  
+    "name":"hard_cheese"
 }
 
 {
-    "name":"semi-hard"  
-}
-
-
-{
-"name":"white wine"
+    "name":"medium-hard_cheese"
 }
 
 {
-"name":"rose wine"
+    "name":"semi-hard_cheese"
 }
 
 {
-"name":"sparkling wine"
+	"name":"soft-ripened_cheese"
 }
 
 {
-"name":"dessert wine"
+	"name":"blue_cheese"
 }
 
 {
-"name":"fortified wine"
+	"name":"smear-ripened_cheese"
+}
+
+{
+	"name":"washed-rind_cheese"
+}
+
+Categories (wine):
+{
+"name":"dry_white_wine"
+}
+
+{
+"name":"sweet_white_wine"
+}
+
+{
+"name":"rich_white_wine"
+}
+
+{
+"name":"light_red_wine"
+}
+
+{
+"name":"medium_red_wine"
+}
+
+{
+"name":"bold_red_wine"
+}
+
+{
+"name":"sparkling_wine"
+}
+
+{
+"name":"dessert_wine"
+}
+
+{
+"name":"fortified_wine"
 }
 
 Customer cards:
@@ -62,44 +98,164 @@ Customer cards:
 }
 
 Products:
-{
-	"categoryNum":
-	"name": "Champagne"
-	"Characteristics":
-}
 
 {
-"categoryNum":
-"name": "Champagne"
-"Characteristics":
+"categoryNum": "semi-soft"
+"name": "Havarti"
+"Characteristics": "Danish cow's milk cheese"
 }
 
-Check input: {
-	"upc": ""
+{
+"categoryNum": "semi-soft"
+"name": "Munster"
+"Characteristics": "strong-smelling cheese with a subtle taste"
 }
 
+{
+"categoryNum": "semi-soft"
+"name": "Butterkäse"
+"Characteristics": "pasteurised cow's milk cheese, distinctive orange rind"
+}
+
+{
+"categoryNum": "semi-soft"
+"name": "Port Salut"
+"Characteristics": "cow's milk cheese moderately popular in Germanic Europe"
+}
+
+{
+"categoryNum": "soft"
+"name": "Neufchâtel"
+"Characteristics": "slightly crumbly, mold-ripened, bloomy-rind cheese made in Normandy"
+}
+
+{
+"categoryNum": "hard"
+"name": "Grana Padano"
+"Characteristics": "crumbly-textured cheese is made with unpasteurized cows' milk"
+}
+
+{
+"categoryNum": "hard"
+"name": "Parmesan"
+"Characteristics": "Italian granular cheese produced from cow's milk and aged at least 12 months"
+}
+
+{
+"categoryNum": "hard"
+"name": "Pecorino"
+"Characteristics": "Italian cheeses made from sheep's milk"
+}
+
+{
+"categoryNum": "medium-hard"
+"name": "Gouda"
+"Characteristics": "sweet, creamy, yellow cow's milk cheese originating from the Netherlands"
+}
+
+{
+"categoryNum": "medium-hard"
+"name": "Cantal cheese"
+"Characteristics": "uncooked firm cheese produced in the Auvergne region of central France"
+}
+
+
+{
+"categoryNum": "semi-hard"
+"name": "Cheddar"
+"Characteristics": "natural cheese that is relatively hard, off-white and sometimes sharp-tasting"
+}
+
+{
+"categoryNum": "semi-hard"
+"name": "Monterey Jack"
+"Characteristics": "mild flavor and slight sweetness"
+}
+
+
+{
+"categoryNum": "soft-ripened"
+"name": "Brie"
+"Characteristics": "pale in color with a slight grayish tinge under a rind of white mould"
+}
+
+{
+"categoryNum": "soft-ripened"
+"name": "Camembert"
+"Characteristics": "moist, soft, creamy, surface-ripened cow's milk cheese"
+}
+
+{
+"categoryNum": "washed-rind"
+"name": "Appenzeller"
+"Characteristics": "cow's-milk cheese produced in the Appenzellerland region of northeast Switzerland"
+}
+
+{
+"categoryNum": "washed-rind"
+"name": "Limburger"
+"Characteristics": "originated in the Herve area, known for its strong smell caused by the bacterium"
+}
+
+{
+"categoryNum": "blue"
+"name": "Gorgonzola"
+"Characteristics": "veined blue cheese, originally from Italy, made from unskimmed cow's milk"
+}
+
+
+Products(wine):
+{
+"categoryNum": "sparkling"
+"name":"Champagne"
+"Characteristics": "A crisp, flinty taste, sometimes ascribed to the chalky soil"
+}
+
+{
+"categoryNum":"sparkling"
+"name": "Prosecco"
+"Characteristics": "has incredible floral aromas, which add to the tasting experience"
+}
+
+{
+"categoryNum": "dry"
+"name": "Pinot Grigio"
+"Characteristics": "tends to exhibit white peach notes, slight citrus tings and a hint of pear"
+}
+
+{
+"categoryNum": ""
+"name": ""
+"Characteristics": ""
+}
+
+{
+"categoryNum": ""
+"name": ""
+"Characteristics": ""
+}
 Managers:
 
 {
-	"firstname" :"Brad",
-	"lastname" :"Pitt",
-	"role" :"manager",
-	"salary" :"1500.5",
-	"DateOfBirth" :"1968-12-18T00:00:00Z",
-	"DateOfStart" :"2015-01-01T00:00:00Z",
-	"phoneNumber" :"0864258690",
-	"city" :"Lviv",
-	"street" :"Rivna",
-	"zipCode" :"78560"
+"firstname" :"Brad",
+"lastname" :"Pitt",
+"role" :"manager",
+"salary" :1500.5,
+"DateOfBirth" :"1968-12-18T00:00:00Z",
+"DateOfStart" :"2015-01-01T00:00:00Z",
+"phoneNumber" :"0864258690",
+"city" :"Lviv",
+"street" :"Rivna",
+"zipCode" :"78560"
 }
 
-kasiru:
+cashiers:
 
 {
 	"firstname" :"Freddie",
 	"lastname" :"Mercury",
 	"role" :"cashier",
-	"salary" :"1305.54",
+	"salary" :1305.54,
 	"DateOfBirth" :"1946-09-05T00:00:00Z",
 	"DateOfStart" :"2019-03-10T00:00:00Z",
 	"phoneNumber" :"0978654230",
@@ -120,3 +276,16 @@ kasiru:
 	"street" :"Green",
 	"zipCode" :"001458"
 }
+
+Store products:
+{
+	"upc":"A457T",
+	"selling_price": 45.2,
+	"promotional_product": false,
+	"IDProduct":911,
+	"products_number":5
+}
+
+Check input:
+{
+"upc":"

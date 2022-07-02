@@ -6,9 +6,9 @@ import (
 )
 
 const (
-	createProduct = "INSERT INTO " + productTable + " (id_product, category_number, product_name, description) " +
+	createProduct = "INSERT INTO " + productTable + " (id_product, fk_category_number, product_name, description) " +
 		"VALUES ($1, $2, $3, $4);"
-	updateProduct = "UPDATE " + productTable + " SET category_number=$2, product_name=$3, description=$4 " +
+	updateProduct = "UPDATE " + productTable + " SET fk_category_number=$2, product_name=$3, description=$4 " +
 		"WHERE id_product=$1;"
 	deleteProduct      = "DELETE FROM " + productTable + " WHERE id_product = $1;"
 	getProductByName   = "SELECT * FROM " + productTable + " WHERE product_name=$1;"
@@ -21,13 +21,16 @@ type ProductPostgres struct {
 }
 
 func (p *ProductPostgres) CreateProduct(product entities.Product) (int, error) {
-	var id int
-	row := p.db.QueryRow(createProduct, product.Id, product.CategoryNum, product.Name, product.Characteristics)
-	if err := row.Scan(&id); err != nil {
+	var idp int
+	//row := p.db.QueryRow(createProduct, product.Id, product.CategoryNum, product.Name, product.Characteristics)
+	//if err := row.Scan(&idp); err != nil {
+	//	return 0, err
+	//}
+	_, err := p.db.Exec(createProduct, product.Id, product.CategoryNum, product.Name, product.Characteristics)
+	if err != nil {
 		return 0, err
 	}
-
-	return id, nil
+	return idp, nil
 }
 
 func (p *ProductPostgres) UpdateProduct(idProduct int, product entities.Product) error {
@@ -58,7 +61,7 @@ func (p *ProductPostgres) GetProductByNumber(number int) (entities.Product, erro
 
 func (p *ProductPostgres) GetAllProducts() ([]entities.Product, error) {
 	var products []entities.Product
-	rows, err := p.db.Query(getAllChecks)
+	rows, err := p.db.Query(getAllProducts)
 	if err != nil {
 		return nil, err
 	}

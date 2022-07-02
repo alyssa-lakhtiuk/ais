@@ -10,10 +10,14 @@ func (h *Handler) createSale(c *gin.Context) {
 	var input entities.Sale
 	if err := c.BindJSON(&input); err != nil {
 		// throw error response
+		respondWithError(c, http.StatusBadRequest, "unable to parse input data")
+		return
 	}
 	id, err := h.services.Sale.Create(input)
 	if err != nil {
 		// throw error response
+		respondWithError(c, http.StatusBadRequest, "unable to create sale")
+		return
 	}
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"id": id,

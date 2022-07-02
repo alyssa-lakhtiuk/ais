@@ -10,10 +10,14 @@ func (h *Handler) createCheck(c *gin.Context) {
 	var input []entities.CheckInput
 	if err := c.BindJSON(&input); err != nil {
 		// throw error response
+		respondWithError(c, http.StatusBadRequest, "unable to parse input data")
+		return
 	}
 	id, err := h.services.Check.Create(input)
 	if err != nil {
 		// throw error response
+		respondWithError(c, http.StatusBadRequest, "unable to create check")
+		return
 	}
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"id": id,
@@ -25,6 +29,7 @@ func (h *Handler) getAllChecks(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
 		// throw error response
+		return
 	}
 	c.JSON(http.StatusOK, cc)
 }
@@ -34,6 +39,8 @@ func (h *Handler) getCheckByNumber(c *gin.Context) {
 	category, err := h.services.Check.GetByNumber(checkNum)
 	if err != nil {
 		// throw error response
+		respondWithError(c, http.StatusBadRequest, "unable to get check")
+		return
 	}
 	c.JSON(http.StatusOK, category)
 }
@@ -43,6 +50,7 @@ func (h *Handler) deleteCheck(c *gin.Context) {
 	err := h.services.Check.Delete(id)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
+		return
 	}
-	c.JSON(http.StatusOK, "deleted")
+	c.JSON(http.StatusOK, id)
 }

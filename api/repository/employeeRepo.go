@@ -9,6 +9,9 @@ const (
 	createEmployee = "INSERT INTO " + employeeTable + " (id_employee, empl_surname, empl_name, empl_patronymic, " +
 		"empl_role, salary, date_of_birth, date_of_start, phone_number, city, street, zip_code) " +
 		"VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12);"
+	createEmployeeWithoutPatronymic = "INSERT INTO " + employeeTable + " (id_employee, empl_surname, empl_name, " +
+		"empl_role, salary, date_of_birth, date_of_start, phone_number, city, street, zip_code) " +
+		"VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);"
 	updateEmployee = "UPDATE " + employeeTable + " SET empl_surname=$2, empl_name=$3, empl_patronymic=$4, " +
 		"empl_role=$5, salary=$6, date_of_birth=$7, date_of_start=$8, phone_number=$9, city=$10, street=$11, zip_code=$12 " +
 		"WHERE id_employee=$1;"
@@ -27,14 +30,25 @@ func NewEmployeePostgres(db *sqlx.DB) *employeePostgres {
 }
 
 func (er *employeePostgres) CreateEmployee(employee entities.Employee) (int, error) {
+	var err error
 	var id int
-	row := er.db.QueryRow(createEmployee, employee.ID, employee.FirstName, employee.SurName, employee.Patronymic,
-		employee.Role, employee.Salary, employee.DateOfBirth, employee.DateOfStart, employee.PhoneNumber, employee.Street, employee.ZipCode)
-	if err := row.Scan(&id); err != nil {
+	if employee.Patronymic != "" {
+		_, err = er.db.Exec(createEmployee, employee.ID, employee.SurName, employee.FirstName, employee.Patronymic,
+			employee.Role, employee.Salary, employee.DateOfBirth, employee.DateOfStart, employee.PhoneNumber, employee.City,
+			employee.Street, employee.ZipCode)
+	} else {
+		row := er.db.QueryRow(createEmployeeWithoutPatronymic, employee.ID, employee.SurName, employee.FirstName,
+			employee.Role, employee.Salary, employee.DateOfBirth, employee.DateOfStart, employee.PhoneNumber, employee.City, employee.Street, employee.ZipCode)
+		if err := row.Scan(&id); err != nil {
+			return 0, err
+		}
+		//_, err = er.db.Exec(createEmployeeWithoutPatronymic, employee.ID, employee.SurName, employee.FirstName,
+		//	employee.Role, employee.Salary, employee.DateOfBirth, employee.DateOfStart, employee.PhoneNumber, employee.Street, employee.ZipCode)
+	}
+	if err != nil {
 		return 0, err
 	}
-
-	return id, nil
+	return 1, nil
 }
 
 func (er *employeePostgres) UpdateEmployee(idEmployee string, employee entities.EmployeeInput) error {

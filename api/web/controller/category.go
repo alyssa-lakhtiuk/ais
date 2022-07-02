@@ -8,17 +8,18 @@ import (
 )
 
 func (h *Handler) createCategory(c *gin.Context) {
-	//employeeId, err := strconv.Atoi(c.Param("id"))
-	//if err != nil {
-	//	// throw error response
-	//}
+
 	var input entities.Category
 	if err := c.BindJSON(&input); err != nil {
 		// throw error response
+		respondWithError(c, http.StatusBadRequest, "unable to parse input data")
+		return
 	}
 	id, err := h.services.Category.Create(input)
 	if err != nil {
 		// throw error response
+		respondWithError(c, http.StatusBadRequest, "unable to create category")
+		return
 	}
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"categoryNumber": input.Number,
@@ -30,6 +31,7 @@ func (h *Handler) getAllCategories(c *gin.Context) {
 	categories, err := h.services.Category.GetAll()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
+		return
 		// throw error response
 	}
 	c.JSON(http.StatusOK, categories)
@@ -45,6 +47,8 @@ func (h *Handler) getCategoryByName(c *gin.Context) {
 	category, err := h.services.Category.GetByName(categoryName)
 	if err != nil {
 		// throw error response
+		respondWithError(c, http.StatusBadRequest, "unable to get category")
+		return
 	}
 	c.JSON(http.StatusOK, category)
 	//err = respondWithJSON(h, http.StatusOK, category)
@@ -56,14 +60,21 @@ func (h *Handler) getCategoryByName(c *gin.Context) {
 func (h *Handler) updateCategory(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
+		respondWithError(c, http.StatusBadRequest, "unable to parse input url")
+		c.JSON(http.StatusOK, id)
+		return
 		// throw error response
 	}
 	var input entities.CategoryInput
 	if err := c.BindJSON(&input); err != nil {
 		// throw error response
+		respondWithError(c, http.StatusBadRequest, "unable to parse input data")
+		return
 	}
 	if err := h.services.Category.Update(id, input); err != nil {
 		// throw error response
+		respondWithError(c, http.StatusBadRequest, "unable to update")
+		return
 	}
 	c.JSON(http.StatusOK, "updated")
 }
@@ -73,6 +84,7 @@ func (h *Handler) deleteCategory(c *gin.Context) {
 	err := h.services.Category.Delete(categoryName)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
+		return
 	}
-	c.JSON(http.StatusOK, "deleted")
+	c.JSON(http.StatusOK, categoryName)
 }
