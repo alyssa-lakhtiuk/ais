@@ -1,4 +1,4 @@
-All test data
+//All test data
 Categories (cheese):
 {
     "name":"semi-soft"  
@@ -19,6 +19,129 @@ Categories (cheese):
 {
     "name":"semi-hard"  
 }
+
+{
+	"name":"soft-ripened"
+}
+
+{
+	"name":"blue"
+}
+
+{
+	"name":"smear-ripened"
+}
+
+{
+	"name":"washed-rind"
+}
+
+Products:
+{
+"categoryNum": "semi-soft"
+"name": "Havarti"
+"Characteristics": "Danish cow's milk cheese"
+}
+
+{
+"categoryNum": "semi-soft"
+"name": "Munster"
+"Characteristics": "strong-smelling cheese with a subtle taste"
+}
+
+{
+"categoryNum": "semi-soft"
+"name": "Butterkäse"
+"Characteristics": "pasteurised cow's milk cheese, distinctive orange rind"
+}
+
+{
+"categoryNum": "semi-soft"
+"name": "Port Salut"
+"Characteristics": "cow's milk cheese moderately popular in Germanic Europe"
+}
+
+{
+"categoryNum": "soft"
+"name": "Neufchâtel"
+"Characteristics": "slightly crumbly, mold-ripened, bloomy-rind cheese made in Normandy"
+}
+
+{
+"categoryNum": "hard"
+"name": "Grana Padano"
+"Characteristics": "crumbly-textured cheese is made with unpasteurized cows' milk"
+}
+
+{
+"categoryNum": "hard"
+"name": "Parmesan"
+"Characteristics": "Italian granular cheese produced from cow's milk and aged at least 12 months"
+}
+
+{
+"categoryNum": "hard"
+"name": "Pecorino"
+"Characteristics": "Italian cheeses made from sheep's milk"
+}
+
+{
+"categoryNum": "medium-hard"
+"name": "Gouda"
+"Characteristics": "sweet, creamy, yellow cow's milk cheese originating from the Netherlands"
+}
+
+{
+"categoryNum": "medium-hard"
+"name": "Cantal cheese"
+"Characteristics": "uncooked firm cheese produced in the Auvergne region of central France"
+}
+
+
+{
+"categoryNum": "semi-hard"
+"name": "Cheddar"
+"Characteristics": "natural cheese that is relatively hard, off-white and sometimes sharp-tasting"
+}
+
+{
+"categoryNum": "semi-hard"
+"name": "Monterey Jack"
+"Characteristics": "mild flavor and slight sweetness"
+}
+
+
+{
+"categoryNum": "soft-ripened"
+"name": "Brie"
+"Characteristics": "pale in color with a slight grayish tinge under a rind of white mould"
+}
+
+{
+"categoryNum": "soft-ripened"
+"name": "Camembert"
+"Characteristics": "moist, soft, creamy, surface-ripened cow's milk cheese"
+}
+
+{
+"categoryNum": "washed-rind"
+"name": "Appenzeller"
+"Characteristics": "cow's-milk cheese produced in the Appenzellerland region of northeast Switzerland"
+}
+
+{
+"categoryNum": "washed-rind"
+"name": "Limburger"
+"Characteristics": "originated in the Herve area, known for its strong smell caused by the bacterium"
+}
+
+{
+"categoryNum": "blue"
+"name": "Gorgonzola"
+"Characteristics": "veined blue cheese, originally from Italy, made from unskimmed cow's milk"
+}
+
+
 
 Customer cards:
 {
@@ -42,13 +165,6 @@ Customer cards:
 	"city": "Kyiv",
 	"zipCode": "17895",
 	"percent": 15
-}
-
-Products:
-{
-"categoryNum": 
-"name":
-"Characteristics":
 }
 
 
