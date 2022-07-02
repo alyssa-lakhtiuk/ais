@@ -62,7 +62,7 @@ func (h *Handler) updateEmployee(c *gin.Context) {
 	c.JSON(http.StatusOK, "updated")
 }
 
-func (h *Handler) deleteEmployee(c gin.Context) {
+func (h *Handler) deleteEmployee(c *gin.Context) {
 	employeeId := c.Param("id")
 	err := h.services.Employee.Delete(employeeId)
 	if err != nil {

@@ -29,7 +29,7 @@ type Category interface {
 
 type Product interface {
 	Create(product entities.Product) (int, error)
-	Update(productId int, product entities.ProductInput) error
+	Update(productId int, product entities.Product) error
 	Delete(productId int) error
 	GetByName(productName string) (entities.Product, error) // ? add func getByID
 	GetAll() ([]entities.Product, error)
@@ -59,7 +59,7 @@ type CustomerCard interface {
 }
 
 type Check interface {
-	Create(check entities.Check) (int, error)
+	Create(check []entities.CheckInput) (int, error)
 	Delete(num string) error
 	// Update(ccNum string, cc entities.CustomerCard) error
 	GetByNumber(num string) (entities.Check, error)
@@ -85,6 +85,6 @@ func NewService(repos *repository.Repository) *Service {
 		StoreProduct: NewStoreProductService(repos.ProductRepo, repos.StoreProductRepo),
 		Sale:         NewSaleService(repos.SaleRepo, repos.StoreProductRepo, repos.CheckRepo),
 		CustomerCard: NewCustomerCardServiceService(repos.CustomerCardRepo),
-		Check:        NewCheckService(repos.CheckRepo, repos.EmployeeRepo, repos.CustomerCardRepo),
+		Check:        NewCheckService(repos.CheckRepo, repos.EmployeeRepo, repos.CustomerCardRepo, repos.StoreProductRepo),
 	}
 }

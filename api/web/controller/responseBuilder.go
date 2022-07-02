@@ -5,7 +5,7 @@ import (
 	"crypto/sha1"
 	"encoding/json"
 	"fmt"
-	"net/http"
+	"github.com/gin-gonic/gin"
 )
 
 const (
@@ -13,18 +13,22 @@ const (
 	badFieldError              = "field name cannot be empty"
 )
 
-func respondWithError(w http.ResponseWriter, code int, message string) error {
-	return respondWithJSON(w, code, ErrorMessage{Message: message})
+func respondWithError(ctx *gin.Context, code int, message string) error {
+	return respondWithJSON(ctx, code, ErrorMessage{Message: message})
 }
 
-func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) error {
+func respondWithJSON(ctx *gin.Context, code int, payload interface{}) error {
 	response, err := json.Marshal(payload)
 	if err != nil {
 		return err
 	}
+	w := ctx.Writer
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(code)
-	w.Write(response)
+	_, err = w.Write(response)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 

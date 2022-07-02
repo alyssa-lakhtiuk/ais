@@ -29,7 +29,7 @@ type EmployeeRepo interface {
 
 type ProductRepo interface {
 	CreateProduct(product entities.Product) (int, error)
-	UpdateProduct(idProduct int, product entities.ProductInput) error
+	UpdateProduct(idProduct int, product entities.Product) error
 	DeleteProduct(productId int) error
 	GetProductByName(name string) (entities.Product, error)
 	GetProductByNumber(number int) (entities.Product, error)
@@ -54,7 +54,7 @@ type CategoryRepo interface {
 }
 
 type CheckRepo interface {
-	CreateCheck(check entities.Check) (int, error)
+	CreateCheck(randomStr string, checkInput []entities.CheckInput) (int, error)
 	DeleteCheck(name string) error
 	GetCheckByNumber(checkId string) (entities.Check, error)
 	GetAllChecks() ([]entities.Check, error)

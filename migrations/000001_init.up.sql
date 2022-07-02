@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS category (
     category_number  int PRIMARY KEY,
-    category_name    varchar(50) NOT NULL
+    category_name    varchar(50) unique NOT NULL
     );
 
 CREATE TABLE IF NOT EXISTS employee (

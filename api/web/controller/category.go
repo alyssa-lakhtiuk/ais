@@ -27,11 +27,17 @@ func (h *Handler) createCategory(c *gin.Context) {
 }
 
 func (h *Handler) getAllCategories(c *gin.Context) {
-	employees, err := h.services.Category.GetAll()
+	categories, err := h.services.Category.GetAll()
 	if err != nil {
+		c.JSON(http.StatusBadRequest, err)
 		// throw error response
 	}
-	c.JSON(http.StatusOK, employees)
+	c.JSON(http.StatusOK, categories)
+	//c.JSON(http.StatusOK, map[string]interface{}{
+	//	"categoryNumber": categories[0].Number,
+	//	"id":             categories[0].Name,
+	//})
+	//respondWithJSON(c, http.StatusOK, categories)
 }
 
 func (h *Handler) getCategoryByName(c *gin.Context) {
@@ -66,8 +72,7 @@ func (h *Handler) deleteCategory(c *gin.Context) {
 	categoryName := c.Param("name")
 	err := h.services.Category.Delete(categoryName)
 	if err != nil {
-		// throw error response
+		c.JSON(http.StatusBadRequest, err)
 	}
-
 	c.JSON(http.StatusOK, "deleted")
 }

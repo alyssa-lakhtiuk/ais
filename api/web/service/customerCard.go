@@ -39,6 +39,13 @@ func NewCustomerCardServiceService(repo repository.CustomerCardRepo) *customerCa
 
 func (s *customerCardService) Create(cc entities.CustomerCard) (int, error) {
 	phone := cc.PhoneNumber
-	ValidPhone(phone)
+	err := ValidPhone(phone)
+	if err != nil {
+		return 0, err
+	}
+	err = IsUnsigned(cc.Percent)
+	if err != nil {
+		return 0, err
+	}
 	return s.repo.CreateCustomerCard(cc)
 }

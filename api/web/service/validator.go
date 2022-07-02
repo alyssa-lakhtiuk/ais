@@ -1,6 +1,11 @@
 package service
 
-import "regexp"
+import (
+	"math/rand"
+	"regexp"
+)
+
+const random = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 func ValidPhone(phone string) error {
 	hasLetters, _ := regexp.MatchString(`[a-zA-Z]`, phone)
@@ -19,4 +24,12 @@ func IsUnsigned(num int) error {
 		// err invalid number
 	}
 	return nil
+}
+
+func GenerateRandomStr(length int) string {
+	b := make([]byte, length)
+	for i := range b {
+		b[i] = random[rand.Int63()%int64(len(random))]
+	}
+	return string(b)
 }

@@ -48,5 +48,9 @@ func (s *saleService) Create(sale entities.Sale) (int, error) {
 	if err != nil {
 		// throw there is no such check
 	}
+	err = IsUnsigned(int(sale.SellingPrice))
+	if err != nil {
+		return 0, err
+	}
 	return s.repo.CreateSale(sale)
 }

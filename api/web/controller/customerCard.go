@@ -1,0 +1,60 @@
+package controller
+
+import (
+	"ais/entities"
+	"github.com/gin-gonic/gin"
+	"net/http"
+)
+
+func (h *Handler) createCustomerCard(c *gin.Context) {
+	var input entities.CustomerCard
+	if err := c.BindJSON(&input); err != nil {
+		// throw error response
+	}
+	id, err := h.services.CustomerCard.Create(input)
+	if err != nil {
+		// throw error response
+	}
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"id": id,
+	})
+}
+
+func (h *Handler) getAllCustomerCards(c *gin.Context) {
+	cc, err := h.services.CustomerCard.GetAll()
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err)
+		// throw error response
+	}
+	c.JSON(http.StatusOK, cc)
+}
+
+func (h *Handler) getCustomerCardByNumber(c *gin.Context) {
+	categoryName := c.Param("card_number")
+	category, err := h.services.CustomerCard.GetByNumber(categoryName)
+	if err != nil {
+		// throw error response
+	}
+	c.JSON(http.StatusOK, category)
+}
+
+func (h *Handler) updateCustomerCard(c *gin.Context) {
+	id := c.Param("card_number")
+	var input entities.CustomerCard
+	if err := c.BindJSON(&input); err != nil {
+		// throw error response
+	}
+	if err := h.services.CustomerCard.Update(id, input); err != nil {
+		// throw error response
+	}
+	c.JSON(http.StatusOK, "updated")
+}
+
+func (h *Handler) deleteCustomerCard(c *gin.Context) {
+	id := c.Param("productId")
+	err := h.services.CustomerCard.Delete(id)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err)
+	}
+	c.JSON(http.StatusOK, "deleted")
+}

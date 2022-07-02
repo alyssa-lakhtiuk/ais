@@ -15,6 +15,11 @@ func (s *storeProductService) Create(product entities.StoreProduct) (int, error)
 	if err != nil {
 		// throw err "Product of this store product doesn't exist"
 	}
+	err = IsUnsigned(int(product.SellingPrice))
+	if err != nil {
+		return 0, err
+	}
+
 	return s.repo.CreateStoreProduct(product)
 }
 

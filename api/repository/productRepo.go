@@ -30,7 +30,7 @@ func (p *ProductPostgres) CreateProduct(product entities.Product) (int, error) {
 	return id, nil
 }
 
-func (p *ProductPostgres) UpdateProduct(idProduct int, product entities.ProductInput) error {
+func (p *ProductPostgres) UpdateProduct(idProduct int, product entities.Product) error {
 	_, err := p.db.Exec(updateProduct, idProduct, product.CategoryNum, product.Name, product.Characteristics)
 	return err
 }
@@ -58,9 +58,22 @@ func (p *ProductPostgres) GetProductByNumber(number int) (entities.Product, erro
 
 func (p *ProductPostgres) GetAllProducts() ([]entities.Product, error) {
 	var products []entities.Product
-	if err := p.db.Select(&products, getAllProducts); err != nil {
-		return []entities.Product{}, err
+	rows, err := p.db.Query(getAllChecks)
+	if err != nil {
+		return nil, err
 	}
+	defer rows.Close()
+	for rows.Next() {
+		prod := entities.Product{}
+		err := rows.Scan(&prod.Id, &prod.Name, &prod.Characteristics, &prod.CategoryNum)
+		if err != nil {
+			return nil, err
+		}
+		products = append(products, prod)
+	}
+	//if err := p.db.Select(&products, getAllProducts); err != nil {
+	//	return []entities.Product{}, err
+	//}
 	return products, nil
 }
 

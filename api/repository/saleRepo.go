@@ -49,9 +49,22 @@ func (p *SalePostgres) GetSaleByUpcCheck(upc, checkNumber string) (entities.Sale
 
 func (p *SalePostgres) GetAllSales() ([]entities.Sale, error) {
 	var sales []entities.Sale
-	if err := p.db.Select(&sales, getAllSales); err != nil {
-		return []entities.Sale{}, err
+	rows, err := p.db.Query(getAllChecks)
+	if err != nil {
+		return nil, err
 	}
+	defer rows.Close()
+	for rows.Next() {
+		sale := entities.Sale{}
+		err := rows.Scan(&sale.UPC, &sale.CheckNumber, &sale.ProductNumber, &sale.SellingPrice)
+		if err != nil {
+			return nil, err
+		}
+		sales = append(sales, sale)
+	}
+	//if err := p.db.Select(&sales, getAllSales); err != nil {
+	//	return []entities.Sale{}, err
+	//}
 	return sales, nil
 }
 

@@ -8,9 +8,9 @@ type Employee struct {
 	ID          string    //`json:"id_employee" validate:"required"`
 	FirstName   string    `json:"firstname" validate:"required"`
 	SurName     string    `json:"lastname" validate:"required"`
-	Patronymic  string    `json:"patronymic" validate:"required"`
+	Patronymic  string    `json:"patronymic"`
 	Role        string    `json:"role" validate:"required"`
-	Salary      int       `json:"salary" validate:"required"`
+	Salary      float64   `json:"salary" validate:"required"`
 	DateOfBirth time.Time `json:"DateOfBirth" validate:"required"`
 	DateOfStart time.Time `json:"DateOfStart" validate:"required"`
 	PhoneNumber string    `json:"phoneNumber" validate:"required"`
@@ -38,36 +38,36 @@ type StoreProduct struct {
 }
 
 type Category struct {
-	Number int    `json:"number" validate:"required"`
+	Number int    `json:"number"`
 	Name   string `json:"name" validate:"required"`
 }
 
 type Check struct {
-	Number     int       `json:"number" validate:"required"`
+	Number     string    `json:"number" validate:"required"`
 	IdEmployee string    `json:"idEmployee" validate:"required"`
-	CardNumber string    `json:"cardNumber" validate:"required"`
+	CardNumber string    `json:"cardNumber"`
 	PrintDate  time.Time `json:"printDate" validate:"required"`
-	SumTotal   int       `json:"sumTotal" validate:"required"`
-	Vat        int       `json:"vat" validate:"required"`
+	SumTotal   float64   `json:"sumTotal" validate:"required"`
+	Vat        float64   `json:"vat"`
 }
 
 type CustomerCard struct {
-	Number             int    `json:"number" validate:"required"`
+	Number             string `json:"number"`
 	CustomerSurname    string `json:"customerSurname" validate:"required"`
 	CustomerName       string `json:"customerName" validate:"required"`
 	CustomerPatronymic string `json:"customerPatronymic" validate:"required"`
 	PhoneNumber        string `json:"phoneNumber" validate:"required"`
-	City               string `json:"city" validate:"required"`
-	Street             string `json:"street" validate:"required"`
-	ZipCode            string `json:"zipCode" validate:"required"`
+	City               string `json:"city"`
+	Street             string `json:"street"`
+	ZipCode            string `json:"zipCode"`
 	Percent            int    `json:"percent" validate:"required"`
 }
 
 type Sale struct {
-	UPC           string `json:"upc" validate:"required"`
-	CheckNumber   string `json:"checkNumber" validate:"required"`
-	ProductNumber int    `json:"productNumber" validate:"required"`
-	SellingPrice  int    `json:"sellingPrice" validate:"required"`
+	UPC           string  `json:"upc" validate:"required"`
+	CheckNumber   string  `json:"checkNumber" validate:"required"`
+	ProductNumber int     `json:"productNumber" validate:"required"`
+	SellingPrice  float64 `json:"sellingPrice" validate:"required"`
 }
 
 // entities for update:
@@ -94,4 +94,12 @@ type ProductInput struct {
 	CategoryNum     int    `json:"categoryNum"`
 	Name            string `json:"name"`
 	Characteristics string `json:"Characteristics"`
+}
+
+type CheckInput struct {
+	// те, що вводить касир при створенні чеку
+	UPC            string `json:"upc" validate:"required"`
+	ProductNumber  int    `json:"productNumber" validate:"required"`
+	CustomerNumber string `json:"CustomerNumber"`
+	IDEmployee     string `json:"id_employee" validate:"required"`
 }

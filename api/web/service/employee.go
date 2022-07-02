@@ -35,6 +35,13 @@ func (s *EmployeeService) Create(employee entities.Employee) (int, error) {
 		// return err "Employee must be adult"
 	}
 	phone := employee.PhoneNumber
-	ValidPhone(phone)
+	err := ValidPhone(phone)
+	if err != nil {
+		return 0, err
+	}
+	err = IsUnsigned(int(employee.Salary))
+	if err != nil {
+		return 0, err
+	}
 	return s.repo.CreateEmployee(employee)
 }

@@ -18,7 +18,7 @@ func (s *productService) Create(product entities.Product) (int, error) {
 	return s.repo.CreateProduct(product)
 }
 
-func (s *productService) Update(productId int, product entities.ProductInput) error {
+func (s *productService) Update(productId int, product entities.Product) error {
 	return s.repo.UpdateProduct(productId, product)
 }
 

@@ -68,8 +68,25 @@ func (er *customerCardPostgres) GetCustomerCardByName(name string) (entities.Cus
 
 func (er *customerCardPostgres) GetAllCustomerCards() ([]entities.CustomerCard, error) {
 	var cc []entities.CustomerCard
-	if err := er.db.Select(&cc, getAllCustomerCards); err != nil {
-		return []entities.CustomerCard{}, err
+
+	rows, err := er.db.Query(getAllChecks)
+	if err != nil {
+		return nil, err
 	}
+	defer rows.Close()
+	for rows.Next() {
+		customerCard := entities.CustomerCard{}
+		err := rows.Scan(&customerCard.Number, &customerCard.CustomerSurname, &customerCard.CustomerName,
+			&customerCard.CustomerPatronymic, &customerCard.PhoneNumber, &customerCard.City, &customerCard.City,
+			&customerCard.Street, &customerCard.ZipCode, &customerCard.Percent)
+		if err != nil {
+			return nil, err
+		}
+		cc = append(cc, customerCard)
+	}
+
+	////if err := er.db.Select(&cc, getAllCustomerCards); err != nil {
+	//	return []entities.CustomerCard{}, err
+	//}
 	return cc, nil
 }

@@ -48,17 +48,32 @@ func (er *storeProductPostgres) DeleteStoreProduct(upc string) error {
 }
 
 func (er *storeProductPostgres) GetStoreProductByUpc(upc string) (entities.StoreProduct, error) {
-	var st_product entities.StoreProduct
-	if err := er.db.Get(&st_product, getStoreProductByName, upc); err != nil {
+	var stProduct entities.StoreProduct
+	if err := er.db.Get(&stProduct, getStoreProductByName, upc); err != nil {
 		return entities.StoreProduct{}, err
 	}
-	return st_product, nil
+	return stProduct, nil
 }
 
 func (er *storeProductPostgres) GetAllStoreProducts() ([]entities.StoreProduct, error) {
-	var st_products []entities.StoreProduct
-	if err := er.db.Select(&st_products, getAllStoreProducts); err != nil {
-		return []entities.StoreProduct{}, err
+	var stProducts []entities.StoreProduct
+
+	rows, err := er.db.Query(getAllChecks)
+	if err != nil {
+		return nil, err
 	}
-	return st_products, nil
+	defer rows.Close()
+	for rows.Next() {
+		stProd := entities.StoreProduct{}
+		err := rows.Scan(&stProd.UPC, &stProd.SellingPrice, &stProd.PromotionalProduct, &stProd.ProductsNumber,
+			&stProd.UPCProm, &stProd.IDProduct)
+		if err != nil {
+			return nil, err
+		}
+		stProducts = append(stProducts, stProd)
+	}
+	//if err := er.db.Select(&stProducts, getAllStoreProducts); err != nil {
+	//	return []entities.StoreProduct{}, err
+	//}
+	return stProducts, nil
 }

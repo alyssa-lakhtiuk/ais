@@ -14,7 +14,7 @@ const (
 	deleteCategory      = "DELETE FROM " + categoryTable + " WHERE category_name = $1;"
 	getCategoryByName   = "SELECT * FROM " + categoryTable + " WHERE category_name=$1;"
 	getCategoryByNumber = "SELECT * FROM " + categoryTable + " WHERE category_number=$1;"
-	getAllCategories    = "SELECT * FROM " + categoryTable + ";"
+	getAllCategories    = "SELECT * FROM " + categoryTable + " ;"
 )
 
 type categoryPostgres struct {
@@ -64,8 +64,22 @@ func (er *categoryPostgres) GetCategoryByNumber(number int) (entities.Category, 
 
 func (er *categoryPostgres) GetAllCategories() ([]entities.Category, error) {
 	var categories []entities.Category
-	if err := er.db.Select(&categories, getAllCategories); err != nil {
-		return []entities.Category{}, err
+	rows, err := er.db.Query(getAllCategories)
+	if err != nil {
+		return nil, err
 	}
+	defer rows.Close()
+	for rows.Next() {
+		category := entities.Category{}
+		err := rows.Scan(&category.Number, &category.Name)
+		if err != nil {
+			return nil, err
+		}
+		categories = append(categories, category)
+	}
+	//if err := er.db.Select(&categories, getAllCategories); err != nil {
+	//	return []entities.Category{}, err
+	//}
+
 	return categories, nil
 }

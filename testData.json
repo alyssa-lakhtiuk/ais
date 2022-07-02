@@ -1,0 +1,58 @@
+All test data
+Categories (cheese):
+{
+    "name":"semi-soft"  
+}
+
+{
+    "name":"soft"  
+}
+
+{
+    "name":"hard"  
+}
+
+{
+    "name":"medium-hard"  
+}
+
+{
+    "name":"semi-hard"  
+}
+
+Customer cards:
+{
+	"number": "39A",
+	"customerSurname": "Shum",
+	"customerName": "Dasha",
+	"customerPatronymic": "Oleksandrivna",
+	"phoneNumber" : "0964786521",
+	"city": "Kyiv",
+	"street": "Warsavska",
+	"zipCode": "44150",
+	"percent": 10
+}
+
+{
+	"number": "17FU",
+	"customerSurname": "Savchuk",
+	"customerName": "Anhelina",
+	"customerPatronymic": "Ruslanivna",
+	"phoneNumber" : "0955035150",
+	"city": "Kyiv",
+	"zipCode": "17895",
+	"percent": 15
+}
+
+Products:
+{
+"categoryNum": 
+"name":
+"Characteristics":
+}
+
+
+
+Check input:
+{
+"upc":"

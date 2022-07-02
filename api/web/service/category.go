@@ -3,11 +3,14 @@ package service
 import (
 	"ais/entities"
 	"ais/repository"
+	"math/rand"
 )
 
 type categoryService struct {
 	repo repository.CategoryRepo
 }
+
+const IdRange = 100
 
 func (s *categoryService) Update(categoryNum int, category entities.CategoryInput) error {
 	_, err := s.repo.GetCategoryByName(category.Name)
@@ -38,5 +41,14 @@ func NewCategoryService(repo repository.CategoryRepo) *categoryService {
 }
 
 func (s *categoryService) Create(category entities.Category) (int, error) {
+	for true {
+		randId := rand.Intn(IdRange)
+		cat, _ := s.repo.GetCategoryByNumber(randId)
+		if cat.Number != randId {
+			category.Number = randId
+			break
+		}
+	}
+	//category.Number = 97
 	return s.repo.CreateCategory(category)
 }
