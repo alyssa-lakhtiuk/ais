@@ -1,11 +1,7 @@
 All test data
 Categories (cheese):
 {
-    "name":"semi-soft"  
-}
-
-{
-    "name":"soft"  
+    "name":"semi-soft"
 }
 
 {
@@ -18,6 +14,27 @@ Categories (cheese):
 
 {
     "name":"semi-hard"  
+}
+
+
+{
+"name":"white wine"
+}
+
+{
+"name":"rose wine"
+}
+
+{
+"name":"sparkling wine"
+}
+
+{
+"name":"dessert wine"
+}
+
+{
+"name":"fortified wine"
 }
 
 Customer cards:
@@ -46,13 +63,60 @@ Customer cards:
 
 Products:
 {
-"categoryNum": 
-"name":
+	"categoryNum":
+	"name": "Champagne"
+	"Characteristics":
+}
+
+{
+"categoryNum":
+"name": "Champagne"
 "Characteristics":
 }
 
+Check input: {
+	"upc": ""
+}
 
+Managers:
 
-Check input:
 {
-"upc":"
+	"firstname" :"Brad",
+	"lastname" :"Pitt",
+	"role" :"manager",
+	"salary" :"1500.5",
+	"DateOfBirth" :"1968-12-18T00:00:00Z",
+	"DateOfStart" :"2015-01-01T00:00:00Z",
+	"phoneNumber" :"0864258690",
+	"city" :"Lviv",
+	"street" :"Rivna",
+	"zipCode" :"78560"
+}
+
+kasiru:
+
+{
+	"firstname" :"Freddie",
+	"lastname" :"Mercury",
+	"role" :"cashier",
+	"salary" :"1305.54",
+	"DateOfBirth" :"1946-09-05T00:00:00Z",
+	"DateOfStart" :"2019-03-10T00:00:00Z",
+	"phoneNumber" :"0978654230",
+	"city" :"Kyiv",
+	"street" :"Rock Stars",
+	"zipCode" :"1879564"
+}
+
+{
+	"firstname" :"Till",
+	"lastname" :"Lindemann",
+	"role" :"cashier",
+	"salary" :"1700.54",
+	"DateOfBirth" :"1963-01-04T00:00:00Z",
+	"DateOfStart" :"2019-03-10T00:00:00Z",
+	"phoneNumber" :"+380675469860",
+	"city" :"Kyiv",
+	"street" :"Green",
+	"zipCode" :"001458"
+}
