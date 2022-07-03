@@ -145,17 +145,14 @@
     <!-- Table body -->
     <tbody>
     {{ range . }}
-    <tr>
-        <td>{{ .CategoryID }}</td>
-        <td>{{ .CategoryName }}</td>
+    <form method="GET">
+    <tr >
+        <td id="CategoryID" >{{ .CategoryID }}</td>
+        <td id="CategoryName">{{ .CategoryName }}</td>
+        <button formaction="/edit_category">edit</button>
 
-        <!--            <td><input type="button"-->
-        <!--                       value="submit" onclick="show()" /></td>-->
-        <!--                       formaction="" /></td>-->
-
-
-        <!-- може бути не назва атрибутів -->
     </tr>
+    </form>
 
     {{ end }}
     </tbody>
@@ -165,22 +162,7 @@
     <button formaction="/manager_homepage" class="button4">Homepage</button>
     <button formaction="/log_out" class="button5">Log out</button>
 </form>
-<script>
-    function show() {
-        var rowId =
-            event.target.parentNode.parentNode.id;
-        //this gives id of tr whose button was clicked
-        var data =
-            document.getElementById(rowId).querySelectorAll(".row-data");
-        /*returns array of all elements with
-        "row-data" class within the row with given id*/
 
-        var name = data[0].innerHTML;
-        var age = data[1].innerHTML;
-
-        alert("Name: " + name + "\nAge: " + age);
-    }
-</script>
 </body>
 
 </html>

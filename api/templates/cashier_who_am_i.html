@@ -5,8 +5,94 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>add new employee</title>
-    <link rel="stylesheet" href="cashier_who_am_i.css">
+    <title>who am I</title>
+    <style>
+        h1 {
+            font-size: 72px;
+            font-family: cursive;
+            font-weight: 50;
+            color: #000000;
+            height: 20px;
+            margin-left: 100px;
+            margin-top: 200px;
+            margin-bottom: 20px;
+        }
+
+        .title1 {
+            font-size: 48px;
+            font-family: cursive;
+            font-weight: 50;
+            color: #92D050;
+            height: 20px;
+            margin-left: 140px;
+            margin-top: 80px;
+        }
+
+        .line1 {
+            width: 650px;
+            margin-left: 700px;
+            margin-top: -205px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid black;
+        }
+
+        label{
+            font-family: cursive;
+            padding-right: 20px;
+            text-align: center;
+            font-size: 20px;
+            margin-left: 720px;
+            margin-bottom: 15px;
+        }
+
+        .line2 {
+            height: 400px;
+            margin-left: 700px;
+            margin-right: 10px;
+            margin-top: -376px;
+            border-left: 1px solid black;
+        }
+
+        .line3 {
+            height: 400px;
+            margin-left: 1350px;
+            margin-right: 10px;
+            margin-top: -400px;
+            border-left: 1px solid black;
+        }
+
+        .line4 {
+            width: 650px;
+            margin-left: 700px;
+            border-bottom: 1px solid black;
+        }
+
+        .button4 {
+            font-family: cursive;
+            border: 1px solid #ffb14d;
+            background-color: #ffffff;
+            color: #ffb14d;
+            padding-left: 20px;
+            padding-right: 20px;
+            text-align: center;
+            font-size: 20px;
+            margin-top: 200px;
+            margin-left: 30px;
+        }
+
+        .button5 {
+            font-family: cursive;
+            border: 1px solid #ffb14d;
+            background-color: #ffffff;
+            color: #ffb14d;
+            padding-left: 20px;
+            padding-right: 20px;
+            text-align: center;
+            font-size: 20px;
+            margin-top: 200px;
+            margin-left: 20px;
+        }
+    </style>
 </head>
 
 <body>
@@ -25,87 +111,70 @@
     <div class="line1"></div>
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <label class="label1">Last name:</label>
-            <input type="text" class="form-control" id="last" name="lastname">
+            <label class="label1">Last name: {{ .LastName}}</label>
         </div>
     </div>
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <label class="label1">First name:</label>
-            <input type="text" class="form-control" id="first" name="firstname">
+            <label class="label1">First name: {{ .FirstName }}</label>
         </div>
     </div>
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <label class="label1">Patronymic:</label>
-            <input type="text" class="form-control" id="patron" name="patronymic">
+            <label class="label1">Patronymic: {{ .Patronymic }}</label>
         </div>
     </div>
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <label class="label1">Role:</label>
-            <select id="role" name="emp_role">
-                <option value="without_value" selected disabled>Choose</option>
-                <option value="manager">Manager</option>
-                <option value="cashier">Cashier</option>
-            </select>
+            <label class="label1">Role: {{ .Role }}</label>
         </div>
     </div>
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <label>Salary:</label>
-            <input type="text" class="form-control" id="sal" name="salary" placeholder="UAH">
+            <label>Salary: {{ .Salary }}</label>
         </div>
     </div>
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <label>Day of starting job:</label>
-            <input type="date" class="form-control" id="start_day" name="day_of_start_job">
+            <label>Day of starting job: {{ .DayStart }}</label>
         </div>
     </div>
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <label>Day of birth:</label>
-            <input type="date" class="form-control" id="birth_day" name="day_of_birth">
+            <label>Day of birth: {{ .DayBirth }}</label>
         </div>
     </div>
 
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <label>Telephone:</label>
-            <input type="tel" class="form-control" id="telep" name="telephone" placeholder="(050)-123-45-67">
+            <label>Telephone: {{ .Telephone }}</label>
         </div>
     </div>
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <label>City:</label>
-            <input type="text" class="form-control" id="city" name="city_name">
+            <label>City: {{ .City }}</label>
         </div>
     </div>
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <label>Street:</label>
-            <input type="text" class="form-control" id="str" name="street">
+            <label>Street: {{ .Street }}</label>
         </div>
     </div>
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <label>Index:</label>
-            <input type="text" class="form-control" id="ind" name="index">
+            <label>Index: {{ .Index }}</label>
         </div>
     </div>
-
-
 </form>
 
 <div class="line2"></div>
@@ -113,7 +182,7 @@
 <div class="line4"></div>
 
 <form method="POST">
-    <button formaction="/manager_homepage" class="button4">Homepage</button>
+    <button formaction="/cashier_homepage" class="button4">Homepage</button>
     <button formaction="/log_out" class="button5">Log out</button>
 </form>
 
