@@ -3,6 +3,7 @@ package controller
 import (
 	"ais/web/service"
 	"github.com/gin-gonic/gin"
+	"html/template"
 )
 
 type Handler struct {
@@ -13,6 +14,12 @@ func NewHandler(services *service.Service) *Handler {
 	return &Handler{services: services}
 }
 
+var Tpl *template.Template
+
+func init() {
+	Tpl = template.Must(template.ParseGlob("templates/*.html"))
+}
+
 func (h *Handler) NewRoutes() *gin.Engine {
 	router := gin.Default()
 	router.GET("employees", h.getAllEmployees)
@@ -20,8 +27,8 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	router.PUT("employee/:id", h.updateEmployee)
 	router.DELETE("employee/:id", h.deleteEmployee)
 	// Category pages
-	router.POST("category/", h.createCategory)
-	router.GET("categories/", h.getAllCategories)
+	router.GET("category.html", h.createCategory)
+	router.GET("categories", h.getAllCategories)
 	router.DELETE("category/:name", h.deleteCategory)
 	router.PUT("category/:id", h.updateCategory)
 	// Product pages

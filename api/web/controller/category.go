@@ -8,8 +8,9 @@ import (
 )
 
 func (h *Handler) createCategory(c *gin.Context) {
-
+	Tpl.ExecuteTemplate(c.Writer, "add_category.html", nil)
 	var input entities.Category
+	input.Name = c.Request.FormValue("name_category")
 	if err := c.BindJSON(&input); err != nil {
 		// throw error response
 		respondWithError(c, http.StatusBadRequest, "unable to parse input data")
@@ -43,7 +44,7 @@ func (h *Handler) getAllCategories(c *gin.Context) {
 }
 
 func (h *Handler) getCategoryByName(c *gin.Context) {
-	categoryName := c.Param("name")
+	categoryName := c.Param("name") // localhost:8080/category/soft-cheese
 	category, err := h.services.Category.GetByName(categoryName)
 	if err != nil {
 		// throw error response
