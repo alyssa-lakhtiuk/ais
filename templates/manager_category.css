@@ -59,10 +59,12 @@ h3 {
 
 }
 th {
-    font-size: 11px;
+    font-size: 24px;
     font-family: cursive;
     font-weight: 50;
     color: #000000;
+    padding-left: 15px;
+    padding-bottom: 15px;
 }
 
 .button4 {

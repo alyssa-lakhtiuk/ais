@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>add new category</title>
-    <link rel="stylesheet" href="add_category.css">
+    <title>added category</title>
+    <link rel="stylesheet" href="done_category.css">
 </head>
 
 <body>
@@ -16,34 +16,24 @@
 </div>
 
 <div class="title1">
-    <h3>Add new category</h3>
+    <h3>You have added Category</h3>
 </div>
-
-
-<form action="/add_category_process" method="GET">
 
     <div class="line1"></div>
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <label>Name:</label>
-            <input type="text" class="form-control" id="name_cat" name="name_category">
+            <label>Name: {{ .NameCategory }}</label>
         </div>
     </div>
 
-
-    <div class="form-row form-group">
-        <div class="form-group col-md-4">
-            <button type="submit" class="button1">Save</button>
-        </div>
-    </div>
-
+<form method="POST">
+    <button formaction="/manager_category" class="button1">Go to all categories</button> <!--go to manager_category -->
 </form>
 
 <div class="line2"></div>
 <div class="line3"></div>
 <div class="line4"></div>
-<p>mistake_mistake_mistake_mistake_mistake</p>
 
 <form method="POST">
     <button formaction="/manager_homepage" class="button4">Homepage</button>
