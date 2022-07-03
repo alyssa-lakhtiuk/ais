@@ -3,6 +3,7 @@ package service
 import (
 	"ais/entities"
 	"ais/repository"
+	"math/rand"
 )
 
 type productService struct {
@@ -16,6 +17,14 @@ func (s *productService) Create(product entities.Product) (int, error) {
 	//	return 0, err
 	//	// throw err "Category of this product doesn't exist"
 	//}
+	for true {
+		randId := rand.Intn(900 - IdRange)
+		cat, _ := s.repo.GetProductByNumber(randId)
+		if cat.Id != randId {
+			product.Id = randId
+			break
+		}
+	}
 	return s.repo.CreateProduct(product)
 }
 

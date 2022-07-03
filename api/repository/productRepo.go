@@ -10,10 +10,11 @@ const (
 		"VALUES ($1, $2, $3, $4);"
 	updateProduct = "UPDATE " + productTable + " SET fk_category_number=$2, product_name=$3, description=$4 " +
 		"WHERE id_product=$1;"
-	deleteProduct      = "DELETE FROM " + productTable + " WHERE id_product = $1;"
-	getProductByName   = "SELECT * FROM " + productTable + " WHERE product_name=$1;"
-	getProductByNumber = "SELECT * FROM " + productTable + " WHERE id_product=$1;"
-	getAllProducts     = "SELECT * FROM " + productTable + ";"
+	deleteProduct        = "DELETE FROM " + productTable + " WHERE id_product = $1;"
+	getProductByName     = "SELECT * FROM " + productTable + " WHERE product_name=$1;"
+	getProductByCategory = "SELECT * FROM " + productTable + " WHERE product_name=$1;"
+	getProductByNumber   = "SELECT * FROM " + productTable + " WHERE id_product=$1;"
+	getAllProducts       = "SELECT * FROM " + productTable + ";"
 )
 
 type ProductPostgres struct {

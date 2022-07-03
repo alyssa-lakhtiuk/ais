@@ -38,7 +38,6 @@ func (er *categoryPostgres) CreateCategory(category entities.Category) (int, err
 func (er *categoryPostgres) UpdateCategory(numberCategory int, category entities.CategoryInput) error {
 	_, err := er.db.Exec(updateCategory, numberCategory, category.Name)
 	return err
-	return nil
 }
 
 func (er *categoryPostgres) DeleteCategory(name string) error {

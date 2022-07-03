@@ -27,7 +27,8 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	router.PUT("employee/:id", h.updateEmployee)
 	router.DELETE("employee/:id", h.deleteEmployee)
 	// Category pages
-	router.GET("category.html", h.createCategory)
+	router.GET("/create-category", h.createCategory)
+	router.POST("/category", h.categoryCreated)
 	router.GET("categories", h.getAllCategories)
 	router.DELETE("category/:name", h.deleteCategory)
 	router.PUT("category/:id", h.updateCategory)

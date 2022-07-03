@@ -7,25 +7,33 @@ import (
 	"strconv"
 )
 
-func (h *Handler) createCategory(c *gin.Context) {
-	Tpl.ExecuteTemplate(c.Writer, "add_category.html", nil)
-	var input entities.Category
-	input.Name = c.Request.FormValue("name_category")
-	if err := c.BindJSON(&input); err != nil {
-		// throw error response
-		respondWithError(c, http.StatusBadRequest, "unable to parse input data")
+func (h *Handler) categoryCreated(c *gin.Context) {
+	if c.Request.Method != "POST" {
+		http.Redirect(c.Writer, c.Request, "/create-category", http.StatusSeeOther)
 		return
 	}
-	id, err := h.services.Category.Create(input)
+	var input entities.Category
+	//if err := c.BindJSON(&input); err != nil {
+	//	// throw error response
+	//	respondWithError(c, http.StatusBadRequest, "unable to parse input data")
+	//	return
+	//}
+	input.Name = c.Request.FormValue("name_category")
+	_, err := h.services.Category.Create(input)
 	if err != nil {
 		// throw error response
 		respondWithError(c, http.StatusBadRequest, "unable to create category")
-		return
+		//return
 	}
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"categoryNumber": input.Number,
-		"id":             id,
-	})
+	//c.JSON(http.StatusOK, map[string]interface{}{
+	//	"categoryNumber": input.Number,
+	//	"id":             id,
+	//})
+	Tpl.ExecuteTemplate(c.Writer, "done_category.html", input)
+}
+
+func (h *Handler) createCategory(c *gin.Context) {
+	Tpl.ExecuteTemplate(c.Writer, "add_category.html", nil)
 }
 
 func (h *Handler) getAllCategories(c *gin.Context) {

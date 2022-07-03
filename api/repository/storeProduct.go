@@ -31,7 +31,7 @@ func NewStoreProductRepo(db *sqlx.DB) *storeProductPostgres {
 func (er *storeProductPostgres) CreateStoreProduct(product entities.StoreProduct) (int, error) {
 	//var id int
 	if product.UPCProm == "" {
-		_, err := er.db.Exec(createStoreProduct, product.UPC, product.SellingPrice, product.PromotionalProduct,
+		_, err := er.db.Exec(createStoreProductWithoutUpc, product.UPC, product.SellingPrice, product.PromotionalProduct,
 			product.ProductsNumber, product.IDProduct)
 		if err != nil {
 			return 0, err
@@ -53,7 +53,8 @@ func (er *storeProductPostgres) CreateStoreProduct(product entities.StoreProduct
 }
 
 func (er *storeProductPostgres) UpdateStoreProduct(upc string, product entities.StoreProduct) error {
-	_, err := er.db.Exec(updateStoreProduct, upc, product.SellingPrice, product.PromotionalProduct, product.ProductsNumber, product.UPC)
+	_, err := er.db.Exec(updateStoreProduct, upc, product.SellingPrice, product.PromotionalProduct,
+		product.ProductsNumber, product.UPC, product.IDProduct)
 	return err
 	return nil
 }

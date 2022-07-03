@@ -4,13 +4,24 @@ import (
 	"ais/entities"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"strconv"
 )
 
-func (h *Handler) createCustomerCard(c *gin.Context) {
+func (h *Handler) customerCardCreated(c *gin.Context) {
 	var input entities.CustomerCard
-	if err := c.BindJSON(&input); err != nil {
-		// throw error response
-	}
+	var err error
+	input.Number = c.Request.FormValue("card_number")
+	input.CustomerSurname = c.Request.FormValue("lastname")
+	input.CustomerName = c.Request.FormValue("firstname")
+	input.CustomerPatronymic = c.Request.FormValue("patronymic")
+	input.PhoneNumber = c.Request.FormValue("telephone")
+	input.City = c.Request.FormValue("city_name")
+	input.Street = c.Request.FormValue("street")
+	input.ZipCode = c.Request.FormValue("index")
+	input.Percent, err = strconv.Atoi(c.Request.FormValue("percents"))
+	//if err := c.BindJSON(&input); err != nil {
+	//	// throw error response
+	//}
 	id, err := h.services.CustomerCard.Create(input)
 	if err != nil {
 		// throw error response
@@ -18,6 +29,10 @@ func (h *Handler) createCustomerCard(c *gin.Context) {
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"id": id,
 	})
+	//Tpl.ExecuteTemplate(c.Writer, ".html", input)
+}
+func (h *Handler) createCustomerCard(c *gin.Context) {
+	Tpl.ExecuteTemplate(c.Writer, "add_client.html", nil)
 }
 
 func (h *Handler) getAllCustomerCards(c *gin.Context) {

@@ -77,7 +77,7 @@ func (er *customerCardPostgres) GetAllCustomerCards() ([]entities.CustomerCard, 
 	for rows.Next() {
 		customerCard := entities.CustomerCard{}
 		err := rows.Scan(&customerCard.Number, &customerCard.CustomerSurname, &customerCard.CustomerName,
-			&customerCard.CustomerPatronymic, &customerCard.PhoneNumber, &customerCard.City, &customerCard.City,
+			&customerCard.CustomerPatronymic, &customerCard.PhoneNumber, &customerCard.City,
 			&customerCard.Street, &customerCard.ZipCode, &customerCard.Percent)
 		if err != nil {
 			return nil, err
