@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>add new product in stock</title>
+    <title>added product</title>
     <style>
         h1 {
-            font-size: 65px;
+            font-size: 72px;
             font-family: cursive;
             font-weight: 50;
             color: #000000;
             height: 20px;
-            margin-left: 10px;
-
+            margin-left: 100px;
+            margin-right: 900px;
             margin-top: 200px;
             margin-bottom: 20px;
         }
@@ -26,7 +26,7 @@
             color: #92D050;
             height: 20px;
 
-            margin-left: 70px;
+            margin-left: 100px;
             margin-top: 80px;
         }
 
@@ -34,7 +34,7 @@
         .line1 {
             width: 650px;
             margin-left: 700px;
-            margin-top: -175px;
+            margin-top: -100px;
             margin-bottom: 25px;
             border-bottom: 1px solid black;
         }
@@ -44,20 +44,9 @@
             /*padding-left: px;*/
             padding-right: 20px;
             text-align: center;
-            font-size: 20px;
+            font-size: 24px;
             margin-left: 720px;
-            margin-bottom: 15px;
-        }
-
-
-        .form-control {
-            font-family: cursive;
-            border: 1px solid #000000;
-            padding-left: 5px;
-            padding-right: 120px;
-            text-align: left;
-            font-size: 20px;
-            margin-bottom: 15px;
+            margin-bottom: 35px;
         }
 
         select {
@@ -74,24 +63,25 @@
         }
 
         .line2 {
-            height: 370px;
+            height: 230px;
             margin-left: 700px;
             margin-right: 10px;
-            margin-top: -350px;
+            margin-top: -205px;
             border-left: 1px solid black;
         }
 
         .line3 {
-            height: 370px;
+            height: 231px;
             margin-left: 1350px;
             margin-right: 10px;
-            margin-top: -370px;
+            margin-top: -231px;
             border-left: 1px solid black;
         }
 
         .line4 {
             width: 650px;
             margin-left: 700px;
+            /*margin-top: 20px;*/
             border-bottom: 1px solid black;
         }
 
@@ -105,7 +95,7 @@
             padding-right: 20px;
             text-align: center;
             font-size: 20px;
-            margin-top: 250px;
+            margin-top: 280px;
             margin-left: 30px;
         }
 
@@ -118,7 +108,7 @@
             padding-right: 20px;
             text-align: center;
             font-size: 20px;
-            margin-top: 250px;
+            margin-top: 280px;
             margin-left: 20px;
         }
 
@@ -132,7 +122,7 @@
             text-align: center;
             font-size: 25px;
             margin-left: 720px;
-            margin-top: 5px;
+            margin-top: 20px;
         }
 
         p {
@@ -147,79 +137,43 @@
 <body>
 
 <div class="heading">
-    <h1>Product in Store 🍷</h1>
+    <h1>Product 🐄</h1>
 </div>
 
 <div class="title1">
-    <h3>Add new product in store</h3>
-
+    <h3>You have added product</h3>
 </div>
 
+<div class="line1"></div>
 
-<form action="/add_stock_product_process" method="GET">
-
-    <div class="line1"></div>
-
-    <div class="form-row form-group">
-        <div class="form-group col-md-4">
-            <label>UPC:</label>
-            <input type="text" class="form-control" id="upc" name="upc">
-        </div>
-    </div>
-
+<form method="POST">
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <label>Product:</label>
-            <select id="prod" name="product">
-                <option value="without_value" selected disabled>Choose</option>
-                {{ range . }}
-                <option value="{{ .Id }}">{{ .Name }}</option>
-                {{ end }}
-            </select>
-        </div>
-    </div>
-
-
-    <div class="form-row form-group">
-        <div class="form-group col-md-4">
-            <label>Selling price:</label>
-            <input type="number" class="form-control" id="sell" name="selling_price" placeholder="UAH">
+            <label>Category: {{ .Category }}</label>
         </div>
     </div>
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <label>Quantity:</label>
-            <input type="number" class="form-control" id="quan" name="quantit">
+            <label>Name: {{ .NameCategory }}</label>
         </div>
     </div>
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <label>Promotional:</label>
-            <select id="prom" name="promotion">
-                <option value="without_value" selected disabled>Choose</option>
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-
-            </select>
-
+            <label>Description: {{ .Characteristics }}</label>
         </div>
     </div>
+</form>
 
-    <div class="form-row form-group">
-        <div class="form-group col-md-4">
-            <button type="submit" class="button1">Save</button>
-        </div>
-    </div>
-
+<form method="POST">
+    <button formaction="/manager_product" class="button1">Go to all products</button> <!--go to manager_category -->
 </form>
 
 <div class="line2"></div>
 <div class="line3"></div>
 <div class="line4"></div>
-<p>mistake_mistake_mistake_mistake_mistake</p>
 
 <form method="POST">
     <button formaction="/manager_homepage" class="button4">Homepage</button>
