@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>product</title>
+  <link rel="stylesheet" href="cashier_product.css">
+</head>
+
+<body>
+
+<div class="heading">
+  <h1>Product 🐏</h1>
+</div>
+
+
+<form action="/cas_request_product" method="POST">
+
+  <label>Sort by Name: </label>
+  <select id="sort_product" name="sort_product_name">
+    <option value="asc">ASC</option>
+    <option value="desc">DESC</option>
+    <!--        <input type="submit" value="Submit">-->
+  </select>
+
+  <label>Search by Name: </label>
+<!--  <select id="cas_sort_product" name="cas_sort_product_name">-->
+<!--    <option value="without_value" selected disabled>Choose</option>-->
+<!--    {{ range . }}-->
+<!--    <option value="{{ .IdCategory }}">{{ .NameCategory }}</option>-->
+<!--    {{ end }}-->
+<!--    &lt;!&ndash;        <input type="submit" value="Submit">&ndash;&gt;-->
+<!--  </select>-->
+  <input type="text" class="form-control" id="ser_per" name="search_percentage">
+
+  <label>Search by category:</label>
+  <select id="search_product_caty" name="/search_product_category">
+    <option value="without_value" selected disabled>Choose</option>
+    {{ range . }}
+    <option value="{{ .Id }}">{{ .Name }}</option>
+    {{ end }}
+  </select>
+  <button type="submit" class="button1">Search</button>
+</form>
+
+<table >
+  <!-- Table header -->
+  <thead>
+  <tr>
+    <th scope="col">Product ID</th>
+    <th scope="col">Category Name</th>
+    <th scope="col">Product Name</th>
+    <th scope="col">Description</th>
+
+    <th scope="col">Edit</th>
+    <th scope="col">Delete</th>
+  </tr>
+  </thead>
+  <!-- Table footer -->
+  <tfoot>
+  <tr>
+    <td>END</td>
+  </tr>
+  </tfoot>
+  <!-- Table body -->
+  <tbody>
+  {{ range . }}
+  <tr>
+    <td>{{ .ProductID }}</td>
+    <td>{{ .CategoryName }}</td>
+    <td>{{ .ProductName }}</td>
+    <td>{{ .Description }}</td>
+
+    <!--            <td><input type="button"-->
+    <!--                       value="submit" onclick="show()" /></td>-->
+    <!--                       formaction="" /></td>-->
+
+
+    <!-- може бути не назва атрибутів -->
+  </tr>
+
+  {{ end }}
+  </tbody>
+</table>
+
+<form method="POST">
+  <button formaction="/manager_homepage" class="button4">Homepage</button>
+  <button formaction="/log_out" class="button5">Log out</button>
+</form>
+<script>
+  function show() {
+    var rowId =
+            event.target.parentNode.parentNode.id;
+    //this gives id of tr whose button was clicked
+    var data =
+            document.getElementById(rowId).querySelectorAll(".row-data");
+    /*returns array of all elements with
+    "row-data" class within the row with given id*/
+
+    var name = data[0].innerHTML;
+    var age = data[1].innerHTML;
+
+    alert("Name: " + name + "\nAge: " + age);
+  }
+</script>
+</body>
+
+</html>

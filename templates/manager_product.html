@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>product</title>
+    <style>
+        h1 {
+            font-size: 72px;
+            font-family: cursive;
+            font-weight: 50;
+            color: #000000;
+            height: 20px;
+            margin-left: 50px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+
+        .button2 {
+            font-family: cursive;
+            border: 1px solid #000000;
+            background-color: #ffffff;
+            padding-left: 40px;
+            padding-right: 40px;
+            text-align: center;
+            font-size: 25px;
+            margin-left: 525px;
+        }
+
+        .button3 {
+            font-family: cursive;
+            border: 1px solid #000000;
+            background-color: #ffffff;
+            padding-left: 40px;
+            padding-right: 40px;
+            text-align: center;
+            font-size: 25px;
+            margin-left: 40px;
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -webkit-border-radius: 0px;
+            font-family: cursive;
+            border: 1px solid #000000;
+            padding-left: 30px;
+            padding-right: 30px;
+            text-align: center;
+            font-size: 25px;
+            margin-bottom: 20px;
+            margin-top: 50px;
+            margin-left: 5px;
+
+        }
+
+        h3 {
+            font-size: 25px;
+            font-family: cursive;
+            font-weight: 50;
+            color: #000000;
+            height: 20px;
+            margin-left: 50px;
+            margin-top: -60px;
+
+        }
+        th {
+            font-size: 11px;
+            font-family: cursive;
+            font-weight: 50;
+            color: #000000;
+        }
+
+        .button4 {
+            font-family: cursive;
+            border: 1px solid #ffb14d;
+            background-color: #ffffff;
+            color: #ffb14d;
+            padding-left: 20px;
+            padding-right: 20px;
+            text-align: center;
+            font-size: 20px;
+            margin-top: 160px;
+            margin-left: 30px;
+        }
+
+        .button5 {
+            font-family: cursive;
+            border: 1px solid #ffb14d;
+            background-color: #ffffff;
+            color: #ffb14d;
+            padding-left: 20px;
+            padding-right: 20px;
+            text-align: center;
+            font-size: 20px;
+            margin-top: 160px;
+            margin-left: 20px;
+        }
+
+        label{
+            font-family: cursive;
+
+            text-align: center;
+            font-size: 25px;
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .button1 {
+            font-family: cursive;
+            border: 1px solid #c27004;
+            background-color: #ffb14d;
+            color: #ffffff;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-align: center;
+            font-size: 25px;
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="heading">
+    <h1>Product 🍇</h1>
+</div>
+
+<form method="POST">
+    <button formaction="/add_product" class="button2">Add new product</button>
+    <button formaction="/print_report_product" class="button3">Print report</button>
+</form>
+
+<form action="/request_product" method="POST">
+    <label>Sort by Name: </label>
+    <select id="sort_product" name="sort_product_name">
+        <option value="asc">ASC</option>
+        <option value="desc">DESC</option>
+        <!--        <input type="submit" value="Submit">-->
+    </select>
+    <label>Search by category:</label>
+
+    <select id="search_product_caty" name="/search_product_category">
+        <option value="without_value" selected disabled>Choose</option>
+        {{ range . }}
+        <option value="{{ .Id }}">{{ .Name }}</option>
+        {{ end }}
+    </select>
+    <button type="submit" class="button1">Search</button>
+</form>
+
+<table >
+    <!-- Table header -->
+    <thead>
+    <tr>
+        <th scope="col">Product ID</th>
+        <th scope="col">Category Name</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Description</th>
+
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <!-- Table footer -->
+    <tfoot>
+    <tr>
+        <td>END</td>
+    </tr>
+    </tfoot>
+    <!-- Table body -->
+    <tbody>
+    {{ range . }}
+    <tr>
+        <td>{{ .ProductID }}</td>
+        <td>{{ .CategoryName }}</td>
+        <td>{{ .ProductName }}</td>
+        <td>{{ .Description }}</td>
+
+        <!--            <td><input type="button"-->
+        <!--                       value="submit" onclick="show()" /></td>-->
+        <!--                       formaction="" /></td>-->
+
+
+        <!-- може бути не назва атрибутів -->
+    </tr>
+
+    {{ end }}
+    </tbody>
+</table>
+
+<form method="POST">
+    <button formaction="/manager_homepage" class="button4">Homepage</button>
+    <button formaction="/log_out" class="button5">Log out</button>
+</form>
+<script>
+    function show() {
+        var rowId =
+            event.target.parentNode.parentNode.id;
+        //this gives id of tr whose button was clicked
+        var data =
+            document.getElementById(rowId).querySelectorAll(".row-data");
+        /*returns array of all elements with
+        "row-data" class within the row with given id*/
+
+        var name = data[0].innerHTML;
+        var age = data[1].innerHTML;
+
+        alert("Name: " + name + "\nAge: " + age);
+    }
+</script>
+</body>
+
+</html>

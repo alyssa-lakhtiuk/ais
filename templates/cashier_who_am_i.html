@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add new employee</title>
+    <link rel="stylesheet" href="cashier_who_am_i.css">
+</head>
+
+<body>
+
+<div class="heading">
+    <h1>Who am I? 🤔</h1>
+</div>
+
+<div class="title1">
+    <h3>Figure out who I am</h3>
+</div>
+
+
+<form action="/who_process" method="POST">
+
+    <div class="line1"></div>
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <label class="label1">Last name:</label>
+            <input type="text" class="form-control" id="last" name="lastname">
+        </div>
+    </div>
+
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <label class="label1">First name:</label>
+            <input type="text" class="form-control" id="first" name="firstname">
+        </div>
+    </div>
+
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <label class="label1">Patronymic:</label>
+            <input type="text" class="form-control" id="patron" name="patronymic">
+        </div>
+    </div>
+
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <label class="label1">Role:</label>
+            <select id="role" name="emp_role">
+                <option value="without_value" selected disabled>Choose</option>
+                <option value="manager">Manager</option>
+                <option value="cashier">Cashier</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <label>Salary:</label>
+            <input type="text" class="form-control" id="sal" name="salary" placeholder="UAH">
+        </div>
+    </div>
+
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <label>Day of starting job:</label>
+            <input type="date" class="form-control" id="start_day" name="day_of_start_job">
+        </div>
+    </div>
+
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <label>Day of birth:</label>
+            <input type="date" class="form-control" id="birth_day" name="day_of_birth">
+        </div>
+    </div>
+
+
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <label>Telephone:</label>
+            <input type="tel" class="form-control" id="telep" name="telephone" placeholder="(050)-123-45-67">
+        </div>
+    </div>
+
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <label>City:</label>
+            <input type="text" class="form-control" id="city" name="city_name">
+        </div>
+    </div>
+
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <label>Street:</label>
+            <input type="text" class="form-control" id="str" name="street">
+        </div>
+    </div>
+
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <label>Index:</label>
+            <input type="text" class="form-control" id="ind" name="index">
+        </div>
+    </div>
+
+
+</form>
+
+<div class="line2"></div>
+<div class="line3"></div>
+<div class="line4"></div>
+
+<form method="POST">
+    <button formaction="/manager_homepage" class="button4">Homepage</button>
+    <button formaction="/log_out" class="button5">Log out</button>
+</form>
+
+</body>
+
