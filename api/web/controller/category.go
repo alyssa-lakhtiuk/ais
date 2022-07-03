@@ -23,13 +23,16 @@ func (h *Handler) categoryCreated(c *gin.Context) {
 	if err != nil {
 		// throw error response
 		respondWithError(c, http.StatusBadRequest, "unable to create category")
-		//return
+		return
 	}
 	//c.JSON(http.StatusOK, map[string]interface{}{
 	//	"categoryNumber": input.Number,
 	//	"id":             id,
 	//})
-	Tpl.ExecuteTemplate(c.Writer, "done_category.html", input)
+	err = Tpl.ExecuteTemplate(c.Writer, "done_category.html", input)
+	if err != nil {
+		return
+	}
 }
 
 func (h *Handler) createCategory(c *gin.Context) {
@@ -43,7 +46,8 @@ func (h *Handler) getAllCategories(c *gin.Context) {
 		return
 		// throw error response
 	}
-	c.JSON(http.StatusOK, categories)
+	Tpl.ExecuteTemplate(c.Writer, "manager_category.html", categories)
+	//c.JSON(http.StatusOK, categories)
 	//c.JSON(http.StatusOK, map[string]interface{}{
 	//	"categoryNumber": categories[0].Number,
 	//	"id":             categories[0].Name,
@@ -52,7 +56,7 @@ func (h *Handler) getAllCategories(c *gin.Context) {
 }
 
 func (h *Handler) getCategoryByName(c *gin.Context) {
-	categoryName := c.Param("name") // localhost:8080/category/soft-cheese
+	categoryName := c.Param("id") // localhost:8080/category/soft-cheese
 	category, err := h.services.Category.GetByName(categoryName)
 	if err != nil {
 		// throw error response

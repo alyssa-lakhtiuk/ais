@@ -22,14 +22,14 @@ func (h *Handler) customerCardCreated(c *gin.Context) {
 	//if err := c.BindJSON(&input); err != nil {
 	//	// throw error response
 	//}
-	id, err := h.services.CustomerCard.Create(input)
+	_, err = h.services.CustomerCard.Create(input)
 	if err != nil {
 		// throw error response
 	}
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"id": id,
-	})
-	//Tpl.ExecuteTemplate(c.Writer, ".html", input)
+	//c.JSON(http.StatusOK, map[string]interface{}{
+	//	"id": id,
+	//})
+	Tpl.ExecuteTemplate(c.Writer, "done_client.html", input)
 }
 func (h *Handler) createCustomerCard(c *gin.Context) {
 	Tpl.ExecuteTemplate(c.Writer, "add_client.html", nil)
@@ -42,7 +42,8 @@ func (h *Handler) getAllCustomerCards(c *gin.Context) {
 		return
 		// throw error response
 	}
-	c.JSON(http.StatusOK, cc)
+	//c.JSON(http.StatusOK, cc)
+	Tpl.ExecuteTemplate(c.Writer, "manager_client.html", cc)
 }
 
 func (h *Handler) getCustomerCardByNumber(c *gin.Context) {

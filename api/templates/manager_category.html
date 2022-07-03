@@ -146,11 +146,17 @@
     <tbody>
     {{ range . }}
     <form method="GET">
-    <tr >
-        <td id="CategoryID" >{{ .CategoryID }}</td>
-        <td id="CategoryName">{{ .CategoryName }}</td>
+    <tr>
+        <td>{{ .Number }}</td>
+        <td>{{ .Name }}</td>
         <button formaction="/edit_category">edit</button>
 
+        <!--            <td><input type="button"-->
+        <!--                       value="submit" onclick="show()" /></td>-->
+        <!--                       formaction="" /></td>-->
+
+
+        <!-- може бути не назва атрибутів -->
     </tr>
     </form>
 

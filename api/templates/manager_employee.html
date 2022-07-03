@@ -142,7 +142,6 @@
             font-size: 25px;
             margin-left: 20px;
             margin-top: 5px;
-
         }
 
     </style>
@@ -177,13 +176,9 @@
     <button type="submit" class="button1">Search</button>
 </form>
 
-
-
 <form action="/sort_employee_role" method="POST">
 
 </form>
-
-
 
     <table >
         <!-- Table header -->
@@ -215,24 +210,18 @@
         <tbody>
         {{ range . }}
         <tr>
-            <td>{{ .EmployeeId }}</td>
-            <td>{{ .LastName }}</td>
+            <td>{{ .ID }}</td>
+            <td>{{ .SurName }}</td>
             <td>{{ .FirstName }}</td>
             <td>{{ .Patronymic }}</td>
             <td>{{ .Role }}</td>
             <td>{{ .Salary }}</td>
-            <td>{{ .DayOfStart }}</td>
-            <td>{{ .DayOfBirth }}</td>
-            <td>{{ .Telephone }}</td>
+            <td>{{ .DateOfStart }}</td>
+            <td>{{ .DateOfBirth }}</td>
+            <td>{{ .PhoneNumber }}</td>
             <td>{{ .City }}</td>
             <td>{{ .Street }}</td>
-            <td>{{ .Index }}</td>
-<!--            <td><input type="button"-->
-<!--                       value="submit" onclick="show()" /></td>-->
-<!--                       formaction="" /></td>-->
-
-
-            <!-- може бути не назва атрибутів -->
+            <td>{{ .ZipCode }}</td>
         </tr>
 
         {{ end }}
@@ -243,22 +232,6 @@
     <button formaction="/manager_homepage" class="button4">Homepage</button>
     <button formaction="/log_out" class="button5">Log out</button>
 </form>
-<script>
-    function show() {
-        var rowId =
-            event.target.parentNode.parentNode.id;
-        //this gives id of tr whose button was clicked
-        var data =
-            document.getElementById(rowId).querySelectorAll(".row-data");
-        /*returns array of all elements with
-        "row-data" class within the row with given id*/
-
-        var name = data[0].innerHTML;
-        var age = data[1].innerHTML;
-
-        alert("Name: " + name + "\nAge: " + age);
-    }
-</script>
 </body>
 
 </html>

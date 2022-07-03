@@ -46,8 +46,14 @@ func (p *ProductPostgres) DeleteProduct(productId int) error {
 
 func (p *ProductPostgres) GetProductByName(name string) (entities.Product, error) {
 	var product entities.Product
-	if err := p.db.Get(&product, getProductByName, name); err != nil {
-		return entities.Product{}, err
+	//if err := p.db.Get(&product, getProductByName, name); err != nil {
+	//	return entities.Product{}, err
+	//}
+
+	row := p.db.QueryRow(getProductByName, name)
+	err := row.Scan(&product.Id, &product.Name, &product.CategoryNum, &product.Characteristics)
+	if err != nil {
+		return product, err
 	}
 	return product, nil
 }

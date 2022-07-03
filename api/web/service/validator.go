@@ -3,6 +3,7 @@ package service
 import (
 	"math/rand"
 	"regexp"
+	"time"
 )
 
 const random = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -28,8 +29,10 @@ func IsUnsigned(num int) error {
 
 func GenerateRandomStr(length int) string {
 	b := make([]byte, length)
+	x1 := rand.NewSource(time.Now().UnixNano())
+	y1 := rand.New(x1)
 	for i := range b {
-		b[i] = random[rand.Int63()%int64(len(random))]
+		b[i] = random[y1.Int63()%int64(len(random))]
 	}
 	return string(b)
 }

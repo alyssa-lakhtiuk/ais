@@ -141,35 +141,35 @@
 <div class="line1"></div>
 
 
-<form action="/done_client" method="POST">
+<form method="GET">
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
-      <label>Card number: {{ .CardNumber }}</label>
+      <label>Card number: {{ .Number }}</label>
     </div>
   </div>
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
-      <label>Last name: {{ .LastName }}</label>
+      <label>Last name: {{ .CustomerSurname }}</label>
     </div>
   </div>
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
-      <label>First name: {{ .FirstName }}</label>
+      <label>First name: {{ .CustomerName }}</label>
     </div>
   </div>
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
-      <label>Patronymic: {{ .Patronymic }}</label>
+      <label>Patronymic: {{ .CustomerPatronymic }}</label>
     </div>
   </div>
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
-      <label>Telephone: {{ .Telephone }}</label>
+      <label>Telephone: {{ .PhoneNumber }}</label>
     </div>
   </div>
 
@@ -187,13 +187,13 @@
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
-      <label>Index: {{ .Index }}</label>
+      <label>Index: {{ .ZipCode }}</label>
     </div>
   </div>
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
-      <label>Percentage: {{ .Percentage }}</label>
+      <label>Percentage: {{ .Percent }}</label>
     </div>
   </div>
 

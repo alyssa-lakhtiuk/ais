@@ -4,6 +4,7 @@ import (
 	"ais/entities"
 	"ais/repository"
 	"math/rand"
+	"time"
 )
 
 type productService struct {
@@ -12,13 +13,10 @@ type productService struct {
 }
 
 func (s *productService) Create(product entities.Product) (int, error) {
-	//_, err := s.repoCategory.GetCategoryByNumber(product.CategoryNum)
-	//if err != nil {
-	//	return 0, err
-	//	// throw err "Category of this product doesn't exist"
-	//}
 	for true {
-		randId := rand.Intn(900 - IdRange)
+		x1 := rand.NewSource(time.Now().UnixNano())
+		y1 := rand.New(x1)
+		randId := y1.Intn(900 - IdRange)
 		cat, _ := s.repo.GetProductByNumber(randId)
 		if cat.Id != randId {
 			product.Id = randId
