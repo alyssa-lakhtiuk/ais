@@ -139,8 +139,8 @@
     <h1>Client 😻</h1>
 </div>
 
-<form method="POST">
-    <button formaction="/add_client" class="button2">Add new client</button>
+<form method="GET">
+    <button formaction="/create-client" class="button2">Add new client</button>
     <button formaction="/print_report_client" class="button3">Print report</button>
     </form>
 
@@ -181,14 +181,14 @@
     <tbody>
     {{ range . }}
     <tr>
-        <td>{{ .CardNumber }}</td>
-        <td>{{ .LastName }}</td>
-        <td>{{ .FirstName }}</td>
-        <td>{{ .Patronymic }}</td>
-        <td>{{ .Telephone }}</td>
+        <td>{{ .Number }}</td>
+        <td>{{ .CustomerSurname }}</td>
+        <td>{{ .CustomerName }}</td>
+        <td>{{ .CustomerPatronymic }}</td>
+        <td>{{ .PhoneNumber }}</td>
         <td>{{ .City }}</td>
         <td>{{ .Street }}</td>
-        <td>{{ .Index }}</td>
+        <td>{{ .ZipCode }}</td>
         <!--            <td><input type="button"-->
         <!--                       value="submit" onclick="show()" /></td>-->
         <!--                       formaction="" /></td>-->

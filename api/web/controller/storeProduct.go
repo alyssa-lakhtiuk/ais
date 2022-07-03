@@ -29,7 +29,7 @@ func (h *Handler) getAllStoreProducts(c *gin.Context) {
 	products, err := h.services.StoreProduct.GetAll()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
-		return
+		//return
 		// throw error response
 	}
 	c.JSON(http.StatusOK, products)
@@ -47,7 +47,7 @@ func (h *Handler) getStoreProductByUpc(c *gin.Context) {
 }
 
 func (h *Handler) deleteStoreProduct(c *gin.Context) {
-	id := c.Param("upc")
+	id := c.Param("id")
 	err := h.services.StoreProduct.Delete(id)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
@@ -57,7 +57,7 @@ func (h *Handler) deleteStoreProduct(c *gin.Context) {
 }
 
 func (h *Handler) updateStoreProduct(c *gin.Context) {
-	upc := c.Param("upc")
+	upc := c.Param("id")
 	var input entities.StoreProduct
 	if err := c.BindJSON(&input); err != nil {
 		// throw error response

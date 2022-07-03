@@ -38,18 +38,19 @@ func (h *Handler) getAllProducts(c *gin.Context) {
 		return
 		// throw error response
 	}
-	c.JSON(http.StatusOK, products)
+	//c.JSON(http.StatusOK, products)
+	Tpl.ExecuteTemplate(c.Writer, "manager_products.html", products)
 }
 
 func (h *Handler) getProductByName(c *gin.Context) {
-	productName := c.Param("name")
-	category, err := h.services.Product.GetByName(productName)
+	productName := c.Param("id")
+	product, err := h.services.Product.GetByName(productName)
 	if err != nil {
 		respondWithError(c, http.StatusBadRequest, "unable to get this product")
-		return
+		//return
 		// throw error response
 	}
-	c.JSON(http.StatusOK, category)
+	c.JSON(http.StatusOK, product)
 }
 
 func (h *Handler) deleteProduct(c *gin.Context) {

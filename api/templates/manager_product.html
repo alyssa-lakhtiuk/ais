@@ -132,8 +132,8 @@
     <h1>Product 🍇</h1>
 </div>
 
-<form method="POST">
-    <button formaction="/add_product" class="button2">Add new product</button>
+<form method="GET">
+    <button formaction="/create-product" class="button2">Add new product</button>
     <button formaction="/print_report_product" class="button3">Print report</button>
 </form>
 
@@ -178,10 +178,11 @@
     <tbody>
     {{ range . }}
     <tr>
-        <td>{{ .ProductID }}</td>
-        <td>{{ .CategoryName }}</td>
-        <td>{{ .ProductName }}</td>
-        <td>{{ .Description }}</td>
+        <td>{{ .Id }}</td>
+        <td>{{ .CategoryNum }}</td>
+        <td>{{ .Name }}</td>
+        <td>{{ .Characteristics }}</td>
+        <button>knopka</button>
 
         <!--            <td><input type="button"-->
         <!--                       value="submit" onclick="show()" /></td>-->

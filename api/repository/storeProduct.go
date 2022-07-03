@@ -15,9 +15,9 @@ const (
 	updateStoreProduct = "UPDATE " + storeProductTable + " SET selling_price=$2, promotional_product=$3, product_number=$4," +
 		" upc_prom=$5, fk_id_product=$6 " +
 		"WHERE upc=$1;"
-	deleteStoreProduct    = "DELETE FROM " + storeProductTable + " WHERE upc = $1;"
+	deleteStoreProduct    = "DELETE FROM " + storeProductTable + " WHERE upc=$1;"
 	getStoreProductByName = "SELECT * FROM " + storeProductTable + " WHERE upc=$1;"
-	getAllStoreProducts   = "SELECT * FROM " + storeProductTable + ";"
+	getAllStoreProducts   = "SELECT * FROM " + storeProductTable + " ;"
 )
 
 type storeProductPostgres struct {
@@ -53,10 +53,11 @@ func (er *storeProductPostgres) CreateStoreProduct(product entities.StoreProduct
 }
 
 func (er *storeProductPostgres) UpdateStoreProduct(upc string, product entities.StoreProduct) error {
-	_, err := er.db.Exec(updateStoreProduct, upc, product.SellingPrice, product.PromotionalProduct,
-		product.ProductsNumber, product.UPC, product.IDProduct)
+	var err error
+	_, err = er.db.Exec(updateStoreProduct, upc, product.SellingPrice, product.PromotionalProduct,
+		product.ProductsNumber, product.UPCProm, product.IDProduct)
+
 	return err
-	return nil
 }
 
 func (er *storeProductPostgres) DeleteStoreProduct(upc string) error {
@@ -75,7 +76,7 @@ func (er *storeProductPostgres) GetStoreProductByUpc(upc string) (entities.Store
 func (er *storeProductPostgres) GetAllStoreProducts() ([]entities.StoreProduct, error) {
 	var stProducts []entities.StoreProduct
 
-	rows, err := er.db.Query(getAllChecks)
+	rows, err := er.db.Query(getAllStoreProducts)
 	if err != nil {
 		return nil, err
 	}
@@ -89,8 +90,5 @@ func (er *storeProductPostgres) GetAllStoreProducts() ([]entities.StoreProduct, 
 		}
 		stProducts = append(stProducts, stProd)
 	}
-	//if err := er.db.Select(&stProducts, getAllStoreProducts); err != nil {
-	//	return []entities.StoreProduct{}, err
-	//}
 	return stProducts, nil
 }
