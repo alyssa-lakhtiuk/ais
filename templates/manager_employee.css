@@ -32,7 +32,7 @@ h1 {
     margin-left: 40px;
 }
 
-select {
+.sel1 {
     appearance: none;
     -webkit-appearance: none;
     -webkit-border-radius: 0px;
@@ -44,8 +44,23 @@ select {
     font-size: 25px;
     margin-bottom: 20px;
     margin-top: 50px;
-    margin-left: 250px;
+    margin-left: 5px;
 
+}
+
+.sel2 {
+    appearance: none;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0px;
+    font-family: cursive;
+    border: 1px solid #000000;
+    padding-left: 30px;
+    padding-right: 30px;
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-left: 5px;
 }
 
 h3 {
@@ -89,4 +104,34 @@ th {
     font-size: 20px;
     margin-top: 160px;
     margin-left: 20px;
+}
+.form-control {
+    font-family: cursive;
+    border: 1px solid #000000;
+    padding-left: 5px;
+    padding-right: 120px;
+    text-align: left;
+    font-size: 20px;
+    margin-left: 5px;
+    margin-bottom: 30px;
+}
+label{
+    font-family: cursive;
+    text-align: center;
+    font-size: 25px;
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+.button1 {
+    font-family: cursive;
+    border: 1px solid #c27004;
+    background-color: #ffb14d;
+    color: #ffffff;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    font-size: 25px;
+    margin-left: 20px;
+    margin-top: 5px;
+
 }

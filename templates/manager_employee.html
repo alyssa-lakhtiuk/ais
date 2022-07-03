@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>employee</title>
-    <link rel="stylesheet" href="employee.css">
+    <link rel="stylesheet" href="manager_employee.css">
 </head>
 
 <body>
@@ -18,29 +18,33 @@
 <form method="POST">
     <button formaction="/add_employee" class="button2">Add new employee</button>
     <button formaction="/print_report_employee" class="button3">Print report</button>
-    <button formaction="/search_employee" class="button3">Specific search</button>
 </form>
 
-<form action="/sort_employee_surname" method="POST">
+<form action="/request_employee" method="POST">
+    <label>Sort by surname:</label>
     <select class="sel1" id="sort_surname" name="sort_surname">
         <option value="asc">ASC</option>
         <option value="desc">DESC</option>
-<!--        <input type="submit" value="Submit">-->
+
     </select>
-</form>
-
-<h3>Sort by surname: </h3>
-
-<form action="/sort_employee_role" method="POST">
+    <label>Role:</label>
     <select class="sel2" id="sort_role" name="sort_role">
         <option value="both_roles">Manager and Cashier</option>
         <option value="manager">Manager</option>
         <option value="cashier">Cashier</option>
-        <!--        <input type="submit" value="Submit">-->
     </select>
+    <label>Search by surname:</label>
+    <input type="text" class="form-control" id="last" name="lastname">
+    <button type="submit" class="button1">Search</button>
 </form>
 
-<h3>Role: </h3>
+
+
+<form action="/sort_employee_role" method="POST">
+
+</form>
+
+
 
     <table >
         <!-- Table header -->

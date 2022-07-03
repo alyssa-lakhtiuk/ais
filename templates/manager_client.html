@@ -5,39 +5,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>search employee</title>
-    <link rel="stylesheet" href="search_employee.css">
+    <title>client</title>
+    <link rel="stylesheet" href="manager_client.css">
 </head>
 
 <body>
 
 <div class="heading">
-    <h1>Employee👩‍💼: specific search</h1>
+    <h1>Client 😻</h1>
 </div>
 
+<form method="POST">
+    <button formaction="/add_client" class="button2">Add new client</button>
+    <button formaction="/print_report_client" class="button3">Print report</button>
+    </form>
 
-<form action="/search_employee_surname" method="POST">
-    <input type="text" class="form-control" id="last" name="lastname">
+<form action="/request_client" method="POST">
+    <label>Sort by surname: </label>
+    <select id="sort_surname" name="sort_surname">
+        <option value="asc">ASC</option>
+        <option value="desc">DESC</option>
+    </select>
+    <label>Search by discount: </label>
+    <input type="number" class="form-control" id="ser_per" name="search_percentage" placeholder="%">
     <button type="submit" class="button1">Search</button>
 </form>
-
-
-<h3>Search by Surname: </h3>
 
 <table >
     <!-- Table header -->
     <thead>
     <tr>
-        <th scope="col">Employee ID</th>
+        <th scope="col">Card Number</th>
         <th scope="col">Last Name</th>
         <th scope="col">First Name</th>
         <th scope="col">Patronymic</th>
-
         <th scope="col">Telephone</th>
         <th scope="col">City</th>
         <th scope="col">Street</th>
         <th scope="col">Index</th>
-
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
     </tr>
     </thead>
     <!-- Table footer -->
@@ -50,11 +57,10 @@
     <tbody>
     {{ range . }}
     <tr>
-        <td>{{ .EmployeeId }}</td>
+        <td>{{ .CardNumber }}</td>
         <td>{{ .LastName }}</td>
         <td>{{ .FirstName }}</td>
         <td>{{ .Patronymic }}</td>
-
         <td>{{ .Telephone }}</td>
         <td>{{ .City }}</td>
         <td>{{ .Street }}</td>
@@ -75,22 +81,22 @@
     <button formaction="/manager_homepage" class="button4">Homepage</button>
     <button formaction="/log_out" class="button5">Log out</button>
 </form>
-<!--<script>-->
-<!--    function show() {-->
-<!--        var rowId =-->
-<!--            event.target.parentNode.parentNode.id;-->
-<!--        //this gives id of tr whose button was clicked-->
-<!--        var data =-->
-<!--            document.getElementById(rowId).querySelectorAll(".row-data");-->
-<!--        /*returns array of all elements with-->
-<!--        "row-data" class within the row with given id*/-->
+<script>
+    function show() {
+        var rowId =
+            event.target.parentNode.parentNode.id;
+        //this gives id of tr whose button was clicked
+        var data =
+            document.getElementById(rowId).querySelectorAll(".row-data");
+        /*returns array of all elements with
+        "row-data" class within the row with given id*/
 
-<!--        var name = data[0].innerHTML;-->
-<!--        var age = data[1].innerHTML;-->
+        var name = data[0].innerHTML;
+        var age = data[1].innerHTML;
 
-<!--        alert("Name: " + name + "\nAge: " + age);-->
-<!--    }-->
-<!--</script>-->
+        alert("Name: " + name + "\nAge: " + age);
+    }
+</script>
 </body>
 
 </html>

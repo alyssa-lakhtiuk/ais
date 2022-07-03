@@ -5,41 +5,54 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>product</title>
-    <link rel="stylesheet" href="product.css">
+    <title>product in store</title>
+    <link rel="stylesheet" href="manager_stock_product.css">
 </head>
 
 <body>
 
 <div class="heading">
-    <h1>Product 🐮</h1>
+    <h1>Product in Store 🧀</h1>
 </div>
 
 <form method="POST">
-    <button formaction="/add_product" class="button2">Add new product</button>
-    <button formaction="/print_report_product" class="button3">Print report</button>
-    <button formaction="/search_product" class="button3">Specific search</button>
+    <button formaction="/add_stock_product" class="button2">Add new product</button>
+    <button formaction="/print_report_stock_product" class="button3">Print report</button>
 </form>
 
-<form action="/sort_product_name" method="POST">
-    <select id="sort_product" name="sort_product_name">
+<form action="/sort_product_st_number" method="POST">
+    <label>Sort by number: </label>
+    <select id="sort_product_st_num" name="sort_product_st_number">
         <option value="asc">ASC</option>
         <option value="desc">DESC</option>
         <!--        <input type="submit" value="Submit">-->
     </select>
+    <label>Sort by name: </label>
+    <select id="sort_product_st_name" name="sort_product_st_name">
+        <option value="asc">ASC</option>
+        <option value="desc">DESC</option>
+        <!--        <input type="submit" value="Submit">-->
+    </select>
+    <input class="check" type="checkbox" id="check_with_prom" name="check_with" checked>
+    <label class="lab1">promotion</label>
+    <input class="check" type="checkbox" id="check_without_prom" name="check_without" checked>
+    <label class="lab1">no promotion</label>
+    <label>UPC:</label>
+    <input type="text" class="form-control" id="upc" name="upccc">
+    <button type="submit" class="button1">Search</button>
 </form>
-
-<h3>Sort by Name: </h3>
 
 <table >
     <!-- Table header -->
     <thead>
     <tr>
-        <th scope="col">Product ID</th>
-        <th scope="col">Category Name</th>
+        <th scope="col">UPC</th>
+        <th scope="col">ID Product</th>
+        <th scope="col">Selling price</th>
+        <th scope="col">Number</th>
+        <th scope="col">Promotional</th>
         <th scope="col">Product Name</th>
-        <th scope="col">Description</th>
-
+        <th scope="col">Characteristics</th>
         <th scope="col">Edit</th>
         <th scope="col">Delete</th>
     </tr>
@@ -54,10 +67,13 @@
     <tbody>
     {{ range . }}
     <tr>
-        <td>{{ .ProductID }}</td>
-        <td>{{ .CategoryName }}</td>
+        <td>{{ .UPC }}</td>
+        <td>{{ .IDProduct }}</td>
+        <td>{{ .SellingPrice }}</td>
+        <td>{{ .Number }}</td>
+        <td>{{ .Promotional }}</td>
         <td>{{ .ProductName }}</td>
-        <td>{{ .Description }}</td>
+        <td>{{ .Characteristics }}</td>
 
         <!--            <td><input type="button"-->
         <!--                       value="submit" onclick="show()" /></td>-->
