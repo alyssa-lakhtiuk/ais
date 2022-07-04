@@ -1,11 +1,228 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
+
 <head>
     <meta charset="UTF-8">
-    <title>add check</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add new check</title>
+    <style>
+        h1 {
+            font-size: 72px;
+            font-family: cursive;
+            font-weight: 50;
+            color: #000000;
+            height: 20px;
+            margin-left: 100px;
+            margin-top: 200px;
+            margin-bottom: 20px;
+        }
 
+        .title1 {
+            font-size: 48px;
+            font-family: cursive;
+            font-weight: 50;
+            color: #92D050;
+            height: 20px;
+            margin-right: 800px;
+            margin-left: 140px;
+            margin-top: 80px;
+        }
+        .line1 {
+            width: 650px;
+            margin-left: 700px;
+            margin-top: -175px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid black;
+        }
+        label{
+            font-family: cursive;
+
+            padding-right: 20px;
+            text-align: center;
+            font-size: 20px;
+            margin-left: 720px;
+            margin-bottom: 15px;
+        }
+        .form-control {
+            font-family: cursive;
+            border: 1px solid #000000;
+            padding-left: 5px;
+            padding-right: 120px;
+            text-align: left;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -webkit-border-radius: 0px;
+            font-family: cursive;
+            border: 1px solid #000000;
+            padding-left: 5px;
+            padding-right: 80px;
+            text-align: left;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .line2 {
+            height: 350px;
+            margin-left: 700px;
+            margin-right: 10px;
+            margin-top: -610px;
+            border-left: 1px solid black;
+        }
+
+        .line3 {
+            height: 352px;
+            margin-left: 1350px;
+            margin-right: 10px;
+            margin-top: -353px;
+            border-left: 1px solid black;
+        }
+
+        .line4 {
+            width: 650px;
+            margin-left: 700px;
+            margin-bottom: 170px;
+            border-bottom: 1px solid black;
+        }
+
+
+        .button4 {
+            font-family: cursive;
+            border: 1px solid #ffb14d;
+            background-color: #ffffff;
+            color: #ffb14d;
+            padding-left: 20px;
+            padding-right: 20px;
+            text-align: center;
+            font-size: 20px;
+            margin-top: 250px;
+            margin-left: 30px;
+        }
+
+        .button5 {
+            font-family: cursive;
+            border: 1px solid #ffb14d;
+            background-color: #ffffff;
+            color: #ffb14d;
+            padding-left: 20px;
+            padding-right: 20px;
+            text-align: center;
+            font-size: 20px;
+            margin-top: 250px;
+            margin-left: 20px;
+        }
+
+        .button1 {
+            font-family: cursive;
+            border: 1px solid #50742b;
+            background-color: #92D050;
+            color: #ffffff;
+            padding-left: 80px;
+            padding-right: 80px;
+            text-align: center;
+            font-size: 25px;
+            margin-left: 720px;
+            margin-top: 5px;
+        }
+        .button2 {
+            font-family: cursive;
+            border: 1px solid #c27004;
+            background-color: #ffb14d;
+            color: #ffffff;
+            padding-left: 80px;
+            padding-right: 80px;
+            text-align: center;
+            font-size: 25px;
+            margin-left: 720px;
+            margin-top: 5px;
+        }
+
+        p {
+            color: #ee5331;
+            margin-left: 950px;
+            margin-top:-55px;
+            margin-bottom: 20px;
+        }
+        .line5 {
+            width: 650px;
+            margin-left: 700px;
+            margin-top: 25px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid black;
+        }
+    </style>
 </head>
+
 <body>
 
+<div class="heading">
+    <h1>Check 💰</h1>
+</div>
+
+<div class="title1">
+    <h3>Add new check</h3>
+</div>
+<div class="line1"></div>
+
+<form  method="POST">
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <label>Product:</label>
+            <input type="text" class="form-control" id="name_prod" name="name_prod">
+        </div>
+    </div>
+
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <label>Number:</label>
+            <input type="text" class="form-control" id="number" name="number">
+        </div>
+    </div>
+
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <button type="submit" formaction=" " name="add_product_check" class="button1">add product</button>
+        </div>
+    </div>
+
+</form>
+
+<div class="line5"></div>
+
+<form  method="POST">
+
+<!--    <div class="line1"></div>-->
+
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <label>Card Number:</label>
+            <input type="text" class="form-control" id="descrip" name="description">
+        </div>
+    </div>
+    </div>
+
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <button type="submit" formaction="/finish-check" class="button2">finish check</button>
+        </div>
+    </div>
+
+</form>
+
+<form method="GET">
+    <button formaction="/manager_homepage" class="button4">Homepage</button>
+    <button formaction="/log_out" class="button5">Log out</button>
+</form>
+
+
+<div class="line2"></div>
+<div class="line3"></div>
+<div class="line4"></div>
+
 </body>
-</html>
+

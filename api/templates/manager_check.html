@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>product</title>
+  <title>check</title>
   <style>
     h1 {
       font-size: 72px;
@@ -58,20 +58,29 @@
     }
 
     h3 {
-      font-size: 25px;
+      font-size: 15px;
       font-family: cursive;
       font-weight: 50;
       color: #000000;
       height: 20px;
-      margin-left: 50px;
-      margin-top: 160px;
+      margin-left: 20px;
+      margin-top: 60px;
 
     }
     th {
-      font-size: 11px;
+      font-size: 16px;
       font-family: cursive;
       font-weight: 50;
       color: #000000;
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+    td {
+      font-size: 12px;
+      font-family: cursive;
+      color: #000000;
+      padding-right: 10px;
+      padding-left: 10px;
     }
 
     .button4 {
@@ -122,13 +131,33 @@
       margin-top: 5px;
     }
 
+    .form-control {
+      font-family: cursive;
+      border: 1px solid #000000;
+      padding-left: 5px;
+
+      text-align: left;
+      font-size: 20px;
+      margin-left: 5px;
+      margin-bottom: 30px;
+    }
 
     .line1 {
-      width: 1250px;
-      margin-left: 100px;
-      margin-top: -25px;
+      width: 1350px;
       margin-bottom: 5px;
-      border-bottom: 1px solid black;
+      border-bottom: 0.5px solid black;
+    }
+    .button0 {
+      font-family: cursive;
+      border: 1px solid #c23704;
+      background-color: #ff6e4d;
+      color: #ffffff;
+      padding-left: 20px;
+      padding-right: 20px;
+      text-align: center;
+      font-size: 25px;
+      margin-left: 20px;
+      margin-top: 35px;
     }
   </style>
 </head>
@@ -139,7 +168,7 @@
   <h1>Check 💸</h1>
 </div>
 
-<form method="POST">
+<form method="GET">
   <button formaction="/print_report_check" class="button2">Print report</button>
 </form>
 
@@ -173,74 +202,59 @@
 
   <button type="submit" class="button1">Search</button>
 </form>
-
+<div class="line1"></div>
 <table >
   <!-- Table header -->
   <thead>
   <tr>
     <th scope="col">Check Number</th>
-    <th scope="col">Cashier Name</th>
-    <th scope="col">Product Name</th>
-    <th scope="col">Amount</th>
-    <th scope="col">Price</th>
+    <th scope="col">Cashier ID</th>
+    <th scope="col">Customer Card</th>
+    <th scope="col">Date</th>
+    <th scope="col">UPC</th>
+    <th scope="col">Product Number</th>
+    <th scope="col">Selling Price</th>
+    <th scope="col">Sum Total</th>
+    <th scope="col">Vat</th>
 
   </tr>
   </thead>
-  <!-- Table footer -->
-  <tfoot>
-  <tr>
-    <td>END</td>
-  </tr>
-  </tfoot>
 
-  <!-- Table body -->
   <tbody>
 
   {{ range . }}
   <tr>
-    <td>{{ .ProductID }}</td>
-    <td>{{ .NameCashier }}</td>
-    <td>{{ .NameProduct }}</td>
-    <td>{{ .Amount }}</td>
-    <td>{{ .Description }}</td>
+    <td>{{ .Number }}</td>
+    <td>{{ .IdEmployee }}</td>
+    <td>{{ .CardNumber }}</td>
+    <td>{{ .PrintDate }}</td>
+    <td>{{ .UPC }}</td>
+    <td>{{ .ProductNumber }}</td>
+    <td>{{ .SellingPrice }}</td>
+    <td>{{ .SumTotal }}</td>
+    <td>{{ .Vat }}</td>
 
-    <!--            <td><input type="button"-->
-    <!--                       value="submit" onclick="show()" /></td>-->
-    <!--                       formaction="" /></td>-->
-
-
-    <!-- може бути не назва атрибутів -->
   </tr>
 <!--  <div class="line1"></div>-->
 
   {{ end }}
   </tbody>
 </table>
+<div class="line1"></div>
 
-
-<h3>Money: {{ .Money }}     ;   Number of Products: {{ .NumProd }}</h3>
-
+<h3>Money: {{ .SumTotal }}     ;   Number of Products: {{ .ProductNumber }}</h3>
 
 <form method="POST">
+  <label>Check number: </label>
+  <input type="text" class="form-control" id="check_number" name="number">
+  <button formaction="/delete_employee" type="submit" class="button0">Delete</button>
+</form>
+
+<form method="GET">
   <button formaction="/manager_homepage" class="button4">Homepage</button>
   <button formaction="/log_out" class="button5">Log out</button>
 </form>
-<!--<script>-->
-<!--  function show() {-->
-<!--    var rowId =-->
-<!--            event.target.parentNode.parentNode.id;-->
-<!--    //this gives id of tr whose button was clicked-->
-<!--    var data =-->
-<!--            document.getElementById(rowId).querySelectorAll(".row-data");-->
-<!--    /*returns array of all elements with-->
-<!--    "row-data" class within the row with given id*/-->
 
-<!--    var name = data[0].innerHTML;-->
-<!--    var age = data[1].innerHTML;-->
-
-<!--    alert("Name: " + name + "\nAge: " + age);-->
-<!--  }-->
-<!--</script>-->
 </body>
 
 </html>
