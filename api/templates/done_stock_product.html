@@ -29,8 +29,6 @@
             margin-left: 100px;
             margin-top: 80px;
         }
-
-
         .line1 {
             width: 650px;
             margin-left: 700px;
@@ -38,7 +36,6 @@
             margin-bottom: 25px;
             border-bottom: 1px solid black;
         }
-
         label{
             font-family: cursive;
             /*padding-left: px;*/
@@ -48,7 +45,6 @@
             margin-left: 720px;
             margin-bottom: 35px;
         }
-
         select {
             appearance: none;
             -webkit-appearance: none;
@@ -61,31 +57,26 @@
             font-size: 25px;
             margin-bottom: 20px;
         }
-
         .line2 {
-            height: 270px;
+            height: 300px;
             margin-left: 700px;
             margin-right: 10px;
-            margin-top: -245px;
+            margin-top: -275px;
             border-left: 1px solid black;
         }
-
         .line3 {
-            height: 271px;
+            height: 301px;
             margin-left: 1350px;
             margin-right: 10px;
-            margin-top: -271px;
+            margin-top: -301px;
             border-left: 1px solid black;
         }
-
         .line4 {
             width: 650px;
             margin-left: 700px;
             /*margin-top: 20px;*/
             border-bottom: 1px solid black;
         }
-
-
         .button4 {
             font-family: cursive;
             border: 1px solid #ffb14d;
@@ -117,8 +108,8 @@
             border: 1px solid #c27004;
             background-color: #ffb14d;
             color: #ffffff;
-            padding-left: 80px;
-            padding-right: 80px;
+            padding-left: 20px;
+            padding-right: 20px;
             text-align: center;
             font-size: 25px;
             margin-left: 720px;
@@ -131,13 +122,14 @@
             margin-top:-55px;
             margin-bottom: 20px;
         }
+
     </style>
 </head>
 
 <body>
 
 <div class="heading">
-    <h1>Product in store 🍾</h1>
+    <h1>Product in store 🐝</h1>
 </div>
 
 <div class="title1">
@@ -147,7 +139,8 @@
 
 <div class="line1"></div>
 
-<form method="POST">
+<form action="/store-product" method="GET">
+
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
@@ -155,27 +148,41 @@
         </div>
     </div>
 
+
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <label>Category: {{ .Category }}</label>
+            <label>Product: {{ .IDProduct  }}</label>
+        </div>
+    </div>
+
+
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <label>Selling price: {{ .SellingPrice  }}</label>
+
         </div>
     </div>
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <label>Name: {{ .NameCategory }}</label>
+            <label>Number: {{ .ProductsNumber }}</label>
+
         </div>
     </div>
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <label>Description: {{ .Characteristics }}</label>
+            <label>Promotional: {{ .PromotionalProduct }}</label>
+
         </div>
     </div>
-</form>
 
-<form method="POST">
-    <button formaction="/manager_stock_product" class="button1">Go to all products in store</button>
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <button type="submit" class="button1">Go to all products in store</button>
+        </div>
+    </div>
+
 </form>
 
 <div class="line2"></div>

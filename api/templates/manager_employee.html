@@ -83,12 +83,20 @@
 
         }
         th {
-            font-size: 11px;
+            font-size: 16px;
             font-family: cursive;
             font-weight: 50;
             color: #000000;
+            padding-right: 15px;
+            padding-left: 15px;
         }
-
+        td {
+            font-size: 12px;
+            font-family: cursive;
+            color: #000000;
+            padding-right: 10px;
+            padding-left: 10px;
+        }
         .button4 {
             font-family: cursive;
             border: 1px solid #ffb14d;
@@ -143,6 +151,24 @@
             margin-left: 20px;
             margin-top: 5px;
         }
+        .button0 {
+            font-family: cursive;
+            border: 1px solid #c23704;
+            background-color: #ff6e4d;
+            color: #ffffff;
+            padding-left: 20px;
+            padding-right: 20px;
+            text-align: center;
+            font-size: 25px;
+            margin-left: 20px;
+            margin-top: 35px;
+        }
+        .line1 {
+            width: 1300px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-bottom: 0.5px solid black;
+        }
 
     </style>
 </head>
@@ -150,10 +176,10 @@
 <body>
 
 <div class="heading">
-    <h1>Employee👩‍💼</h1>
+    <h1>Employee🦑</h1>
 </div>
 
-<form method="POST">
+<form method="GET">
     <button formaction="/add_employee" class="button2">Add new employee</button>
     <button formaction="/print_report_employee" class="button3">Print report</button>
 </form>
@@ -163,8 +189,8 @@
     <select class="sel1" id="sort_surname" name="sort_surname">
         <option value="asc">ASC</option>
         <option value="desc">DESC</option>
-
     </select>
+
     <label>Role:</label>
     <select class="sel2" id="sort_role" name="sort_role">
         <option value="both_roles">Manager and Cashier</option>
@@ -176,36 +202,33 @@
     <button type="submit" class="button1">Search</button>
 </form>
 
-<form action="/sort_employee_role" method="POST">
-
-</form>
+<div class="line1"></div>
 
     <table >
         <!-- Table header -->
         <thead>
         <tr>
             <th scope="col">Employee ID</th>
-            <th scope="col">Last Name</th>
+            <th scope="col">Surname</th>
             <th scope="col">First Name</th>
             <th scope="col">Patronymic</th>
             <th scope="col">Role</th>
             <th scope="col">Salary</th>
             <th scope="col">Day of start</th>
             <th scope="col">Day of birth</th>
-            <th scope="col">Telephone</th>
+            <th scope="col">Phone number</th>
             <th scope="col">City</th>
             <th scope="col">Street</th>
-            <th scope="col">Index</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
+            <th scope="col">Zipcode</th>
+
         </tr>
         </thead>
         <!-- Table footer -->
-        <tfoot>
-        <tr>
-            <td>END</td>
-        </tr>
-        </tfoot>
+<!--        <tfoot>-->
+<!--        <tr>-->
+<!--            <td>END</td>-->
+<!--        </tr>-->
+<!--        </tfoot>-->
         <!-- Table body -->
         <tbody>
         {{ range . }}
@@ -227,8 +250,16 @@
         {{ end }}
         </tbody>
     </table>
+<div class="line1"></div>
 
 <form method="POST">
+    <label>Employee ID: </label>
+    <input type="text" class="form-control" id="employee_id" name="id">
+    <button formaction="/edit_employee" type="submit" class="button0">Edit</button>
+    <button formaction="/delete_employee" type="submit" class="button0">Delete</button>
+</form>
+
+<form method="GET">
     <button formaction="/manager_homepage" class="button4">Homepage</button>
     <button formaction="/log_out" class="button5">Log out</button>
 </form>

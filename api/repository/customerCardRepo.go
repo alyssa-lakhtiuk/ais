@@ -4,6 +4,7 @@ import (
 	"ais/entities"
 	"fmt"
 	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
 )
 
 const (
@@ -53,10 +54,17 @@ func (er *customerCardPostgres) DeleteCustomerCard(num string) error {
 
 func (er *customerCardPostgres) GetCustomerCardByNumber(num string) (entities.CustomerCard, error) {
 	var cc entities.CustomerCard
-	if err := er.db.Get(&cc, getCustomerCardByNumber, num); err != nil {
-		return entities.CustomerCard{}, err
+	row := er.db.QueryRow(getCustomerCardByNumber, num)
+	err := row.Scan(&cc.Number, &cc.CustomerSurname, &cc.CustomerName, &cc.CustomerPatronymic, &cc.PhoneNumber,
+		&cc.City, &cc.Street, &cc.ZipCode, &cc.Percent)
+	if err != nil {
+		return cc, err
 	}
 	return cc, nil
+	//if err := er.db.Get(&cc, getCustomerCardByNumber, num); err != nil {
+	//	return entities.CustomerCard{}, err
+	//}
+	//return cc, nil
 }
 
 func (er *customerCardPostgres) GetCustomerCardByName(name string) (entities.CustomerCard, error) {

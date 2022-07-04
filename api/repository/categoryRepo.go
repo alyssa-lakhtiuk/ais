@@ -2,8 +2,8 @@ package repository
 
 import (
 	"ais/entities"
-	"fmt"
 	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
 )
 
 const (
@@ -47,18 +47,30 @@ func (er *categoryPostgres) DeleteCategory(name string) error {
 
 func (er *categoryPostgres) GetCategoryByName(name string) (entities.Category, error) {
 	var category entities.Category
-	if err := er.db.Get(&category, getCategoryByName, name); err != nil {
-		return entities.Category{}, fmt.Errorf("such category doesn't exist")
+	row := er.db.QueryRow(getCategoryByName, name)
+	err := row.Scan(&category.Number, &category.Name)
+	if err != nil {
+		return category, err
 	}
 	return category, nil
+	//if err := er.db.Get(&category, getCategoryByName, name); err != nil {
+	//	return entities.Category{}, fmt.Errorf("such category doesn't exist")
+	//}
+	//return category, nil
 }
 
 func (er *categoryPostgres) GetCategoryByNumber(number int) (entities.Category, error) {
 	var category entities.Category
-	if err := er.db.Get(&category, getCategoryByNumber, number); err != nil {
-		return entities.Category{}, fmt.Errorf("such category doesn't exist")
+	row := er.db.QueryRow(getCategoryByNumber, number)
+	err := row.Scan(&category.Number, &category.Name)
+	if err != nil {
+		return category, err
 	}
 	return category, nil
+	//if err := er.db.Get(&category, getCategoryByNumber, number); err != nil {
+	//	return entities.Category{}, fmt.Errorf("such category doesn't exist")
+	//}
+	//return category, nil
 }
 
 func (er *categoryPostgres) GetAllCategories() ([]entities.Category, error) {

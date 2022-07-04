@@ -22,39 +22,47 @@ func init() {
 
 func (h *Handler) NewRoutes() *gin.Engine {
 	router := gin.Default()
-	router.GET("/employees", h.getAllEmployees)
-	router.POST("/employee", h.createEmployee)
+	router.GET("/employees", h.getAllEmployees) // вертає null
+	router.GET("/create-employee", h.createEmployee)
+	router.POST("/employee", h.employeeCreated)      // не відкривається
+	router.GET("/employee/:id", h.getEmployeeByName) // by name  // з Brad не працює
+	router.GET("/employees/:id", h.getEmployeeById)  // by id
 	router.PUT("/employee/:id", h.updateEmployee)
 	router.DELETE("/employee/:id", h.deleteEmployee)
 	// Category pages
-	router.GET("/create-category", h.createCategory)
+	router.GET("/create-category", h.createCategory) // кидає помилку, хуй знає чого, але створює
 	router.POST("/category", h.categoryCreated)
-	router.GET("/category/:id", h.getCategoryByName) // by name
-	router.GET("/categories", h.getAllCategories)
+	router.GET("/category/:id", h.getCategoryByName)     // by name // працює
+	router.GET("/categories/:id", h.getCategoryByNumber) // by number  // кидає помилку
+	router.GET("/categories", h.getAllCategories)        // працює
 	router.DELETE("/category/:name", h.deleteCategory)
 	router.PUT("/category/:id", h.updateCategory)
 	// Product pages
 	router.POST("/product", h.createProduct)
-	router.GET("/products", h.getAllProducts)
-	router.GET("/product/:id", h.getProductByName) // by name
+	router.GET("/products", h.getAllProducts)         // нічого не виводить, взагалі + в postman
+	router.GET("/product/:name", h.getProductByName)  // by name // працює
+	router.GET("/products/:id", h.getProductByNumber) // by id // працює
 	router.DELETE("/product/:id", h.deleteProduct)
 	router.PUT("/product/:id", h.updateProduct)
 	// Customer card pages
 	router.GET("/create-customer-card", h.createCustomerCard)
 	router.POST("/customer-card", h.customerCardCreated)
-	router.GET("/customer-cards", h.getAllCustomerCards)
+	router.GET("/customer-card/:id", h.getCustomerCardByNumber) // by name // працює
+	router.GET("/customer-cards", h.getAllCustomerCards)        // працює
 	router.DELETE("/customer-cards/:id", h.deleteCustomerCard)
 	router.PUT("/customer-card/:id", h.updateCustomerCard)
+	// Store product pages
+	router.GET("/create-store-product", h.createStoreProduct)
+	router.POST("/store-product", h.storeProductCreated)
+	router.GET("/store-products", h.getAllStoreProducts)
+	router.GET("/store-products/:upc", h.getStoreProductByUpc) // by upc // не працює, потестити
+	router.DELETE("/store-product/:id", h.deleteStoreProduct)
+	router.PUT("/store-product/:id", h.updateStoreProduct)
 	// Sale pages
 	// Check pages
 	router.POST("/check", h.createCheck)
 	router.GET("/checks", h.getAllChecks)
 	router.DELETE("/check/:id", h.deleteCheck)
-	// Store product pages
-	router.POST("/store-product", h.createStoreProduct)
-	router.GET("/store-products", h.getAllStoreProducts)
-	router.DELETE("/store-product/:id", h.deleteStoreProduct)
-	router.PUT("/store-product/:id", h.updateStoreProduct)
 
 	////router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	//

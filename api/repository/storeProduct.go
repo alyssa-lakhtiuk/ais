@@ -3,6 +3,7 @@ package repository
 import (
 	"ais/entities"
 	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
 )
 
 const (
@@ -67,10 +68,17 @@ func (er *storeProductPostgres) DeleteStoreProduct(upc string) error {
 
 func (er *storeProductPostgres) GetStoreProductByUpc(upc string) (entities.StoreProduct, error) {
 	var stProduct entities.StoreProduct
-	if err := er.db.Get(&stProduct, getStoreProductByName, upc); err != nil {
-		return entities.StoreProduct{}, err
+	row := er.db.QueryRow(getStoreProductByName, upc)
+	err := row.Scan(&stProduct.UPC, &stProduct.SellingPrice, &stProduct.PromotionalProduct, &stProduct.ProductsNumber,
+		&stProduct.UPCProm, &stProduct.IDProduct)
+	if err != nil {
+		return stProduct, err
 	}
 	return stProduct, nil
+	//if err := er.db.Get(&stProduct, getStoreProductByName, upc); err != nil {
+	//	return entities.StoreProduct{}, err
+	//}
+	//return stProduct, nil
 }
 
 func (er *storeProductPostgres) GetAllStoreProducts() ([]entities.StoreProduct, error) {

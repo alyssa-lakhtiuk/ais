@@ -43,8 +43,21 @@ func (h *Handler) getAllProducts(c *gin.Context) {
 }
 
 func (h *Handler) getProductByName(c *gin.Context) {
-	productName := c.Param("id")
+	//productName := c.Param("name")
+	productName := "Parmesan"
 	product, err := h.services.Product.GetByName(productName)
+	if err != nil {
+		respondWithError(c, http.StatusBadRequest, "unable to get this product")
+		//return
+		// throw error response
+	}
+	c.JSON(http.StatusOK, product)
+}
+
+func (h *Handler) getProductByNumber(c *gin.Context) {
+	productName, err := strconv.Atoi(c.Param("id"))
+	//productName := 976
+	product, err := h.services.Product.GetByNumber(productName)
 	if err != nil {
 		respondWithError(c, http.StatusBadRequest, "unable to get this product")
 		//return

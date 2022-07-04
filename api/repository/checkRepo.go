@@ -3,6 +3,7 @@ package repository
 import (
 	"ais/entities"
 	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
 	"time"
 )
 
@@ -85,10 +86,16 @@ func (er *checkPostgres) DeleteCheck(num string) error {
 
 func (er *checkPostgres) GetCheckByNumber(num string) (entities.Check, error) {
 	var check entities.Check
-	if err := er.db.Get(&check, getCheckByName, num); err != nil {
-		return entities.Check{}, err
+	row := er.db.QueryRow(getCheckByName, num)
+	err := row.Scan(&check.Number, &check.PrintDate, &check.SumTotal, &check.Vat, &check.IdEmployee, &check.CardNumber)
+	if err != nil {
+		return check, err
 	}
 	return check, nil
+	//if err := er.db.Get(&check, getCheckByName, num); err != nil {
+	//	return entities.Check{}, err
+	//}
+	//return check, nil
 }
 
 func (er *checkPostgres) GetAllChecks() ([]entities.Check, error) {

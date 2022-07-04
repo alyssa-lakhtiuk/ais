@@ -3,6 +3,7 @@ package repository
 import (
 	"ais/entities"
 	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
 )
 
 const (
@@ -11,9 +12,9 @@ const (
 	updateProduct = "UPDATE " + productTable + " SET fk_category_number=$2, product_name=$3, description=$4 " +
 		"WHERE id_product=$1;"
 	deleteProduct        = "DELETE FROM " + productTable + " WHERE id_product = $1;"
-	getProductByName     = "SELECT * FROM " + productTable + " WHERE product_name=$1;"
-	getProductByCategory = "SELECT * FROM " + productTable + " WHERE product_name=$1;"
-	getProductByNumber   = "SELECT * FROM " + productTable + " WHERE id_product=$1;"
+	getProductByName     = "SELECT * FROM " + productTable + " WHERE product_name = $1;"
+	getProductByCategory = "SELECT * FROM " + productTable + " WHERE fk_category_number = $1;"
+	getProductByNumber   = "SELECT * FROM " + productTable + " WHERE id_product = $1;"
 	getAllProducts       = "SELECT * FROM " + productTable + ";"
 )
 
@@ -51,7 +52,7 @@ func (p *ProductPostgres) GetProductByName(name string) (entities.Product, error
 	//}
 
 	row := p.db.QueryRow(getProductByName, name)
-	err := row.Scan(&product.Id, &product.Name, &product.CategoryNum, &product.Characteristics)
+	err := row.Scan(&product.Id, &product.Name, &product.Characteristics, &product.CategoryNum)
 	if err != nil {
 		return product, err
 	}
@@ -60,8 +61,13 @@ func (p *ProductPostgres) GetProductByName(name string) (entities.Product, error
 
 func (p *ProductPostgres) GetProductByNumber(number int) (entities.Product, error) {
 	var product entities.Product
-	if err := p.db.Get(&product, getProductByNumber, number); err != nil {
-		return entities.Product{}, err
+	//if err := p.db.Get(&product, getProductByNumber, number); err != nil {
+	//	return entities.Product{}, err
+	//}
+	row := p.db.QueryRow(getProductByNumber, number)
+	err := row.Scan(&product.Id, &product.Name, &product.Characteristics, &product.CategoryNum)
+	if err != nil {
+		return product, err
 	}
 	return product, nil
 }

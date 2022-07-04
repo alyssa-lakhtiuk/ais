@@ -3,6 +3,7 @@ package repository
 import (
 	"ais/entities"
 	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
 )
 
 const (
@@ -16,7 +17,7 @@ const (
 		"empl_role=$5, salary=$6, date_of_birth=$7, date_of_start=$8, phone_number=$9, city=$10, street=$11, zip_code=$12 " +
 		"WHERE id_employee=$1;"
 	deleteEmployee    = "DELETE FROM " + employeeTable + " WHERE id_employee = $1;"
-	getEmployeeByName = "SELECT * FROM " + employeeTable + " WHERE empl_name=$1;"
+	getEmployeeByName = "SELECT * FROM " + employeeTable + " WHERE empl_name = $1;"
 	getEmployeeById   = "SELECT * FROM " + employeeTable + " WHERE id_employee=$1;"
 	getAllEmployees   = "SELECT * FROM " + employeeTable + ";"
 )
@@ -65,18 +66,34 @@ func (er *employeePostgres) DeleteEmployee(id string) error {
 
 func (er *employeePostgres) GetEmployeeByName(name string) (entities.Employee, error) {
 	var employee entities.Employee
-	if err := er.db.Get(&employee, getEmployeeByName, name); err != nil {
-		return entities.Employee{}, err
+	row := er.db.QueryRow(getEmployeeByName, name)
+	err := row.Scan(&employee.ID, &employee.SurName, &employee.FirstName, &employee.Patronymic, &employee.Role,
+		&employee.Salary, &employee.DateOfBirth, &employee.DateOfStart, &employee.PhoneNumber, &employee.City,
+		&employee.Street, &employee.ZipCode)
+	if err != nil {
+		return employee, err
 	}
 	return employee, nil
+	//if err := er.db.Get(&employee, getEmployeeByName, name); err != nil {
+	//	return entities.Employee{}, err
+	//}
+	//return employee, nil
 }
 
 func (er *employeePostgres) GetEmployeeById(id string) (entities.Employee, error) {
 	var employee entities.Employee
-	if err := er.db.Get(&employee, getEmployeeById, id); err != nil {
-		return entities.Employee{}, err
+	row := er.db.QueryRow(getEmployeeById, id)
+	err := row.Scan(&employee.ID, &employee.SurName, &employee.FirstName, &employee.Patronymic, &employee.Role,
+		&employee.Salary, &employee.DateOfBirth, &employee.DateOfStart, &employee.PhoneNumber, &employee.City,
+		&employee.Street, &employee.ZipCode)
+	if err != nil {
+		return employee, err
 	}
 	return employee, nil
+	//if err := er.db.Get(&employee, getEmployeeById, id); err != nil {
+	//	return entities.Employee{}, err
+	//}
+	//return employee, nil
 }
 
 func (er *employeePostgres) GetAllEmployees() ([]entities.Employee, error) {

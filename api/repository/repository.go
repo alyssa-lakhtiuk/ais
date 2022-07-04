@@ -3,6 +3,7 @@ package repository
 import (
 	"ais/entities"
 	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
 )
 
 // tableNames:

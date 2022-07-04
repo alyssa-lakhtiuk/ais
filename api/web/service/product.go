@@ -38,6 +38,10 @@ func (s *productService) GetByName(productName string) (entities.Product, error)
 	return s.repo.GetProductByName(productName)
 }
 
+func (s *productService) GetByNumber(productId int) (entities.Product, error) {
+	return s.repo.GetProductByNumber(productId)
+}
+
 func (s *productService) GetAll() ([]entities.Product, error) {
 	return s.repo.GetAllProducts()
 }
