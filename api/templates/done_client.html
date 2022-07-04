@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>added client</title>
+  <title>added customer</title>
   <style>
     h1 {
       font-size: 72px;
@@ -131,16 +131,16 @@
 <body>
 
 <div class="heading">
-  <h1>Client 😸</h1>
+  <h1>Customer 😸</h1>
 </div>
 
 <div class="title1">
-  <h3>You have added Client</h3>
+  <h3>You have added Customer</h3>
 </div>
 
 <div class="line1"></div>
 
-
+<!--а чого тут get-->
 <form method="GET">
 
   <div class="form-row form-group">
@@ -151,7 +151,7 @@
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
-      <label>Last name: {{ .CustomerSurname }}</label>
+      <label>Surname: {{ .CustomerSurname }}</label>
     </div>
   </div>
 
@@ -201,7 +201,7 @@
 
 
 <form method="POST">
-  <button formaction="/manager_client" class="button1">Go to all clients</button> <!--go to manager_category -->
+  <button formaction="/manager_client" class="button1">Go to all customers</button> <!--go to manager_category -->
 </form>
 
 <div class="line2"></div>
