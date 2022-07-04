@@ -4,25 +4,38 @@ import (
 	"ais/entities"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"strconv"
 )
 
-func (h *Handler) createStoreProduct(c *gin.Context) {
+func (h *Handler) storeProductCreated(c *gin.Context) {
 	var input entities.StoreProduct
-	if err := c.BindJSON(&input); err != nil {
-		// throw error response
-		respondWithError(c, http.StatusBadRequest, "cant process data, check it")
-		return
-	}
-	id, err := h.services.StoreProduct.Create(input)
+	var err error
+	//if err := c.BindJSON(&input); err != nil {
+	//	// throw error response
+	//	respondWithError(c, http.StatusBadRequest, "cant process data, check it")
+	//	return
+	//}
+	input.UPC = c.Request.FormValue("upc")
+	input.IDProduct, err = strconv.Atoi(c.Request.FormValue("product"))
+	input.SellingPrice, err = strconv.ParseFloat(c.Request.FormValue("selling_price"), 64)
+	input.ProductsNumber, err = strconv.Atoi(c.Request.FormValue("quantit"))
+	input.PromotionalProduct, err = strconv.ParseBool(c.Request.FormValue("promotion"))
+	/// !!!!!!!!!!!!!! upcprom !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+	///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	_, err = h.services.StoreProduct.Create(input)
 	if err != nil {
 		// throw error response
 		respondWithError(c, http.StatusBadRequest, "fail to create store product")
 		return
 	}
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"productId": input.UPC,
-		"id":        id,
-	})
+	//c.JSON(http.StatusOK, map[string]interface{}{
+	//	"productId": input.UPC,
+	//	"id":        id,
+	//})
+}
+
+func (h *Handler) createStoreProduct(c *gin.Context) {
+	Tpl.ExecuteTemplate(c.Writer, "add_stock_product.html", nil)
 }
 
 func (h *Handler) getAllStoreProducts(c *gin.Context) {

@@ -70,6 +70,17 @@ func (h *Handler) getCategoryByName(c *gin.Context) {
 	//}
 }
 
+func (h *Handler) getCategoryByNumber(c *gin.Context) {
+	categoryName := c.Param("id") // localhost:8080/category/soft-cheese
+	category, err := h.services.Category.GetByName(categoryName)
+	if err != nil {
+		// throw error response
+		respondWithError(c, http.StatusBadRequest, "unable to get category")
+		//return
+	}
+	c.JSON(http.StatusOK, category)
+}
+
 func (h *Handler) updateCategory(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {

@@ -33,6 +33,10 @@ func (s *categoryService) GetByName(categoryName string) (entities.Category, err
 	return s.repo.GetCategoryByName(categoryName)
 }
 
+func (s *categoryService) GetByNumber(categoryNumber int) (entities.Category, error) {
+	return s.repo.GetCategoryByNumber(categoryNumber)
+}
+
 func (s *categoryService) GetAll() ([]entities.Category, error) {
 	return s.repo.GetAllCategories()
 }

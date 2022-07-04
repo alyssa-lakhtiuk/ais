@@ -16,6 +16,7 @@ type Employee interface {
 	Update(employeeId string, employee entities.EmployeeInput) error
 	Delete(employeeId string) error
 	GetByName(employeeName string) (entities.Employee, error) // ?
+	GetById(emplId string) (entities.Employee, error)
 	GetAll() ([]entities.Employee, error)
 }
 
@@ -24,6 +25,7 @@ type Category interface {
 	Update(categoryNumber int, category entities.CategoryInput) error
 	Delete(categoryName string) error
 	GetByName(categoryName string) (entities.Category, error)
+	GetByNumber(categoryNumber int) (entities.Category, error)
 	GetAll() ([]entities.Category, error)
 }
 
@@ -32,6 +34,7 @@ type Product interface {
 	Update(productId int, product entities.Product) error
 	Delete(productId int) error
 	GetByName(productName string) (entities.Product, error) // ? add func getByID
+	GetByNumber(productId int) (entities.Product, error)
 	GetAll() ([]entities.Product, error)
 }
 

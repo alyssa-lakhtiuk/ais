@@ -23,6 +23,10 @@ func (s *EmployeeService) GetByName(employeeName string) (entities.Employee, err
 	return s.repo.GetEmployeeByName(employeeName)
 }
 
+func (s *EmployeeService) GetById(emplId string) (entities.Employee, error) {
+	return s.repo.GetEmployeeById(emplId)
+}
+
 func (s *EmployeeService) GetAll() ([]entities.Employee, error) {
 	return s.repo.GetAllEmployees()
 }
