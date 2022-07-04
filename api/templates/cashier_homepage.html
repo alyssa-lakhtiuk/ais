@@ -51,7 +51,7 @@
      text-align: center;
      font-size: 25px;
      margin-top: 80px;
-     margin-left: 295px;
+     margin-left: 200px;
    }
 
    .button1 {
@@ -64,7 +64,7 @@
      text-align: center;
      font-size: 25px;
      margin-top: 80px;
-     margin-left: 122px;
+     margin-left: 85px;
    }
 
    .line2 {
@@ -98,7 +98,7 @@
      text-align: center;
      font-size: 25px;
      margin-top: 80px;
-     margin-left: 125px;
+     margin-left: 200px;
    }
 
    .button3 {
@@ -152,10 +152,11 @@
 
 <div class="line1"></div>
 
-<form method="POST">
-  <button formaction="/cashier_client" class="button0">Clients</button>
+<form method="GET">
+  <button formaction="/cashier_client" class="button0">Customers</button>
   <button formaction="/cashier_all_products" class="button1">All products</button>
-  <button formaction="/cashier_products_in_stock" class="button1">Products in Stock</button>
+  <button formaction="/cashier_stock_products" class="button1">Products in Stock</button>
+  <button formaction="/cashier_products_in_stock" class="button1">Checks</button>
 </form>
 
 <div class="line2"></div>
@@ -168,9 +169,8 @@
 
 <div class="line1"></div>
 
-<form method="POST">
-  <button formaction="/print_report" class="button2">Checks</button>
-  <button formaction="/who_am_i" class="button3">Хто я??????</button>
+<form method="GET">
+  <button formaction="/who_am_i" class="button2">Хто я??????</button>
 
 </form>
 
@@ -178,7 +178,7 @@
 <div class="line3"></div>
 <div class="line4"></div>
 
-<form method="POST">
+<form method="GET">
   <button formaction="/cashier_homepage" class="button4">Homepage</button>
   <button formaction="/log_out" class="button5">Log out</button>
 </form>

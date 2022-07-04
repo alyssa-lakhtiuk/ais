@@ -46,10 +46,19 @@
 
    }
    th {
-     font-size: 11px;
+     font-size: 16px;
      font-family: cursive;
      font-weight: 50;
      color: #000000;
+     padding-right: 35px;
+     padding-left: 35px;
+   }
+   td {
+     font-size: 12px;
+     font-family: cursive;
+     color: #000000;
+     padding-right: 10px;
+     padding-left: 40px;
    }
 
    .button4 {
@@ -109,6 +118,12 @@
      margin-left: 20px;
      margin-bottom: 30px;
    }
+   .line1 {
+     width: 1300px;
+     margin-top: 10px;
+     margin-bottom: 10px;
+     border-bottom: 0.5px solid black;
+   }
  </style>
 
 </head>
@@ -149,39 +164,33 @@
   <button type="submit" class="button1">Search</button>
 </form>
 
+
+<div class="line1"></div>
 <table >
   <!-- Table header -->
   <thead>
   <tr>
     <th scope="col">Product ID</th>
-    <th scope="col">Category Name</th>
+    <th scope="col">Category Number</th>
     <th scope="col">Product Name</th>
-    <th scope="col">Description</th>
-
-    <th scope="col">Edit</th>
-    <th scope="col">Delete</th>
+    <th scope="col">Characteristics</th>
   </tr>
   </thead>
-  <!-- Table footer -->
-  <tfoot>
-  <tr>
-    <td>END</td>
-  </tr>
-  </tfoot>
+
   <!-- Table body -->
   <tbody>
   {{ range . }}
   <tr>
-    <td>{{ .ProductID }}</td>
-    <td>{{ .CategoryName }}</td>
-    <td>{{ .ProductName }}</td>
-    <td>{{ .Description }}</td>
-
+    <td>{{ .Id }}</td>
+    <td>{{ .CategoryNum }}</td>
+    <td>{{ .Name }}</td>
+    <td>{{ .Characteristics }}</td>
   </tr>
 
   {{ end }}
   </tbody>
 </table>
+<div class="line1"></div>
 
 <form method="POST">
   <button formaction="/cashier_homepage" class="button4">Homepage</button>

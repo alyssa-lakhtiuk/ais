@@ -89,10 +89,20 @@
 
     }
     th {
-      font-size: 11px;
+      font-size: 16px;
       font-family: cursive;
       font-weight: 50;
       color: #000000;
+      padding-right: 35px;
+      padding-left: 35px;
+    }
+    td {
+      font-size: 12px;
+      font-family: cursive;
+      color: #000000;
+      padding-right: 10px;
+      padding-left: 30px;
+
     }
     .button1 {
       font-family: cursive;
@@ -132,17 +142,36 @@
       margin-top: 160px;
       margin-left: 20px;
     }
+    .line1 {
+      width: 1300px;
+      /*margin-left: 70px;*/
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border-bottom: 0.5px solid black;
+    }
+    .button0 {
+      font-family: cursive;
+      border: 1px solid #c23704;
+      background-color: #ff6e4d;
+      color: #ffffff;
+      padding-left: 20px;
+      padding-right: 20px;
+      text-align: center;
+      font-size: 25px;
+      margin-left: 20px;
+      margin-top: 35px;
+    }
   </style>
 </head>
 
 <body>
 
 <div class="heading">
-  <h1>Client 😽</h1>
+  <h1>Customer 😽</h1>
 </div>
 
 <form method="POST">
-  <button formaction="/add_client" class="button2">Add new client</button>
+  <button formaction="/cashier_add_client" class="button2">Add new customer</button>
 
 </form>
 
@@ -156,49 +185,51 @@
   <input type="text" class="form-control" id="cas_ser_sur" name="cas_search_surname">
   <button type="submit" class="button1">Search</button>
 </form>
-
-<table >
+<div class="line1"></div>
+<table>
   <!-- Table header -->
   <thead>
   <tr>
     <th scope="col">Card Number</th>
-    <th scope="col">Last Name</th>
-    <th scope="col">First Name</th>
+    <th scope="col">Surname</th>
+    <th scope="col">First name</th>
     <th scope="col">Patronymic</th>
-    <th scope="col">Telephone</th>
+    <th scope="col">Phone number</th>
     <th scope="col">City</th>
     <th scope="col">Street</th>
-    <th scope="col">Index</th>
-    <th scope="col">Edit</th>
-
+    <th scope="col">Zipcode</th>
+    <th scope="col">Percent</th>
   </tr>
   </thead>
-  <!-- Table footer -->
-  <tfoot>
-  <tr>
-    <td>END</td>
-  </tr>
-  </tfoot>
+
   <!-- Table body -->
   <tbody>
   {{ range . }}
   <tr>
-    <td>{{ .CardNumber }}</td>
-    <td>{{ .LastName }}</td>
-    <td>{{ .FirstName }}</td>
-    <td>{{ .Patronymic }}</td>
-    <td>{{ .Telephone }}</td>
+    <td>{{ .Number }}</td>
+    <td>{{ .CustomerSurname }}</td>
+    <td>{{ .CustomerName }}</td>
+    <td>{{ .CustomerPatronymic }}</td>
+    <td>{{ .PhoneNumber }}</td>
     <td>{{ .City }}</td>
     <td>{{ .Street }}</td>
-    <td>{{ .Index }}</td>
-
+    <td>{{ .ZipCode }}</td>
+    <td>{{ .Percent }}</td>
   </tr>
 
   {{ end }}
   </tbody>
 </table>
+<div class="line1"></div>
 
 <form method="POST">
+  <label>Card Number: </label>
+  <input type="text" class="form-control" id="number_card" name="number_card">
+  <button formaction="/cashier_edit_client" type="submit" class="button0">Edit</button>
+
+</form>
+
+<form method="GET">
   <button formaction="/cashier_homepage" class="button4">Homepage</button>
   <button formaction="/log_out" class="button5">Log out</button>
 </form>

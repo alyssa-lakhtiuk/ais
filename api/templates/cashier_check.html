@@ -57,20 +57,19 @@
 
     }
         th {
-            font-size: 22px;
+            font-size: 20px;
             font-family: cursive;
             font-weight: 50;
             color: #000000;
-            padding-right: 75px;
-            padding-left: 35px;
+            padding-right: 15px;
+            padding-left: 15px;
         }
         td {
-            font-size: 20px;
+            font-size: 14px;
             font-family: cursive;
             color: #000000;
-            padding-right: 20px;
-            padding-left: 20px;
-
+            padding-right: 10px;
+            padding-left: 10px;
         }
 
     .button4 {
@@ -120,13 +119,11 @@
         margin-top: 5px;
     }
 
-    .line1 {
-        width: 1250px;
-        margin-left: 10px;
-
-
-        border-bottom: 1px solid black;
-    }
+        .line1 {
+            width: 1350px;
+            margin-bottom: 5px;
+            border-bottom: 0.5px solid black;
+        }
     </style>
 </head>
 
@@ -137,7 +134,7 @@
 </div>
 
 <form method="POST">
-    <button formaction="/add_check" class="button2">Add check</button>
+    <button formaction="/cashier_add_check" class="button2">Add check</button>
 </form>
 
 <form action="/cas_request_check" method="POST">
@@ -163,43 +160,46 @@
     <button type="submit" class="button1">Search</button>
 </form>
 
+<div class="line1"></div>
 <table >
     <!-- Table header -->
     <thead>
     <tr>
         <th scope="col">Check Number</th>
-        <th scope="col">Cashier Name</th>
-        <th scope="col">Product Name</th>
-        <th scope="col">Amount</th>
-        <th scope="col">Price</th>
+        <th scope="col">Cashier ID</th>
+        <th scope="col">Customer Card</th>
+        <th scope="col">Date</th>
+        <th scope="col">UPC</th>
+        <th scope="col">Product Number</th>
+        <th scope="col">Selling Price</th>
+        <th scope="col">Sum Total</th>
+        <th scope="col">Vat</th>
 
     </tr>
     </thead>
-    <!-- Table footer -->
-    <tfoot>
-    <tr>
-        <td>END</td>
-    </tr>
-    </tfoot>
 
-    <!-- Table body -->
     <tbody>
 
     {{ range . }}
     <tr>
-        <td>{{ .ProductID }}</td>
-        <td>{{ .NameCashier }}</td>
-        <td>{{ .NameProduct }}</td>
-        <td>{{ .Amount }}</td>
-        <td>{{ .Description }}</td>
+        <td>{{ .Number }}</td>
+        <td>{{ .IdEmployee }}</td>
+        <td>{{ .CardNumber }}</td>
+        <td>{{ .PrintDate }}</td>
+        <td>{{ .UPC }}</td>
+        <td>{{ .ProductNumber }}</td>
+        <td>{{ .SellingPrice }}</td>
+        <td>{{ .SumTotal }}</td>
+        <td>{{ .Vat }}</td>
+
     </tr>
-<!--      <div class="line1"></div>-->
+    <!--  <div class="line1"></div>-->
 
     {{ end }}
     </tbody>
 </table>
-
-<form method="POST">
+      <div class="line1"></div>
+<form method="GET">
     <button formaction="/cashier_homepage" class="button4">Homepage</button>
     <button formaction="/log_out" class="button5">Log out</button>
 </form>
