@@ -18,11 +18,12 @@ func (h *Handler) categoryCreated(c *gin.Context) {
 	//	respondWithError(c, http.StatusBadRequest, "unable to parse input data")
 	//	return
 	//}
+	input.Number = 0
 	input.Name = c.Request.FormValue("name_category")
 	_, err := h.services.Category.Create(input)
 	if err != nil {
 		// throw error response
-		respondWithError(c, http.StatusBadRequest, "unable to create category")
+		//respondWithError(c, http.StatusBadRequest, "unable to create category")
 		return
 	}
 	//c.JSON(http.StatusOK, map[string]interface{}{

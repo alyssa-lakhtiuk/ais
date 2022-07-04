@@ -2,11 +2,9 @@ package controller
 
 import (
 	"ais/entities"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
-	"strings"
 	"time"
 )
 
@@ -17,28 +15,33 @@ func (h *Handler) employeeCreated(c *gin.Context) {
 	}
 	var err error
 	var input entities.Employee
-	//if err := c.BindJSON(&input); err != nil {
-	//	respondWithError(c, http.StatusBadRequest, "unable to parse input data, check if it's correct")
-	//	// throw error response
-	//	return
-	//}
 	input.ID = c.Request.FormValue("lastname")
 	input.SurName = c.Request.FormValue("lastname")
 	input.FirstName = c.Request.FormValue("firstname")
 	input.Patronymic = c.Request.FormValue("patronymic")
 	input.Role = c.Request.FormValue("emp_role")
 	input.Salary, err = strconv.ParseFloat(c.Request.FormValue("salary"), 64)
+	std := c.Request.FormValue("start_day")
+	c.JSON(http.StatusOK, std)
+	c.JSON(http.StatusOK, "|||")
+	c.JSON(http.StatusOK, c.Request.FormValue("day_of_birth"))
+	c.JSON(http.StatusOK, "//")
 	layout := "2006-01-02"
 	inputStDate := c.Request.FormValue("start_day")
-	k := strings.Split(inputStDate, ".")
-	strStartDate := fmt.Sprintf("%s-%s-%s", k[0], k[1], k[2])
-	startTime, _ := time.Parse(layout, strStartDate)
+	c.JSON(http.StatusOK, inputStDate)
+	c.JSON(http.StatusOK, "**")
+	//k := strings.Split(inputStDate, ".")
+	//strStartDate := fmt.Sprintf("%s-%s-%s", k[0], k[1], k[2])
+	startTime, _ := time.Parse(layout, inputStDate)
 	input.DateOfStart = startTime
+	c.JSON(http.StatusOK, input.DateOfStart)
+	c.JSON(http.StatusOK, "**")
 	inputBDate := c.Request.FormValue("start_day")
-	helpArr2 := strings.Split(inputBDate, ".")
-	BDate := fmt.Sprintf("%s-%s-%s", helpArr2[0], helpArr2[1], helpArr2[2])
-	BTime, _ := time.Parse(layout, BDate)
+	//helpArr2 := strings.Split(inputBDate, ".")
+	//BDate := fmt.Sprintf("%s-%s-%s", helpArr2[0], helpArr2[1], helpArr2[2])
+	BTime, _ := time.Parse(layout, inputBDate)
 	input.DateOfBirth = BTime
+	c.JSON(http.StatusOK, input.DateOfBirth)
 	input.PhoneNumber = c.Request.FormValue("telephone")
 	input.City = c.Request.FormValue("city_name")
 	input.Street = c.Request.FormValue("street")

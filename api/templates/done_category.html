@@ -37,7 +37,7 @@
             border-bottom: 1px solid black;
         }
 
-        label{
+        label {
             font-family: cursive;
             /*padding-left: px;*/
             padding-right: 20px;
@@ -125,7 +125,7 @@
         p {
             color: #ee5331;
             margin-left: 950px;
-            margin-top:-55px;
+            margin-top: -55px;
             margin-bottom: 20px;
         }
     </style>
@@ -141,17 +141,17 @@
     <h3>You have added Category</h3>
 </div>
 
-    <div class="line1"></div>
-<!--    <form method="POST">-->
-        <div class="form-row form-group">
-            <div class="form-group col-md-4">
-                <label>Name: {{ .Name }}</label>
-            </div>
+<div class="line1"></div>
+<form method="GET">
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <label>Name: {{ .Name }}</label>
         </div>
-<!--    </form>-->
+    </div>
+</form>
 
 <form method="GET">
-    <button formaction="/manager_category" class="button1">Go to all categories</button> <!--go to manager_category -->
+    <button formaction="/categories" class="button1">Go to all categories</button> <!--go to manager_category -->
 </form>
 
 <div class="line2"></div>

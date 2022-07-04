@@ -99,19 +99,20 @@ func (er *employeePostgres) GetEmployeeById(id string) (entities.Employee, error
 func (er *employeePostgres) GetAllEmployees() ([]entities.Employee, error) {
 	var employees []entities.Employee
 
-	rows, err := er.db.Query(getAllChecks)
+	rows, err := er.db.Query(getAllEmployees)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
 	for rows.Next() {
-		empl := entities.Employee{}
-		err := rows.Scan(&empl.ID, &empl.SurName, &empl.FirstName, &empl.Patronymic, &empl.Role, &empl.Salary,
-			&empl.DateOfBirth, &empl.DateOfStart, &empl.PhoneNumber, &empl.City, &empl.Street, &empl.ZipCode)
+		employee := entities.Employee{}
+		err := rows.Scan(&employee.ID, &employee.SurName, &employee.FirstName, &employee.Patronymic, &employee.Role,
+			&employee.Salary, &employee.DateOfBirth, &employee.DateOfStart, &employee.PhoneNumber, &employee.City,
+			&employee.Street, &employee.ZipCode)
 		if err != nil {
 			return nil, err
 		}
-		employees = append(employees, empl)
+		employees = append(employees, employee)
 	}
 	//if err := er.db.Select(&employees, getAllEmployees); err != nil {
 	//	return []entities.Employee{}, err

@@ -14,21 +14,26 @@ import (
 // оновити відомості про товар
 // вилучити відомості про товар
 
-func (h *Handler) createProduct(c *gin.Context) {
+func (h *Handler) productCreated(c *gin.Context) {
 	var input entities.Product
 	if err := c.BindJSON(&input); err != nil {
 		// throw error response
 		respondWithError(c, http.StatusBadRequest, "unable to get input data")
 	}
-	id, err := h.services.Product.Create(input)
+	_, err := h.services.Product.Create(input)
 	if err != nil {
 		// throw error response
 		respondWithError(c, http.StatusBadRequest, "unable to create product, check is your data correct")
 	}
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"productId": input.Id,
-		"id":        id,
-	})
+	Tpl.ExecuteTemplate(c.Writer, "done_product.html", input)
+	//c.JSON(http.StatusOK, map[string]interface{}{
+	//	"productId": input.Id,
+	//	"id":        id,
+	//})
+}
+
+func (h *Handler) createProduct(c *gin.Context) {
+	Tpl.ExecuteTemplate(c.Writer, "add_product.html", nil)
 }
 
 func (h *Handler) getAllProducts(c *gin.Context) {
@@ -39,7 +44,7 @@ func (h *Handler) getAllProducts(c *gin.Context) {
 		// throw error response
 	}
 	//c.JSON(http.StatusOK, products)
-	Tpl.ExecuteTemplate(c.Writer, "manager_products.html", products)
+	Tpl.ExecuteTemplate(c.Writer, "manager_product.html", products)
 }
 
 func (h *Handler) getProductByName(c *gin.Context) {

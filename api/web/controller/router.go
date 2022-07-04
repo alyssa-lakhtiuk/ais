@@ -22,31 +22,32 @@ func init() {
 
 func (h *Handler) NewRoutes() *gin.Engine {
 	router := gin.Default()
-	router.GET("/employees", h.getAllEmployees) // вертає null
+	router.GET("/employees", h.getAllEmployees) // помилка
 	router.GET("/create-employee", h.createEmployee)
 	router.POST("/employee", h.employeeCreated)      // не відкривається
 	router.GET("/employee/:id", h.getEmployeeByName) // by name  // з Brad не працює
-	router.GET("/employees/:id", h.getEmployeeById)  // by id
+	router.GET("/employees/:id", h.getEmployeeById)  // by id  // помилка
 	router.PUT("/employee/:id", h.updateEmployee)
 	router.DELETE("/employee/:id", h.deleteEmployee)
 	// Category pages
-	router.GET("/create-category", h.createCategory) // кидає помилку, хуй знає чого, але створює
-	router.POST("/category", h.categoryCreated)
+	router.GET("/create-category", h.createCategory)     // кидає помилку, хуй знає чого, але створює
+	router.POST("/category", h.categoryCreated)          // нічого не виводить
 	router.GET("/category/:id", h.getCategoryByName)     // by name // працює
 	router.GET("/categories/:id", h.getCategoryByNumber) // by number  // кидає помилку
 	router.GET("/categories", h.getAllCategories)        // працює
 	router.DELETE("/category/:name", h.deleteCategory)
 	router.PUT("/category/:id", h.updateCategory)
 	// Product pages
-	router.POST("/product", h.createProduct)
-	router.GET("/products", h.getAllProducts)         // нічого не виводить, взагалі + в postman
+	router.GET("/create-product", h.createProduct)
+	router.POST("/product", h.productCreated)
+	router.GET("/products", h.getAllProducts)         // працює
 	router.GET("/product/:name", h.getProductByName)  // by name // працює
 	router.GET("/products/:id", h.getProductByNumber) // by id // працює
 	router.DELETE("/product/:id", h.deleteProduct)
 	router.PUT("/product/:id", h.updateProduct)
 	// Customer card pages
-	router.GET("/create-customer-card", h.createCustomerCard)
-	router.POST("/customer-card", h.customerCardCreated)
+	router.GET("/create-customer-card", h.createCustomerCard)   // html
+	router.POST("/customer-card", h.customerCardCreated)        //html
 	router.GET("/customer-card/:id", h.getCustomerCardByNumber) // by name // працює
 	router.GET("/customer-cards", h.getAllCustomerCards)        // працює
 	router.DELETE("/customer-cards/:id", h.deleteCustomerCard)
