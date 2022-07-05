@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	createSale = "INSERT INTO " + saleTable + " (fk_upc, fk_check_number, product_number, selling_price) " +
+	createSale = "INSERT INTO " + saleTable + " (product_number, selling_price, fk_upc, fk_check_number) " +
 		"VALUES ($1, $2, $3, $4);"
 	updateSale = "UPDATE " + saleTable + " SET product_number=$3, selling_price=$4 " +
 		"WHERE fk_upc=$1 AND fk_check_number=$2;"

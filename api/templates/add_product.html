@@ -36,7 +36,7 @@
             margin-left: 700px;
             margin-top: -175px;
             margin-bottom: 25px;
-            border-bottom: 1px solid black;
+            border-bottom: 1px solid #a20000;
         }
 
         .button3 {
@@ -81,7 +81,7 @@
             font-family: cursive;
             border: 1px solid #000000;
             padding-left: 5px;
-            padding-right: 380px;
+            padding-right: 180px;
             text-align: left;
             font-size: 25px;
             margin-bottom: 20px;
@@ -178,19 +178,11 @@
         <div class="form-group col-md-4">
             <label>Category:</label>
             <select name="category" id="caty">
+                <option selected disabled>Choose</option>
                 {{range .}}
-                <option value="{{.ID}}">{{.}}
-                </option> {{end}}
+                <option value="{{.Number}}">{{.Number}} {{.Name}}</option>
+                {{end}}
             </select>
-<!--            <select id="caty" name="category">-->
-<!--                <option value="without_value" selected disabled>Choose</option>-->
-<!--&lt;!&ndash;                {{ range . }}&ndash;&gt;-->
-<!--&lt;!&ndash;                <option value="{{ .Id }}">{{ .Name }}</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                {{ end }}&ndash;&gt;-->
-<!--                {{range $key, $value := .}}-->
-<!--                <option value="{{ $value }}">{{ $key }}</option>-->
-<!--                {{end}}-->
-<!--            </select>-->
         </div>
         </div>
     </div>
