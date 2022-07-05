@@ -42,6 +42,7 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	router.GET("/categories", h.getAllCategories)        // html
 	router.DELETE("/category/:name", h.deleteCategory)
 	router.PUT("/category/:id", h.updateCategory)
+	//router.GET("/create-report-category", h.createReportCategory)
 	// Product pages
 	router.GET("/create-product", h.createProduct)
 	router.POST("/product", h.productCreated)         // випадний список сука

@@ -106,3 +106,25 @@ func (h *Handler) deleteCategory(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, categoryName)
 }
+
+//func (h *Handler) createReportCategory(c *gin.Context) {
+//	r := u.NewRequestPdf("")
+//	templatePath := "templates/create_report_category.html"
+//	outputPath := "templates/reports/report_employee.pdf"
+//	var categories []entities.Category
+//
+//	if err := r.ParseTemplate(templatePath, categories); err == nil {
+//		ok, _ := r.GeneratePDF(outputPath)
+//		fmt.Println(ok, "pdf generated successfully")
+//	} else {
+//		fmt.Println(err)
+//	}
+//	//Tpl.ExecuteTemplate(c.Writer, "categories.html", nil)
+//	h.getAllCategories(c)
+//
+//	//if err != nil {
+//	//	c.JSON(http.StatusBadRequest, err)
+//	//	return
+//	//}
+//	//c.JSON(http.StatusOK, categoryName)
+//}
