@@ -35,7 +35,14 @@ func (h *Handler) storeProductCreated(c *gin.Context) {
 }
 
 func (h *Handler) createStoreProduct(c *gin.Context) {
-	Tpl.ExecuteTemplate(c.Writer, "add_stock_product.html", nil)
+	var products []entities.Product
+	var err error
+	products, err = h.services.Product.GetAll()
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err)
+		return
+	}
+	Tpl.ExecuteTemplate(c.Writer, "add_stock_product.html", products)
 }
 
 func (h *Handler) getAllStoreProducts(c *gin.Context) {
@@ -48,9 +55,8 @@ func (h *Handler) getAllStoreProducts(c *gin.Context) {
 
 	products, err := h.services.StoreProduct.GetAll()
 	if err != nil {
-		//c.JSON(http.StatusBadRequest, err)
-		//return
-		// throw error response
+		c.JSON(http.StatusBadRequest, err)
+		return
 	}
 	if roleDromDB.Role == "manager" {
 		Tpl.ExecuteTemplate(c.Writer, "manager_stock_product.html", products)

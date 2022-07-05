@@ -30,6 +30,7 @@ func (h *Handler) productCreated(c *gin.Context) {
 
 func (h *Handler) createProduct(c *gin.Context) {
 	var categories []entities.Category
+
 	var err error
 	categories, err = h.services.Category.GetAll()
 	if err != nil {
