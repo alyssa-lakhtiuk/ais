@@ -21,6 +21,8 @@ const (
 		"WHERE id_product NOT IN (SELECT id_product FROM product" +
 		" WHERE category_number IN (SELECT category_number " +
 		"FROM category WHERE category_name = $1))) AND SL.bill_number = bill_number);"
+
+	query =
 )
 
 type zvit struct {
