@@ -35,7 +35,10 @@ func (er *checkPostgres) CreateCheck(randomStr string, checkInput []entities.Che
 	for i := 0; i < len(checkInput); i++ {
 		currentProductUPC := checkInput[i].UPC
 		var stProduct entities.StoreProduct
-		if err := er.db.Get(&stProduct, getStoreProductByName, currentProductUPC); err != nil {
+		row := er.db.QueryRow(getStoreProductByName, currentProductUPC)
+		err := row.Scan(&stProduct.UPC, &stProduct.SellingPrice, &stProduct.PromotionalProduct, &stProduct.ProductsNumber,
+			&stProduct.UPCProm, &stProduct.IDProduct)
+		if err != nil {
 			return 0, err
 		}
 		sumTotal += float64(checkInput[i].ProductNumber) * stProduct.SellingPrice
@@ -44,16 +47,20 @@ func (er *checkPostgres) CreateCheck(randomStr string, checkInput []entities.Che
 	checkInDB := entities.Check{Number: randomStr, PrintDate: time.Now(), SumTotal: sumTotal,
 		Vat: sumTotal * 0.2, CardNumber: checkInput[0].CustomerNumber, IdEmployee: checkInput[0].IDEmployee}
 	row := tx.QueryRow(createCheck, randomStr, time.Now(), sumTotal, sumTotal*0.2, checkInput[0].IDEmployee, checkInput[0].CustomerNumber)
-	err = row.Scan(&id)
-	if err != nil {
+	err2 := row.Scan(&id)
+	if err2 != nil {
 		tx.Rollback()
 		return 0, err
 	}
 	for j := 0; j < len(checkInput); j++ {
 		var stProduct entities.StoreProduct
-		if err := er.db.Get(&stProduct, getStoreProductByName, checkInput[j].UPC); err != nil {
-			return 0, err
-		}
+
+		//if err := er.db.Get(&stProduct, getStoreProductByName, checkInput[j].UPC); err != nil {
+		//	return 0, err
+		//}
+		row := er.db.QueryRow(getStoreProductByName, checkInput[j].UPC)
+		err := row.Scan(&stProduct.UPC, &stProduct.SellingPrice, &stProduct.PromotionalProduct, &stProduct.ProductsNumber,
+			&stProduct.UPCProm, &stProduct.IDProduct)
 		saleInCheck := entities.Sale{UPC: checkInput[j].UPC, SellingPrice: stProduct.SellingPrice,
 			CheckNumber: checkInDB.Number, ProductNumber: checkInput[j].ProductNumber}
 		_, err = tx.Exec(createSale, saleInCheck.ProductNumber, saleInCheck.SellingPrice, saleInCheck.UPC, saleInCheck.CheckNumber)
@@ -62,13 +69,11 @@ func (er *checkPostgres) CreateCheck(randomStr string, checkInput []entities.Che
 			return 0, err
 		}
 	}
-
 	//var id int
 	//row := er.db.QueryRow(createCheck, check.Number, check.PrintDate, check.SumTotal, check.Vat, check.IdEmployee, check.CardNumber)
 	//if err := row.Scan(&id); err != nil {
 	//	return 0, err
 	//}
-
 	return id, tx.Commit()
 }
 

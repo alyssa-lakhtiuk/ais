@@ -69,6 +69,11 @@ type Check interface {
 	GetAll() ([]entities.Check, error)
 }
 
+type Role interface {
+	GetByPhone(phone string) (entities.SignIn, error)
+	GetByIdEmployee(id string) (entities.SignIn, error)
+}
+
 type Service struct {
 	//Authorization
 	Employee
@@ -78,6 +83,7 @@ type Service struct {
 	Sale
 	CustomerCard
 	Check
+	Role
 }
 
 func NewService(repos *repository.Repository) *Service {
@@ -89,5 +95,6 @@ func NewService(repos *repository.Repository) *Service {
 		Sale:         NewSaleService(repos.SaleRepo, repos.StoreProductRepo, repos.CheckRepo),
 		CustomerCard: NewCustomerCardServiceService(repos.CustomerCardRepo),
 		Check:        NewCheckService(repos.CheckRepo, repos.EmployeeRepo, repos.CustomerCardRepo, repos.StoreProductRepo),
+		Role:         NewRoleService(repos.RoleRepo),
 	}
 }

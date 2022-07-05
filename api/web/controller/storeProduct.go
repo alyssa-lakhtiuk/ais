@@ -41,7 +41,7 @@ func (h *Handler) createStoreProduct(c *gin.Context) {
 func (h *Handler) getAllStoreProducts(c *gin.Context) {
 	products, err := h.services.StoreProduct.GetAll()
 	if err != nil {
-		c.JSON(http.StatusBadRequest, err)
+		//c.JSON(http.StatusBadRequest, err)
 		//return
 		// throw error response
 	}
@@ -53,8 +53,8 @@ func (h *Handler) getStoreProductByUpc(c *gin.Context) {
 	category, err := h.services.StoreProduct.GetByName(upc)
 	if err != nil {
 		// throw error response
-		respondWithError(c, http.StatusBadRequest, "unable to get store product")
-		return
+		//respondWithError(c, http.StatusBadRequest, "unable to get store product")
+		//return
 	}
 	c.JSON(http.StatusOK, category)
 }

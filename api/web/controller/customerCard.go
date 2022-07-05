@@ -26,9 +26,6 @@ func (h *Handler) customerCardCreated(c *gin.Context) {
 	if err != nil {
 		// throw error response
 	}
-	//c.JSON(http.StatusOK, map[string]interface{}{
-	//	"id": id,
-	//})
 	Tpl.ExecuteTemplate(c.Writer, "done_client.html", input)
 }
 func (h *Handler) createCustomerCard(c *gin.Context) {

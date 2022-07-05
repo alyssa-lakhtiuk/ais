@@ -33,10 +33,24 @@ func (h *Handler) productCreated(c *gin.Context) {
 }
 
 func (h *Handler) createProduct(c *gin.Context) {
-	Tpl.ExecuteTemplate(c.Writer, "add_product.html", nil)
+	var categories []entities.Category
+	var err error
+	categories, err = h.services.Category.GetAll()
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err)
+		return
+	}
+	Tpl.ExecuteTemplate(c.Writer, "add_product.html", categories)
 }
 
 func (h *Handler) getAllProducts(c *gin.Context) {
+	authHeader, err := c.Request.Cookie("Authorization")
+	if err != nil {
+		c.HTML(http.StatusUnauthorized, "authorization first", nil)
+	}
+	currentEmplId := authHeader.Value
+	roleDromDB, err := h.services.Role.GetByIdEmployee(currentEmplId)
+
 	products, err := h.services.Product.GetAll()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
@@ -44,12 +58,17 @@ func (h *Handler) getAllProducts(c *gin.Context) {
 		// throw error response
 	}
 	//c.JSON(http.StatusOK, products)
-	Tpl.ExecuteTemplate(c.Writer, "manager_product.html", products)
+	if roleDromDB.Role == "manager" {
+		Tpl.ExecuteTemplate(c.Writer, "manager_product.html", products)
+	} else {
+		Tpl.ExecuteTemplate(c.Writer, "cashier_product.html", products)
+	}
+
 }
 
 func (h *Handler) getProductByName(c *gin.Context) {
-	//productName := c.Param("name")
-	productName := "Parmesan"
+	productName := c.Param("name")
+	//productName := "Parmesan"
 	product, err := h.services.Product.GetByName(productName)
 	if err != nil {
 		respondWithError(c, http.StatusBadRequest, "unable to get this product")

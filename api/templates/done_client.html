@@ -139,10 +139,7 @@
 </div>
 
 <div class="line1"></div>
-
-<!--а чого тут get-->
 <form method="GET">
-
   <div class="form-row form-group">
     <div class="form-group col-md-4">
       <label>Card number: {{ .Number }}</label>
@@ -200,7 +197,7 @@
 </form>
 
 
-<form method="POST">
+<form method="GET">
   <button formaction="/customer-cards" class="button1">Go to all customers</button> <!--go to manager_category -->
 </form>
 
@@ -208,7 +205,7 @@
 <div class="line3"></div>
 <div class="line4"></div>
 
-<form method="POST">
+<form method="GET">
   <button formaction="/manager_homepage" class="button4">Homepage</button>
   <button formaction="/log_out" class="button5">Log out</button>
 </form>

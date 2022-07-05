@@ -2,6 +2,7 @@ package repository
 
 import (
 	"ais/entities"
+	"fmt"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 )
@@ -17,8 +18,9 @@ const (
 		" upc_prom=$5, fk_id_product=$6 " +
 		"WHERE upc=$1;"
 	deleteStoreProduct    = "DELETE FROM " + storeProductTable + " WHERE upc=$1;"
-	getStoreProductByName = "SELECT * FROM " + storeProductTable + " WHERE upc=$1;"
-	getAllStoreProducts   = "SELECT * FROM " + storeProductTable + " ;"
+	getStoreProductByName = "SELECT upc, selling_price, promotional_product, product_number, " +
+		"upc_prom, fk_id_product FROM " + storeProductTable + " WHERE upc = $1 ;"
+	getAllStoreProducts = "SELECT * FROM " + storeProductTable + " ;"
 )
 
 type storeProductPostgres struct {
@@ -75,18 +77,14 @@ func (er *storeProductPostgres) GetStoreProductByUpc(upc string) (entities.Store
 		return stProduct, err
 	}
 	return stProduct, nil
-	//if err := er.db.Get(&stProduct, getStoreProductByName, upc); err != nil {
-	//	return entities.StoreProduct{}, err
-	//}
-	//return stProduct, nil
+
 }
 
 func (er *storeProductPostgres) GetAllStoreProducts() ([]entities.StoreProduct, error) {
 	var stProducts []entities.StoreProduct
-
 	rows, err := er.db.Query(getAllStoreProducts)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("unable to execute the query")
 	}
 	defer rows.Close()
 	for rows.Next() {

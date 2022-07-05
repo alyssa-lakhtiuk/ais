@@ -2,6 +2,7 @@ package repository
 
 import (
 	"ais/entities"
+	"fmt"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 )
@@ -16,10 +17,13 @@ const (
 	updateEmployee = "UPDATE " + employeeTable + " SET empl_surname=$2, empl_name=$3, empl_patronymic=$4, " +
 		"empl_role=$5, salary=$6, date_of_birth=$7, date_of_start=$8, phone_number=$9, city=$10, street=$11, zip_code=$12 " +
 		"WHERE id_employee=$1;"
-	deleteEmployee    = "DELETE FROM " + employeeTable + " WHERE id_employee = $1;"
-	getEmployeeByName = "SELECT * FROM " + employeeTable + " WHERE empl_name = $1;"
-	getEmployeeById   = "SELECT * FROM " + employeeTable + " WHERE id_employee=$1;"
-	getAllEmployees   = "SELECT * FROM " + employeeTable + ";"
+	deleteEmployee    = "DELETE FROM " + employeeTable + " WHERE id_employee = $1 ;"
+	getEmployeeByName = "SELECT id_employee, empl_surname, empl_name, empl_patronymic, empl_role, salary, date_of_birth, " +
+		"date_of_start, phone_number, city, street, zip_code FROM " + employeeTable + " WHERE empl_name = $1 ;"
+	getEmployeeById = "SELECT id_employee, empl_surname, empl_name, empl_patronymic, empl_role, salary, date_of_birth, " +
+		"date_of_start, phone_number, city, street, zip_code FROM " + employeeTable + " WHERE id_employee=$1 ;"
+	getAllEmployees = "SELECT id_employee, empl_surname, empl_name, empl_patronymic, empl_role, salary, date_of_birth, " +
+		"date_of_start, phone_number, city, street, zip_code FROM " + employeeTable + " ;"
 )
 
 type employeePostgres struct {
@@ -66,6 +70,10 @@ func (er *employeePostgres) DeleteEmployee(id string) error {
 
 func (er *employeePostgres) GetEmployeeByName(name string) (entities.Employee, error) {
 	var employee entities.Employee
+	//if err := er.db.Get(&employee, getEmployeeByName, name); err != nil {
+	//	return entities.Employee{}, err
+	//}
+	//return employee, nil
 	row := er.db.QueryRow(getEmployeeByName, name)
 	err := row.Scan(&employee.ID, &employee.SurName, &employee.FirstName, &employee.Patronymic, &employee.Role,
 		&employee.Salary, &employee.DateOfBirth, &employee.DateOfStart, &employee.PhoneNumber, &employee.City,
@@ -73,11 +81,12 @@ func (er *employeePostgres) GetEmployeeByName(name string) (entities.Employee, e
 	if err != nil {
 		return employee, err
 	}
-	return employee, nil
+
+	//return employee, nil
 	//if err := er.db.Get(&employee, getEmployeeByName, name); err != nil {
 	//	return entities.Employee{}, err
 	//}
-	//return employee, nil
+	return employee, nil
 }
 
 func (er *employeePostgres) GetEmployeeById(id string) (entities.Employee, error) {
@@ -98,10 +107,9 @@ func (er *employeePostgres) GetEmployeeById(id string) (entities.Employee, error
 
 func (er *employeePostgres) GetAllEmployees() ([]entities.Employee, error) {
 	var employees []entities.Employee
-
 	rows, err := er.db.Query(getAllEmployees)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("unable to execute the query")
 	}
 	defer rows.Close()
 	for rows.Next() {
@@ -114,8 +122,5 @@ func (er *employeePostgres) GetAllEmployees() ([]entities.Employee, error) {
 		}
 		employees = append(employees, employee)
 	}
-	//if err := er.db.Select(&employees, getAllEmployees); err != nil {
-	//	return []entities.Employee{}, err
-	//}
 	return employees, nil
 }

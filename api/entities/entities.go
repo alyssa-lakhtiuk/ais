@@ -6,18 +6,18 @@ import (
 )
 
 type Employee struct {
-	ID          string    //`json:"id_employee" validate:"required"`
-	FirstName   string    `json:"firstname" validate:"required"`
-	SurName     string    `json:"lastname" validate:"required"`
-	Patronymic  string    `json:"patronymic"`
-	Role        string    `json:"role" validate:"required"`
-	Salary      float64   `json:"salary" validate:"required"`
-	DateOfBirth time.Time `json:"DateOfBirth" validate:"required"`
-	DateOfStart time.Time `json:"DateOfStart" validate:"required"`
-	PhoneNumber string    `json:"phoneNumber" validate:"required"`
-	City        string    `json:"city" validate:"required"`
-	Street      string    `json:"street" validate:"required"`
-	ZipCode     string    `json:"zipCode" validate:"required"`
+	ID          string  //`json:"id_employee" validate:"required"`
+	SurName     string  `json:"lastname" validate:"required"`
+	FirstName   string  `json:"firstname" validate:"required"`
+	Patronymic  string  `json:"patronymic"`
+	Role        string  `json:"role" validate:"required"`
+	Salary      float64 `json:"salary" validate:"required"`
+	DateOfBirth string  `json:"DateOfBirth" validate:"required"`
+	DateOfStart string  `json:"DateOfStart" validate:"required"`
+	PhoneNumber string  `json:"phoneNumber" validate:"required"`
+	City        string  `json:"city" validate:"required"`
+	Street      string  `json:"street" validate:"required"`
+	ZipCode     string  `json:"zipCode" validate:"required"`
 	//Password    string `json:"password" validate:"required"`
 	// or separate db relation for password
 }
@@ -103,4 +103,11 @@ type CheckInput struct {
 	ProductNumber  int    `json:"productNumber" validate:"required"`
 	CustomerNumber string `json:"CustomerNumber"`
 	IDEmployee     string `json:"id_employee" validate:"required"`
+}
+
+type SignIn struct {
+	IdEmployee string
+	Role       string
+	Phone      string
+	Password   string
 }

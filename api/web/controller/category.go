@@ -8,10 +8,10 @@ import (
 )
 
 func (h *Handler) categoryCreated(c *gin.Context) {
-	if c.Request.Method != "POST" {
-		http.Redirect(c.Writer, c.Request, "/create-category", http.StatusSeeOther)
-		return
-	}
+	//if c.Request.Method != "POST" {
+	//	http.Redirect(c.Writer, c.Request, "/create-category", http.StatusSeeOther)
+	//	return
+	//}
 	var input entities.Category
 	//if err := c.BindJSON(&input); err != nil {
 	//	// throw error response
@@ -24,16 +24,9 @@ func (h *Handler) categoryCreated(c *gin.Context) {
 	if err != nil {
 		// throw error response
 		//respondWithError(c, http.StatusBadRequest, "unable to create category")
-		return
+		//return
 	}
-	//c.JSON(http.StatusOK, map[string]interface{}{
-	//	"categoryNumber": input.Number,
-	//	"id":             id,
-	//})
-	err = Tpl.ExecuteTemplate(c.Writer, "done_category.html", input)
-	if err != nil {
-		return
-	}
+	Tpl.ExecuteTemplate(c.Writer, "done_category.html", input)
 }
 
 func (h *Handler) createCategory(c *gin.Context) {

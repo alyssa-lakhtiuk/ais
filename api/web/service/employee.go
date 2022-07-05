@@ -4,7 +4,6 @@ import (
 	"ais/entities"
 	"ais/repository"
 	"fmt"
-	"time"
 )
 
 type EmployeeService struct {
@@ -44,9 +43,9 @@ func (s *EmployeeService) Create(employee entities.Employee) (int, error) {
 			break
 		}
 	}
-	if time.Now().Year()-employee.DateOfBirth.Year() < 18 {
-		return 0, fmt.Errorf("employee must be adult")
-	}
+	//if time.Now().Year()-employee.DateOfBirth.Year() < 18 {
+	//	return 0, fmt.Errorf("employee must be adult")
+	//}
 	phone := employee.PhoneNumber
 	err := ValidPhone(phone)
 	if err != nil {

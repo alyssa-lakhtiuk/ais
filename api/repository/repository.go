@@ -15,6 +15,7 @@ const (
 	saleTable         = "sale"
 	customerCardTable = "customer_card"
 	checkTable        = "bill"
+	rolesTable        = "roles"
 )
 
 // all repository interfaces:
@@ -77,6 +78,11 @@ type SaleRepo interface {
 	GetAllSales() ([]entities.Sale, error)
 }
 
+type RoleRepo interface {
+	GetRoleByPhone(phone string) (entities.SignIn, error)
+	GetRoleByIdEmployee(id string) (entities.SignIn, error)
+}
+
 type Repository struct {
 	EmployeeRepo
 	ProductRepo
@@ -85,6 +91,7 @@ type Repository struct {
 	CheckRepo
 	CustomerCardRepo
 	SaleRepo
+	RoleRepo
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
@@ -96,5 +103,6 @@ func NewRepository(db *sqlx.DB) *Repository {
 		CheckRepo:        NewCheckRepo(db),
 		CustomerCardRepo: NewCustomerCardPostgres(db),
 		SaleRepo:         NewSalePostgres(db),
+		RoleRepo:         NewRolesPostgres(db),
 	}
 }

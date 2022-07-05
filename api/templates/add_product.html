@@ -170,19 +170,27 @@
 </div>
 
 
-<form action="/add_product_process" method="GET">
+<form action="/product" method="POST">
 
     <div class="line1"></div>
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
             <label>Category:</label>
-            <select id="caty" name="category">
-                <option value="without_value" selected disabled>Choose</option>
-                {{ range . }}
-                <option value="{{ .Id }}">{{ .Name }}</option>
-                {{ end }}
+            <select name="category" id="caty">
+                {{range .Name}}
+                <option value="{{.}}">{{.}}
+                </option> {{end}}
             </select>
+<!--            <select id="caty" name="category">-->
+<!--                <option value="without_value" selected disabled>Choose</option>-->
+<!--&lt;!&ndash;                {{ range . }}&ndash;&gt;-->
+<!--&lt;!&ndash;                <option value="{{ .Id }}">{{ .Name }}</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                {{ end }}&ndash;&gt;-->
+<!--                {{range $key, $value := .}}-->
+<!--                <option value="{{ $value }}">{{ $key }}</option>-->
+<!--                {{end}}-->
+<!--            </select>-->
         </div>
         </div>
     </div>
@@ -214,7 +222,7 @@
 <div class="line4"></div>
 <p>mistake_mistake_mistake_mistake_mistake</p>
 
-<form method="POST">
+<form method="GET">
     <button formaction="/manager_homepage" class="button4">Homepage</button>
     <button formaction="/log_out" class="button5">Log out</button>
 </form>
