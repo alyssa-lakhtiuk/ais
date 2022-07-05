@@ -202,7 +202,6 @@
                 <option value="without_value" selected disabled>Choose</option>
                 <option value="true">Yes</option>
                 <option value="false">No</option>
-
             </select>
 
         </div>
@@ -219,11 +218,11 @@
 <div class="line2"></div>
 <div class="line3"></div>
 <div class="line4"></div>
-<p>mistake_mistake_mistake_mistake_mistake</p>
+<p>{{.Mess}}</p>
 
-<form method="POST">
-    <button formaction="/manager_homepage" class="button4">Homepage</button>
-    <button formaction="/log_out" class="button5">Log out</button>
+<form method="GET">
+    <button formaction="/homepage" class="button4">Homepage</button>
+    <button formaction="/sign-in-input" class="button5">Log out</button>
 </form>
 
 </body>

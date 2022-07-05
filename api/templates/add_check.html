@@ -28,6 +28,7 @@
             margin-left: 140px;
             margin-top: 80px;
         }
+
         .line1 {
             width: 650px;
             margin-left: 700px;
@@ -35,7 +36,8 @@
             margin-bottom: 25px;
             border-bottom: 1px solid black;
         }
-        label{
+
+        label {
             font-family: cursive;
 
             padding-right: 20px;
@@ -44,6 +46,7 @@
             margin-left: 720px;
             margin-bottom: 15px;
         }
+
         .form-control {
             font-family: cursive;
             border: 1px solid #000000;
@@ -129,6 +132,7 @@
             margin-left: 720px;
             margin-top: 5px;
         }
+
         .button2 {
             font-family: cursive;
             border: 1px solid #c27004;
@@ -145,9 +149,10 @@
         p {
             color: #ee5331;
             margin-left: 950px;
-            margin-top:-55px;
+            margin-top: -55px;
             margin-bottom: 20px;
         }
+
         .line5 {
             width: 650px;
             margin-left: 700px;
@@ -169,13 +174,27 @@
 </div>
 <div class="line1"></div>
 
-<form  method="POST">
+<form method="POST">
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <label>Product:</label>
-            <input type="text" class="form-control" id="name_prod" name="name_prod">
+            <label>UPC:</label>
+            <select name="upc" id="upc-st">
+                <option selected disabled>Choose</option>
+                {{range .}}
+                <option value="{{.Number}}">{{.UPC}} {{.SellingPrice}} {{.ProductsNumber}}</option>
+                {{end}}
+            </select>
         </div>
     </div>
+
+    </div>
+
+    <!--    <div class="form-row form-group">-->
+    <!--        <div class="form-group col-md-4">-->
+    <!--            <label>Product:</label>-->
+    <!--            <input type="text" class="form-control" id="name_prod" name="name_prod">-->
+    <!--        </div>-->
+    <!--    </div>-->
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
@@ -186,7 +205,8 @@
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <button type="submit" formaction=" " name="add_product_check" class="button1">add product</button>
+            <button type="submit" formaction="add-product" name="add_product_check" class="button1">add product
+            </button>
         </div>
     </div>
 
@@ -194,10 +214,8 @@
 
 <div class="line5"></div>
 
-<form  method="POST">
-
-<!--    <div class="line1"></div>-->
-
+<form method="POST">
+    <!--    <div class="line1"></div>-->
     <div class="form-row form-group">
         <div class="form-group col-md-4">
             <label>Card Number:</label>
@@ -215,8 +233,8 @@
 </form>
 
 <form method="GET">
-    <button formaction="/manager_homepage" class="button4">Homepage</button>
-    <button formaction="/log_out" class="button5">Log out</button>
+    <button formaction="/homepage" class="button4">Homepage</button>
+    <button formaction="/sign-in-input" class="button5">Log out</button>
 </form>
 
 

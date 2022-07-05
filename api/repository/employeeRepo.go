@@ -24,6 +24,8 @@ const (
 		"date_of_start, phone_number, city, street, zip_code FROM " + employeeTable + " WHERE id_employee=$1 ;"
 	getAllEmployees = "SELECT id_employee, empl_surname, empl_name, empl_patronymic, empl_role, salary, date_of_birth, " +
 		"date_of_start, phone_number, city, street, zip_code FROM " + employeeTable + " ;"
+	getAllEmployeesByCategory = "SELECT id_employee, empl_surname, empl_name, empl_patronymic, empl_role, salary, date_of_birth, " +
+		"date_of_start, phone_number, city, street, zip_code FROM " + employeeTable + " WHERE empl_role = $1;"
 )
 
 type employeePostgres struct {
@@ -36,7 +38,7 @@ func NewEmployeePostgres(db *sqlx.DB) *employeePostgres {
 
 func (er *employeePostgres) CreateEmployee(employee entities.Employee) (int, error) {
 	var id int
-	row := er.db.QueryRow(createEmployee, employee.ID, employee.SurName, employee.FirstName, employee.Patronymic,
+	row := er.db.QueryRow(createEmployee, employee.ID, employee.SurName, employee.FirstName, employee.Patronymic.String,
 		employee.Role, employee.Salary, employee.DateOfBirth, employee.DateOfStart, employee.PhoneNumber, employee.City,
 		employee.Street, employee.ZipCode)
 	if err := row.Scan(&id); err != nil {
@@ -47,7 +49,7 @@ func (er *employeePostgres) CreateEmployee(employee entities.Employee) (int, err
 }
 
 func (er *employeePostgres) UpdateEmployee(idEmployee string, employee entities.EmployeeInput) error {
-	_, err := er.db.Exec(updateEmployee, idEmployee, employee.SurName, employee.FirstName, employee.Patronymic,
+	_, err := er.db.Exec(updateEmployee, idEmployee, employee.SurName, employee.FirstName, employee.Patronymic.String,
 		employee.Role, employee.Salary, employee.DateOfBirth, employee.DateOfStart, employee.PhoneNumber, employee.City,
 		employee.Street, employee.ZipCode)
 	return err
@@ -98,6 +100,26 @@ func (er *employeePostgres) GetEmployeeById(id string) (entities.Employee, error
 func (er *employeePostgres) GetAllEmployees() ([]entities.Employee, error) {
 	var employees []entities.Employee
 	rows, err := er.db.Query(getAllEmployees)
+	if err != nil {
+		return nil, fmt.Errorf("unable to execute the query")
+	}
+	defer rows.Close()
+	for rows.Next() {
+		employee := entities.Employee{}
+		err := rows.Scan(&employee.ID, &employee.SurName, &employee.FirstName, &employee.Patronymic, &employee.Role,
+			&employee.Salary, &employee.DateOfBirth, &employee.DateOfStart, &employee.PhoneNumber, &employee.City,
+			&employee.Street, &employee.ZipCode)
+		if err != nil {
+			return nil, err
+		}
+		employees = append(employees, employee)
+	}
+	return employees, nil
+}
+
+func (er *employeePostgres) GetEmployeeByRole(role string) ([]entities.Employee, error) {
+	var employees []entities.Employee
+	rows, err := er.db.Query(getAllEmployeesByCategory, role)
 	if err != nil {
 		return nil, fmt.Errorf("unable to execute the query")
 	}

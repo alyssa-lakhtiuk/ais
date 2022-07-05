@@ -30,6 +30,21 @@ func (h *Handler) signIn(c *gin.Context) {
 	}
 }
 
+func (h *Handler) goToHomePage(c *gin.Context) {
+	authHeader, err := c.Request.Cookie("Authorization")
+	if err != nil {
+		c.HTML(http.StatusUnauthorized, "authorization first", nil)
+	}
+	currentEmplId := authHeader.Value
+	roleDromDB, err := h.services.Role.GetByIdEmployee(currentEmplId)
+
+	if roleDromDB.Role == "manager" {
+		Tpl.ExecuteTemplate(c.Writer, "manager_homepage.html", nil)
+	} else {
+		Tpl.ExecuteTemplate(c.Writer, "cashier_homepage.html", nil)
+	}
+}
+
 func (h *Handler) signInInput(c *gin.Context) {
 	Tpl.ExecuteTemplate(c.Writer, "login.html", nil)
 }

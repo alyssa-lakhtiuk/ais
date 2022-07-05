@@ -215,12 +215,16 @@
 <form method="POST">
     <label>Product ID: </label>
     <input type="text" class="form-control" id="product_id" name="id">
-    <button formaction="/edit_product" type="submit" class="button0">Edit</button>
-    <button formaction="/delete_product" type="submit" class="button0">Delete</button>
+    <button formaction="/edit-product" type="submit" class="button0">Edit</button>
+<!--    <button formaction="/delete-product" type="submit" class="button0">Delete</button>-->
 </form>
+<form method="POST">
+    <button formaction="/delete-product" type="submit" class="button0">Delete</button>
+</form>
+<p>{{.Mess}}</p>
 
 <form method="GET">
-    <button formaction="/manager_homepage" class="button4">Homepage</button>
+    <button formaction="/homepage" class="button4">Homepage</button>
     <button formaction="/sign-in-input" class="button5">Log out</button>
 </form>
 

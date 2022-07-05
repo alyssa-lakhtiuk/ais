@@ -29,6 +29,14 @@ func (s *categoryService) Delete(name string) error {
 	return s.repo.DeleteCategory(name)
 }
 
+func (s *categoryService) DeleteByNum(name int) error {
+	//_, err := s.repo.GetCategoryByName(name)
+	//if err != nil {
+	//	return err
+	//}
+	return s.repo.DeleteCategoryByNum(name)
+}
+
 func (s *categoryService) GetByName(categoryName string) (entities.Category, error) {
 	return s.repo.GetCategoryByName(categoryName)
 }

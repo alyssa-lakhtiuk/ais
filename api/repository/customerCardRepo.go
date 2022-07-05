@@ -42,8 +42,8 @@ func (er *customerCardPostgres) CreateCustomerCard(customerCard entities.Custome
 
 func (er *customerCardPostgres) UpdateCustomerCard(cardNumber string, customerCard entities.CustomerCard) error {
 	_, err := er.db.Exec(updateCustomerCard, cardNumber, customerCard.CustomerSurname, customerCard.CustomerName,
-		customerCard.CustomerPatronymic, customerCard.PhoneNumber, customerCard.City, customerCard.Street,
-		customerCard.ZipCode, customerCard.Percent)
+		customerCard.CustomerPatronymic.String, customerCard.PhoneNumber, customerCard.City.String, customerCard.Street.String,
+		customerCard.ZipCode.String, customerCard.Percent)
 	return err
 }
 

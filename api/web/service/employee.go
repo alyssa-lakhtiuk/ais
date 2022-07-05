@@ -30,6 +30,10 @@ func (s *EmployeeService) GetAll() ([]entities.Employee, error) {
 	return s.repo.GetAllEmployees()
 }
 
+func (s *EmployeeService) GetAllByCategory(role string) ([]entities.Employee, error) {
+	return s.repo.GetEmployeeByRole(role)
+}
+
 func NewEmployeeService(repo repository.EmployeeRepo) *EmployeeService {
 	return &EmployeeService{repo: repo}
 }

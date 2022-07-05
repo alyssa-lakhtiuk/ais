@@ -155,9 +155,16 @@
 </div>
 
 
-<form action="/edit_employee" method="POST">
+<form action="/edit-employee" method="POST">
 
     <div class="line1"></div>
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <label class="label1">Last name:</label>
+            <input type="text" class="form-control" id="id" name="id" value="{{ .ID }}" disabled>
+        </div>
+    </div>
+
     <div class="form-row form-group">
         <div class="form-group col-md-4">
             <label class="label1">Last name:</label>
@@ -175,7 +182,7 @@
     <div class="form-row form-group">
         <div class="form-group col-md-4">
             <label class="label1">Patronymic:</label>
-            <input type="text" class="form-control" id="patron" name="patronymic" value="{{ .Patronymic }}">
+            <input type="text" class="form-control" id="patron" name="patronymic" value="{{ .Patronymic.String }}">
         </div>
     </div>
 
@@ -229,7 +236,7 @@
     <div class="form-row form-group">
         <div class="form-group col-md-4">
             <label>Street:</label>
-            <input type="text" class="form-control" id="str" name="street" value="{{ .Street }}">
+            <input type="text" class="form-control" id="str" name="street" value= "{{ .Street }}">
         </div>
     </div>
 
@@ -251,11 +258,11 @@
 <div class="line2"></div>
 <div class="line3"></div>
 <div class="line4"></div>
-<p>mistake_mistake_mistake_mistake_mistake</p>
+<p>{{.Mess}}</p>
 
-<form method="POST">
-    <button formaction="/manager_homepage" class="button4">Homepage</button>
-    <button formaction="/log_out" class="button5">Log out</button>
+<form method="GET">
+    <button formaction="/homepage" class="button4">Homepage</button>
+    <button formaction="/sign-in-input" class="button5">Log out</button>
 </form>
 
 </body>

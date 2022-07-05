@@ -155,7 +155,7 @@
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
-      <label>Patronymic: {{ .Patronymic }}</label>
+      <label>Patronymic: {{ .Patronymic.String }}</label>
     </div>
   </div>
 
@@ -204,15 +204,10 @@
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
-      <label>Index: {{ .Index }}</label>
+      <label>Index: {{ .ZipCode }}</label>
     </div>
   </div>
 
-  <div class="form-row form-group">
-    <div class="form-group col-md-4">
-      <label>Percentage: {{ .Percentage }}</label>
-    </div>
-  </div>
 
 </form>
 
@@ -226,8 +221,8 @@
 <div class="line4"></div>
 
 <form method="GET">
-  <button formaction="/manager_homepage" class="button4">Homepage</button>
-  <button formaction="/log_out" class="button5">Log out</button>
+  <button formaction="/homepage" class="button4">Homepage</button>
+  <button formaction="/sign-in-input" class="button5">Log out</button>
 </form>
 
 </body>

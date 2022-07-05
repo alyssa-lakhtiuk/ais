@@ -18,12 +18,14 @@ type Employee interface {
 	GetByName(employeeName string) (entities.Employee, error) // ?
 	GetById(emplId string) (entities.Employee, error)
 	GetAll() ([]entities.Employee, error)
+	GetAllByCategory(role string) ([]entities.Employee, error)
 }
 
 type Category interface {
 	Create(category entities.Category) (int, error)
 	Update(categoryNumber int, category entities.CategoryInput) error
 	Delete(categoryName string) error
+	DeleteByNum(name int) error
 	GetByName(categoryName string) (entities.Category, error)
 	GetByNumber(categoryNumber int) (entities.Category, error)
 	GetAll() ([]entities.Category, error)
@@ -74,6 +76,11 @@ type Role interface {
 	GetByIdEmployee(id string) (entities.SignIn, error)
 }
 
+type Zvit interface {
+	GetPricesByCategory() ([]entities.PriceByCat, error)
+	GetChecksByCategory(category string) ([]entities.CheckByCat, error)
+}
+
 type Service struct {
 	//Authorization
 	Employee
@@ -84,6 +91,7 @@ type Service struct {
 	CustomerCard
 	Check
 	Role
+	Zvit
 }
 
 func NewService(repos *repository.Repository) *Service {
@@ -96,5 +104,6 @@ func NewService(repos *repository.Repository) *Service {
 		CustomerCard: NewCustomerCardServiceService(repos.CustomerCardRepo),
 		Check:        NewCheckService(repos.CheckRepo, repos.EmployeeRepo, repos.CustomerCardRepo, repos.StoreProductRepo),
 		Role:         NewRoleService(repos.RoleRepo),
+		Zvit:         NewZvitService(repos.Zvit),
 	}
 }

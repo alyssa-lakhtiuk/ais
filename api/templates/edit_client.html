@@ -154,17 +154,17 @@
 </div>
 
 <div class="title1">
-    <h3>Add new customer</h3>
+    <h3>Edit customer</h3>
 </div>
 
 
-<form action="/customer-card" method="GET">
+<form action="/edit-customer-card" method="PUT">
 
     <div class="line1"></div>
     <div class="form-row form-group">
         <div class="form-group col-md-4">
             <label>Card number:</label>
-            <input type="text" class="form-control" id="c_number" name="card_number" value="{{ .Number }}">
+            <input type="text" class="form-control" id="c_number" name="card_number" value="{{ .Number }}" disabled>
         </div>
     </div>
 
@@ -185,7 +185,7 @@
     <div class="form-row form-group">
         <div class="form-group col-md-4">
             <label>Patronymic:</label>
-            <input type="text" class="form-control" id="patron" name="patronymic" value="{{ .CustomerPatronymic }}">
+            <input type="text" class="form-control" id="patron" name="patronymic" value="{{ .CustomerPatronymic.String }}">
         </div>
     </div>
 
@@ -199,21 +199,21 @@
     <div class="form-row form-group">
         <div class="form-group col-md-4">
             <label>City:</label>
-            <input type="text" class="form-control" id="city" name="city_name" value="{{ .City }}">
+            <input type="text" class="form-control" id="city" name="city_name" value="{{ .City.String }}">
         </div>
     </div>
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
             <label>Street:</label>
-            <input type="text" class="form-control" id="str" name="street" value="{{ .Street }}">
+            <input type="text" class="form-control" id="str" name="street" value="{{ .Street.String }}">
         </div>
     </div>
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
             <label>Zipcode:</label>
-            <input type="text" class="form-control" id="ind" name="index" value="{{ .ZipCode }}">
+            <input type="text" class="form-control" id="ind" name="index" value="{{ .ZipCode.String }}">
         </div>
     </div>
 
@@ -235,11 +235,11 @@
 <div class="line2"></div>
 <div class="line3"></div>
 <div class="line4"></div>
-<p>mistake_mistake_mistake_mistake_mistake</p>
+<p>{{.Mess}}</p>
 
-<form method="POST">
-    <button formaction="/manager_homepage" class="button4">Homepage</button>
-    <button formaction="/log_out" class="button5">Log out</button>
+<form method="GET">
+    <button formaction="/homepage" class="button4">Homepage</button>
+    <button formaction="/sign-in-input" class="button5">Log out</button>
 </form>
 
 </body>

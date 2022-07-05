@@ -16,10 +16,13 @@ import (
 
 func (h *Handler) productCreated(c *gin.Context) {
 	var input entities.Product
-	if err := c.BindJSON(&input); err != nil {
-		// throw error response
-		respondWithError(c, http.StatusBadRequest, "unable to get input data")
-	}
+	input.Name = c.Request.FormValue("name_prod")
+	input.CategoryNum, _ = strconv.Atoi(c.Request.FormValue("category"))
+	input.Characteristics = c.Request.FormValue("description")
+	//if err := c.BindJSON(&input); err != nil {
+	//	// throw error response
+	//	respondWithError(c, http.StatusBadRequest, "unable to get input data")
+	//}
 	_, err := h.services.Product.Create(input)
 	if err != nil {
 		// throw error response
@@ -88,7 +91,8 @@ func (h *Handler) getProductByNumber(c *gin.Context) {
 }
 
 func (h *Handler) deleteProduct(c *gin.Context) {
-	id, err := strconv.Atoi(c.Param("id"))
+	//id, err := strconv.Atoi(c.Param("id"))
+	id, err := strconv.Atoi(c.Request.FormValue("id"))
 	if err != nil {
 		respondWithError(c, http.StatusBadRequest, "unable to get id of product")
 		return
@@ -98,25 +102,39 @@ func (h *Handler) deleteProduct(c *gin.Context) {
 		respondWithError(c, http.StatusBadRequest, "unable to delete product, maybe it doesn't exist") //c.JSON(http.StatusBadRequest, err)
 		return
 	}
-	c.JSON(http.StatusOK, id)
+	h.getAllProducts(c)
+	//c.JSON(http.StatusOK, id)
 }
 
-func (h *Handler) updateProduct(c *gin.Context) {
-	id, err := strconv.Atoi(c.Param("id"))
+var updateProductNum int
+
+func (h *Handler) updateProductOpen(c *gin.Context) {
+	updateProductNum, _ = strconv.Atoi(c.Request.FormValue("id"))
+	productToEdit, _ := h.services.Product.GetByNumber(updateProductNum)
+
+	var categories []entities.Category
+	var err error
+	categories, err = h.services.Category.GetAll()
 	if err != nil {
-		respondWithError(c, http.StatusBadRequest, "unable to get id of product")
+		c.JSON(http.StatusBadRequest, err)
 		return
 	}
+	var combo entities.CategoryProduct
+	combo.C = categories
+	combo.P = productToEdit
+	Tpl.ExecuteTemplate(c.Writer, "edit_product.html", combo)
+}
+func (h *Handler) updateProduct(c *gin.Context) {
 	var input entities.Product
-	if err := c.BindJSON(&input); err != nil {
-		// throw error response
-		respondWithError(c, http.StatusBadRequest, "unable to get update information, check if your data is correct")
-		return
-	}
-	if err := h.services.Product.Update(id, input); err != nil {
+	input.Name = c.Request.FormValue("name_prod")
+	input.CategoryNum, _ = strconv.Atoi(c.Request.FormValue("category"))
+	input.Characteristics = c.Request.FormValue("Characteristics")
+	if err := h.services.Product.Update(updateProductNum, input); err != nil {
 		// throw error response
 		respondWithError(c, http.StatusBadRequest, "unable to update, check is your data correct")
 		return
 	}
-	c.JSON(http.StatusOK, "updated")
+	//c.JSON(http.StatusOK, "updated")
+	h.getAllProducts(c)
+	//Tpl.ExecuteTemplate(c.Writer, "edit_product.html", entities.Message{Mess: "employee updated"})
 }

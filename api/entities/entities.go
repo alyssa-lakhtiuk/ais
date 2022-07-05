@@ -75,17 +75,17 @@ type Sale struct {
 // entities for update:
 
 type EmployeeInput struct {
-	FirstName   string    `json:"firstname"`
-	SurName     string    `json:"lastname"`
-	Patronymic  string    `json:"patronymic"`
-	Role        string    `json:"role"`
-	Salary      float64   `json:"salary"`
-	DateOfBirth time.Time `json:"DateOfBirth"`
-	DateOfStart time.Time `json:"DateOfStart"`
-	PhoneNumber string    `json:"phoneNumber"`
-	City        string    `json:"city"`
-	Street      string    `json:"street"`
-	ZipCode     string    `json:"zipCode"`
+	FirstName   string         `json:"firstname"`
+	SurName     string         `json:"lastname"`
+	Patronymic  sql.NullString `json:"patronymic"`
+	Role        string         `json:"role"`
+	Salary      float64        `json:"salary"`
+	DateOfBirth string         `json:"DateOfBirth"`
+	DateOfStart string         `json:"DateOfStart"`
+	PhoneNumber string         `json:"phoneNumber"`
+	City        string         `json:"city"`
+	Street      string         `json:"street"`
+	ZipCode     string         `json:"zipCode"`
 }
 
 type CategoryInput struct {
@@ -111,4 +111,29 @@ type SignIn struct {
 	Role       string
 	Phone      string
 	Password   string
+}
+
+type Message struct {
+	Mess string
+}
+
+type CategoryProduct struct {
+	C []Category
+	P Product
+}
+
+type ProductStoreProductUpc struct {
+	Pr  []Product
+	Stp StoreProduct
+	UpC []StoreProduct
+}
+
+type PriceByCat struct {
+	Cat   string  `json:"cat" validate:"required"`
+	Price float64 `json:"price" validate:"required"`
+}
+
+type CheckByCat struct {
+	Check string `json:"check" validate:"required"`
+	Cat   string `json:"cat"`
 }

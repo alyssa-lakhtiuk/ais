@@ -165,13 +165,13 @@
 
   <div class="line1"></div>
 
-  <form action="/store-product" method="POST">
+  <form action="/edit-store-product" method="POST">
 
 
     <div class="form-row form-group">
       <div class="form-group col-md-4">
         <label>UPC:</label>
-        <input type="text" class="form-control" id="upc" name="upc" value="{{ .UPC }}">
+        <input type="text" class="form-control" id="upc" name="upc" value="{{ .Stp.UPC }}" disabled>
       </div>
     </div>
 
@@ -180,10 +180,10 @@
       <div class="form-group col-md-4">
         <label>ProductID:</label>
         <select id="prod" name="product">
-          <option value="{{ .IDProduct }}">{{ .IDProduct }}</option>
-          {{ range . }}
-          <option value="{{ .IDProduct }}">{{ .IDProduct }}</option>
-          {{ end }}
+          <option selected disabled>{{.IDProduct}}</option>
+          {{range .Pr}}
+          <option value="{{.Number}}">{{.IDProduct}} {{.Name}}</option>
+          {{end}}
         </select>
       </div>
     </div>
@@ -192,14 +192,14 @@
     <div class="form-row form-group">
       <div class="form-group col-md-4">
         <label>Selling price:</label>
-        <input type="text" class="form-control" id="sell" name="selling_price" placeholder="UAH" value="{{ .SellingPrice }}">
+        <input type="text" class="form-control" id="sell" name="selling_price" placeholder="UAH" value="{{ .Stp.SellingPrice }}">
       </div>
     </div>
 
     <div class="form-row form-group">
       <div class="form-group col-md-4">
         <label>Number:</label>
-        <input type="text" class="form-control" id="number" name="number" value="{{ .ProductsNumber }}">
+        <input type="text" class="form-control" id="number" name="number" value="{{ .Stp.ProductsNumber }}">
       </div>
     </div>
 
@@ -207,7 +207,7 @@
       <div class="form-group col-md-4">
         <label>Promotional:</label>
         <select id="prom" name="promotion">
-          <option value="{{ .PromotionalProduct }}">{{ .PromotionalProduct }}</option>
+          <option value="{{ .Stp.PromotionalProduct }}">{{ .Stp.PromotionalProduct }}</option>
           <option value="true">Yes</option>
           <option value="false">No</option>
 
@@ -227,11 +227,11 @@
 <div class="line2"></div>
 <div class="line3"></div>
 <div class="line4"></div>
-<p>mistake_mistake_mistake_mistake_mistake</p>
+<p>{{.Mess}}</p>
 
 <form method="GET">
-  <button formaction="/manager_homepage" class="button4">Homepage</button>
-  <button formaction="/log_out" class="button5">Log out</button>
+  <button formaction="/homepage" class="button4">Homepage</button>
+  <button formaction="/sign-in-input" class="button5">Log out</button>
 </form>
 
 </body>

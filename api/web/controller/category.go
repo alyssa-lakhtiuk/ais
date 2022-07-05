@@ -75,36 +75,46 @@ func (h *Handler) getCategoryByNumber(c *gin.Context) {
 	c.JSON(http.StatusOK, category)
 }
 
+func (h *Handler) updateCategoryOpen(c *gin.Context) {
+	categoryUpdateNum, _ := strconv.Atoi(c.Request.FormValue("id"))
+	categoryToEdit, _ := h.services.Category.GetByNumber(categoryUpdateNum)
+	Tpl.ExecuteTemplate(c.Writer, "edit_category.html", categoryToEdit)
+
+}
 func (h *Handler) updateCategory(c *gin.Context) {
-	id, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		respondWithError(c, http.StatusBadRequest, "unable to parse input url")
-		c.JSON(http.StatusOK, id)
-		return
-		// throw error response
-	}
+	//id, err := strconv.Atoi(c.Param("id"))
+	//if err != nil {
+	//	respondWithError(c, http.StatusBadRequest, "unable to parse input url")
+	//	c.JSON(http.StatusOK, id)
+	//	return
+	//	// throw error response
+	//}
 	var input entities.CategoryInput
-	if err := c.BindJSON(&input); err != nil {
-		// throw error response
-		respondWithError(c, http.StatusBadRequest, "unable to parse input data")
-		return
-	}
+	id, _ := strconv.Atoi(c.Request.FormValue("num_category"))
+	input.Name = c.Request.FormValue("name_category")
+	//if err := c.BindJSON(&input); err != nil {
+	//	// throw error response
+	//	respondWithError(c, http.StatusBadRequest, "unable to parse input data")
+	//	return
+	//}
 	if err := h.services.Category.Update(id, input); err != nil {
 		// throw error response
 		respondWithError(c, http.StatusBadRequest, "unable to update")
 		return
 	}
-	c.JSON(http.StatusOK, "updated")
+	h.getAllCategories(c)
+	//c.JSON(http.StatusOK, "updated")
 }
 
 func (h *Handler) deleteCategory(c *gin.Context) {
-	categoryName := c.Param("name")
-	err := h.services.Category.Delete(categoryName)
+	categoryNum, _ := strconv.Atoi(c.Request.FormValue("id"))
+	err := h.services.Category.DeleteByNum(categoryNum)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
 		return
 	}
-	c.JSON(http.StatusOK, categoryName)
+	h.getAllCategories(c)
+	//c.JSON(http.StatusOK, categoryNum)
 }
 
 //func (h *Handler) createReportCategory(c *gin.Context) {
