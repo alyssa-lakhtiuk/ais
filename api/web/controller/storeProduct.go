@@ -20,6 +20,7 @@ func (h *Handler) storeProductCreated(c *gin.Context) {
 	input.SellingPrice, err = strconv.ParseFloat(c.Request.FormValue("selling_price"), 64)
 	input.ProductsNumber, err = strconv.Atoi(c.Request.FormValue("quantit"))
 	input.PromotionalProduct, err = strconv.ParseBool(c.Request.FormValue("promotion"))
+	//input.UPCProm = c.Request.FormValue("promotion")
 	/// !!!!!!!!!!!!!! upcprom !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 	///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	_, err = h.services.StoreProduct.Create(input)
@@ -79,27 +80,60 @@ func (h *Handler) getStoreProductByUpc(c *gin.Context) {
 }
 
 func (h *Handler) deleteStoreProduct(c *gin.Context) {
-	id := c.Param("id")
+	//id := c.Param("id")
+	id := c.Request.FormValue("upc_id")
 	err := h.services.StoreProduct.Delete(id)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
 		return
 	}
-	c.JSON(http.StatusOK, "deleted")
+	h.getAllStoreProducts(c)
+	//c.JSON(http.StatusOK, "deleted")
+}
+
+func (h *Handler) updateStoreProductOpen(c *gin.Context) {
+	storeProductUPCForUPD := c.Request.FormValue("upc_id")
+	stProdToEdit, _ := h.services.StoreProduct.GetByName(storeProductUPCForUPD)
+
+	products, err := h.services.Product.GetAll()
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err)
+		return
+		// throw error response
+	}
+	Stproducts, err := h.services.StoreProduct.GetAll()
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err)
+		return
+	}
+	var combo entities.ProductStoreProductUpc
+	combo.Stp = stProdToEdit
+	combo.Pr = products
+	combo.UpC = Stproducts
+
+	Tpl.ExecuteTemplate(c.Writer, "edit_stock_product.html", combo)
 }
 
 func (h *Handler) updateStoreProduct(c *gin.Context) {
-	upc := c.Param("id")
+	//upc := c.Param("id")
 	var input entities.StoreProduct
-	if err := c.BindJSON(&input); err != nil {
-		// throw error response
-		respondWithError(c, http.StatusBadRequest, "unable to parse input data")
-		return
-	}
+	upc := c.Request.FormValue("upc")
+	input.IDProduct, _ = strconv.Atoi(c.Request.FormValue("product"))
+	input.SellingPrice, _ = strconv.ParseFloat(c.Request.FormValue("selling_price"), 64)
+	input.ProductsNumber, _ = strconv.Atoi(c.Request.FormValue("number"))
+	input.PromotionalProduct, _ = strconv.ParseBool(c.Request.FormValue("promotion"))
+
+	//if err := c.BindJSON(&input); err != nil {
+	//	// throw error response
+	//	respondWithError(c, http.StatusBadRequest, "unable to parse input data")
+	//	return
+	//}
 	if err := h.services.StoreProduct.Update(upc, input); err != nil {
 		// throw error response
 		respondWithError(c, http.StatusBadRequest, "unable to update store product")
 		return
 	}
-	c.JSON(http.StatusOK, "updated")
+	//c.JSON(http.StatusOK, "updated")
+	h.getAllStoreProducts(c)
+	//Tpl.ExecuteTemplate(c.Writer, "manager_stock_product.html", entities.Message{Mess: "employee updated"})
 }

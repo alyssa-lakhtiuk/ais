@@ -116,3 +116,24 @@ type SignIn struct {
 type Message struct {
 	Mess string
 }
+
+type CategoryProduct struct {
+	C []Category
+	P Product
+}
+
+type ProductStoreProductUpc struct {
+	Pr  []Product
+	Stp StoreProduct
+	UpC []StoreProduct
+}
+
+type PriceByCat struct {
+	Cat   string  `json:"cat" validate:"required"`
+	Price float64 `json:"price" validate:"required"`
+}
+
+type CheckByCat struct {
+	Check string `json:"check" validate:"required"`
+	Cat   string `json:"cat"`
+}

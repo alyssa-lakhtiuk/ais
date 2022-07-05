@@ -184,7 +184,7 @@
 </div>
 
 <form method="GET">
-    <button formaction="/add_stock_product" class="button2">Add new product</button>
+    <button formaction="/create-store-product" class="button2">Add new product</button>
     <button formaction="/print_report_stock_product" class="button3">Print report</button>
 </form>
 
@@ -241,12 +241,16 @@
 </table>
 <div class="line1"></div>
 
-<form method="POST">
+<form method="GET">
     <label>UPC: </label>
     <input type="text" class="form-control" id="upc_id" name="upc_id">
-    <button formaction="/edit_stock_product" type="submit" class="button0">Edit</button>
-    <button formaction="/delete_stock_product" type="submit" class="button0">Delete</button>
+    <button formaction="/edit-store-product" type="submit" class="button0">Edit</button>
+<!--    <button formaction="/delete-store-product" type="submit" class="button0">Delete</button>-->
 </form>
+<form method="POST">
+    <button formaction="/delete-store-product" type="submit" class="button0">Delete</button>
+</form>
+<p>{{.Mess}}</p>
 
 <form method="GET">
     <button formaction="/homepage" class="button4">Homepage</button>

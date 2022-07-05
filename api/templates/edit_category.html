@@ -151,9 +151,15 @@
 </div>
 
 
-<form action="/done_category" method="POST">
+<form action="/edit-category" method="POST">
 
   <div class="line1"></div>
+  <div class="form-row form-group">
+    <div class="form-group col-md-4">
+      <label>Number:</label>
+      <input type="text" class="form-control" id="num_cat" name="num_category" value="{{ .Number }}" disabled>
+    </div>
+  </div>
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">

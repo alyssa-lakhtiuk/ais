@@ -168,16 +168,16 @@
 </div>
 
 <form method="GET">
-    <button formaction="/create-client" class="button2">Add new customer</button>
+    <button formaction="/create-customer-card" class="button2">Add new customer</button>
     <button formaction="/print_report_client" class="button3">Print report</button>
     </form>
 
 <form action="/request_client" method="POST">
-    <label>Sort by surname: </label>
-    <select id="sort_surname" name="sort_surname">
-        <option value="asc">ASC</option>
-        <option value="desc">DESC</option>
-    </select>
+<!--    <label>Sort by surname: </label>-->
+<!--    <select id="sort_surname" name="sort_surname">-->
+<!--        <option value="asc">ASC</option>-->
+<!--        <option value="desc">DESC</option>-->
+<!--    </select>-->
     <label>Search by percentage: </label>
     <input type="number" class="form-control" id="ser_per" name="search_percentage" placeholder="%">
     <button type="submit" class="button1">Search</button>
@@ -206,11 +206,11 @@
         <td>{{ .Number }}</td>
         <td>{{ .CustomerSurname }}</td>
         <td>{{ .CustomerName }}</td>
-        <td>{{ .CustomerPatronymic }}</td>
+        <td>{{ .CustomerPatronymic.String }}</td>
         <td>{{ .PhoneNumber }}</td>
-        <td>{{ .City }}</td>
-        <td>{{ .Street }}</td>
-        <td>{{ .ZipCode }}</td>
+        <td>{{ .City.String }}</td>
+        <td>{{ .Street.String }}</td>
+        <td>{{ .ZipCode.String }}</td>
         <td>{{ .Percent }}</td>
     </tr>
 
@@ -219,12 +219,15 @@
 </table>
 <div class="line1"></div>
 
-<form method="POST">
+<form method="GET">
     <label>Card Number: </label>
     <input type="text" class="form-control" id="number_card" name="number_card">
     <button formaction="/edit-customer-card" type="submit" class="button0">Edit</button>
-    <button formaction="/delete_client" type="submit" class="button0">Delete</button>
 </form>
+<form method="POST">
+<button formaction="/delete-client" type="submit" class="button0">Delete</button>
+</form>
+    <!--<p>{{.Mess}}</p>-->
 
 <form method="GET">
     <button formaction="/homepage" class="button4">Homepage</button>

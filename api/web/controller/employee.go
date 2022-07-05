@@ -4,6 +4,7 @@ import (
 	"ais/entities"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"sort"
 	"strconv"
 )
 
@@ -49,6 +50,9 @@ func (h *Handler) getAllEmployees(c *gin.Context) {
 		//return
 	}
 	//c.JSON(http.StatusOK, employees)
+	sort.SliceStable(employees, func(i, j int) bool {
+		return employees[i].SurName < employees[j].SurName
+	})
 	Tpl.ExecuteTemplate(c.Writer, "manager_employee.html", employees)
 }
 
@@ -96,7 +100,7 @@ func (h *Handler) updateEmployee(c *gin.Context) {
 	input.PhoneNumber = c.Request.FormValue("telephone")
 	input.City = c.Request.FormValue("city_name")
 	input.Street = c.Request.FormValue("street")
-	input.ZipCode = c.Request.FormValue("index")
+	input.ZipCode = c.Request.FormValue("ZipCode")
 	//if err := c.BindJSON(&input); err != nil {
 	//	// throw error response
 	//	respondWithError(c, http.StatusBadRequest, "unable to read input data, check is it correct")
@@ -107,16 +111,54 @@ func (h *Handler) updateEmployee(c *gin.Context) {
 		respondWithError(c, http.StatusBadRequest, "unable to update")
 		return
 	}
-	Tpl.ExecuteTemplate(c.Writer, "edit_employee.html", entities.Message{Mess: "employee updated"})
+	h.getAllEmployees(c)
+	//Tpl.ExecuteTemplate(c.Writer, "manager_employee.html", )
 }
 
 func (h *Handler) deleteEmployee(c *gin.Context) {
-	employeeId := c.Param("id")
+	employeeId := c.Request.FormValue("id")
 	err := h.services.Employee.Delete(employeeId)
 	if err != nil {
 		respondWithError(c, http.StatusBadRequest, "unable to delete employee")
 		// throw error response
 		return
 	}
-	c.JSON(http.StatusOK, employeeId)
+	h.getAllEmployees(c)
+	//c.JSON(http.StatusOK, employeeId)
+}
+
+func (h *Handler) onlyOneEmployeeCategory(c *gin.Context) {
+	role := c.Request.FormValue("sort_role")
+	if role != "manager" && role != "cashier" {
+		return
+	}
+	employees, err := h.services.Employee.GetAllByCategory(role)
+	if err != nil {
+		// throw error response
+		//respondWithError(c, http.StatusBadRequest, "can't get all employees, maybe there is no even one")
+		//return
+	}
+	//c.JSON(http.StatusOK, employees)
+	sort.SliceStable(employees, func(i, j int) bool {
+		return employees[i].SurName < employees[j].SurName
+	})
+	Tpl.ExecuteTemplate(c.Writer, "manager_employee.html", employees)
+}
+
+func (h *Handler) searchEmployee(c *gin.Context) {
+	role := c.Request.FormValue("sort_role")
+	if role != "manager" && role != "cashier" {
+		return
+	}
+	employees, err := h.services.Employee.GetAllByCategory(role)
+	if err != nil {
+		// throw error response
+		//respondWithError(c, http.StatusBadRequest, "can't get all employees, maybe there is no even one")
+		//return
+	}
+	//c.JSON(http.StatusOK, employees)
+	sort.SliceStable(employees, func(i, j int) bool {
+		return employees[i].SurName < employees[j].SurName
+	})
+	Tpl.ExecuteTemplate(c.Writer, "manager_employee.html", employees)
 }

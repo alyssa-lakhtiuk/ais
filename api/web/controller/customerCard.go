@@ -66,10 +66,8 @@ func (h *Handler) getCustomerCardByNumber(c *gin.Context) {
 	c.JSON(http.StatusOK, category)
 }
 
-var cardNumber string
-
 func (h *Handler) updateCustomerCardOpen(c *gin.Context) {
-	cardNumber = c.Request.FormValue("number_card")
+	cardNumber := c.Request.FormValue("number_card")
 	ccToEdit, _ := h.services.CustomerCard.GetByNumber(cardNumber)
 	Tpl.ExecuteTemplate(c.Writer, "edit_client.html", ccToEdit)
 }
@@ -77,8 +75,9 @@ func (h *Handler) updateCustomerCardOpen(c *gin.Context) {
 func (h *Handler) updateCustomerCard(c *gin.Context) {
 	//id := c.Param("id")
 	var input entities.CustomerCard
+	cardNumber := c.Request.FormValue("card_number")
 	//input.Number = c.Request.FormValue("card_number")
-	input.CustomerSurname = c.Request.FormValue("lastname")
+	input.CustomerSurname = c.Request.FormValue("surname")
 	input.CustomerName = c.Request.FormValue("firstname")
 	input.CustomerPatronymic.String = c.Request.FormValue("patronymic")
 	input.PhoneNumber = c.Request.FormValue("telephone")
@@ -97,16 +96,18 @@ func (h *Handler) updateCustomerCard(c *gin.Context) {
 		respondWithError(c, http.StatusBadRequest, "unable to update")
 		return
 	}
-	Tpl.ExecuteTemplate(c.Writer, "edit_employee.html", entities.Message{Mess: "customer card updated"})
+	h.getAllCustomerCards(c)
+	//Tpl.ExecuteTemplate(c.Writer, "edit_employee.html", entities.Message{Mess: "customer card updated"})
 	//c.JSON(http.StatusOK, cardNumber)
 }
 
 func (h *Handler) deleteCustomerCard(c *gin.Context) {
-	id := c.Param("id")
+	id := c.Request.FormValue("number_card")
 	err := h.services.CustomerCard.Delete(id)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
 		return
 	}
-	c.JSON(http.StatusOK, id)
+	//c.JSON(http.StatusOK, id)
+	h.getAllCustomerCards(c)
 }

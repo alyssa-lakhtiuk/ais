@@ -28,6 +28,7 @@
             text-align: center;
             font-size: 25px;
             margin-left: 525px;
+            margin-bottom: 30px;
         }
 
         .button3 {
@@ -39,6 +40,7 @@
             text-align: center;
             font-size: 25px;
             margin-left: 40px;
+            margin-bottom: 30px;
         }
 
         .sel1 {
@@ -82,6 +84,7 @@
             margin-top: -60px;
 
         }
+
         th {
             font-size: 16px;
             font-family: cursive;
@@ -90,6 +93,7 @@
             padding-right: 15px;
             padding-left: 15px;
         }
+
         td {
             font-size: 12px;
             font-family: cursive;
@@ -97,6 +101,7 @@
             padding-right: 10px;
             padding-left: 10px;
         }
+
         .button4 {
             font-family: cursive;
             border: 1px solid #ffb14d;
@@ -122,6 +127,7 @@
             margin-top: 160px;
             margin-left: 20px;
         }
+
         .form-control {
             font-family: cursive;
             border: 1px solid #000000;
@@ -132,13 +138,15 @@
             margin-left: 5px;
             margin-bottom: 30px;
         }
-        label{
+
+        label {
             font-family: cursive;
             text-align: center;
             font-size: 25px;
             margin-left: 20px;
             margin-bottom: 15px;
         }
+
         .button1 {
             font-family: cursive;
             border: 1px solid #c27004;
@@ -151,6 +159,7 @@
             margin-left: 20px;
             margin-top: 5px;
         }
+
         .button0 {
             font-family: cursive;
             border: 1px solid #c23704;
@@ -163,6 +172,7 @@
             margin-left: 20px;
             margin-top: 35px;
         }
+
         .line1 {
             width: 1300px;
             margin-top: 10px;
@@ -184,80 +194,79 @@
     <button formaction="/print_report_employee" class="button3">Print report</button>
 </form>
 
-<form action="/request_employee" method="POST">
-    <label>Sort by surname:</label>
-    <select class="sel1" id="sort_surname" name="sort_surname">
-        <option value="asc">ASC</option>
-        <option value="desc">DESC</option>
-    </select>
-
-    <label>Role:</label>
+<form  method="POST">
+    <label>Select by role:</label>
     <select class="sel2" id="sort_role" name="sort_role">
         <option value="both_roles">Manager and Cashier</option>
         <option value="manager">Manager</option>
         <option value="cashier">Cashier</option>
     </select>
+    <button formaction="/request-employee" type="submit" class="button1">Select</button>
     <label>Search by surname:</label>
     <input type="text" class="form-control" id="last" name="lastname">
-    <button type="submit" class="button1">Search</button>
+    <button formaction="/search-employee" type="submit" class="button1">Search</button>
 </form>
 
 <div class="line1"></div>
 
-    <table >
-        <!-- Table header -->
-        <thead>
-        <tr>
-            <th scope="col">Employee ID</th>
-            <th scope="col">Surname</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Patronymic</th>
-            <th scope="col">Role</th>
-            <th scope="col">Salary</th>
-            <th scope="col">Day of start</th>
-            <th scope="col">Day of birth</th>
-            <th scope="col">Phone number</th>
-            <th scope="col">City</th>
-            <th scope="col">Street</th>
-            <th scope="col">Zipcode</th>
+<table>
+    <!-- Table header -->
+    <thead>
+    <tr>
+        <th scope="col">Employee ID</th>
+        <th scope="col">Surname</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Patronymic</th>
+        <th scope="col">Role</th>
+        <th scope="col">Salary</th>
+        <th scope="col">Day of start</th>
+        <th scope="col">Day of birth</th>
+        <th scope="col">Phone number</th>
+        <th scope="col">City</th>
+        <th scope="col">Street</th>
+        <th scope="col">Zipcode</th>
 
-        </tr>
-        </thead>
-        <!-- Table footer -->
-<!--        <tfoot>-->
-<!--        <tr>-->
-<!--            <td>END</td>-->
-<!--        </tr>-->
-<!--        </tfoot>-->
-        <!-- Table body -->
-        <tbody>
-        {{ range . }}
-        <tr>
-            <td>{{ .ID }}</td>
-            <td>{{ .SurName }}</td>
-            <td>{{ .FirstName }}</td>
-            <td>{{ .Patronymic.String }}</td>
-            <td>{{ .Role }}</td>
-            <td>{{ .Salary }}</td>
-            <td>{{ .DateOfStart }}</td>
-            <td>{{ .DateOfBirth }}</td>
-            <td>{{ .PhoneNumber }}</td>
-            <td>{{ .City }}</td>
-            <td>{{ .Street }}</td>
-            <td>{{ .ZipCode }}</td>
-        </tr>
+    </tr>
+    </thead>
+    <!-- Table footer -->
+    <!--        <tfoot>-->
+    <!--        <tr>-->
+    <!--            <td>END</td>-->
+    <!--        </tr>-->
+    <!--        </tfoot>-->
+    <!-- Table body -->
+    <tbody>
+    {{ range . }}
+    <tr>
+        <td>{{ .ID }}</td>
+        <td>{{ .SurName }}</td>
+        <td>{{ .FirstName }}</td>
+        <td>{{ .Patronymic.String }}</td>
+        <td>{{ .Role }}</td>
+        <td>{{ .Salary }}</td>
+        <td>{{ .DateOfStart }}</td>
+        <td>{{ .DateOfBirth }}</td>
+        <td>{{ .PhoneNumber }}</td>
+        <td>{{ .City }}</td>
+        <td>{{ .Street }}</td>
+        <td>{{ .ZipCode }}</td>
+    </tr>
 
-        {{ end }}
-        </tbody>
-    </table>
+    {{ end }}
+    </tbody>
+</table>
 <div class="line1"></div>
 
 <form method="POST">
     <label>Employee ID: </label>
     <input type="text" class="form-control" id="employee_id" name="id">
     <button formaction="/edit-employee" type="submit" class="button0">Edit</button>
-    <button formaction="/delete_employee" type="submit" class="button0">Delete</button>
+<!--    <button formaction="/delete-employee" type="submit" class="button0">Delete</button>-->
 </form>
+<form method="POST">
+    <button formaction="/delete-employee" type="submit" class="button0">Delete</button>
+</form>
+<!--<p>{{.Mess}}</p>-->
 
 <form method="GET">
     <button formaction="/homepage" class="button4">Homepage</button>

@@ -28,6 +28,7 @@
         text-align: center;
         font-size: 25px;
         margin-left: 525px;
+        margin-bottom: 30px;
     }
 
     .button3 {
@@ -39,6 +40,7 @@
         text-align: center;
         font-size: 25px;
         margin-left: 40px;
+        margin-bottom: 30px;
     }
 
     select {
@@ -159,16 +161,16 @@
     <button formaction="/print_report_category" class="button3">Print report</button>
     </form>
 
-<form action="/sort_category_name" method="POST"> <!--somehow goes to the same page-->
-    <select id="sort_category" name="sort_category_name">
-        <option value="asc">ASC</option>
-        <option value="desc">DESC</option>
-        <!--        <input type="submit" value="Submit">-->
-    </select>
-</form>
+<!--<form action="/sort_category_name" method="POST"> &lt;!&ndash;somehow goes to the same page&ndash;&gt;-->
+<!--    <select id="sort_category" name="sort_category_name">-->
+<!--        <option value="asc">ASC</option>-->
+<!--        <option value="desc">DESC</option>-->
+<!--        &lt;!&ndash;        <input type="submit" value="Submit">&ndash;&gt;-->
+<!--    </select>-->
+<!--</form>-->
 
 
-<h3>Sort by Name: </h3>
+<!--<h3>Sort by Name: </h3>-->
 
 <div class="line1"></div>
 
@@ -201,8 +203,11 @@
 <form method="POST">
 <label>Category Number: </label>
     <input type="text" class="form-control" id="number_category" name="id">
-    <button formaction="/edit_category" type="submit" class="button1">Edit</button>
-    <button formaction="/delete_category" type="submit" class="button1">Delete</button>
+    <button formaction="/edit-category" type="submit" class="button1">Edit</button>
+<!--    <button formaction="/delete-category" type="submit" class="button1">Delete</button>-->
+</form>
+<form method="POST">
+    <button formaction="/delete-category" type="submit" class="button1">Delete</button>
 </form>
 
 <form method="GET">

@@ -12,6 +12,7 @@ const (
 	updateCategory = "UPDATE " + categoryTable + " SET category_name=$2 " +
 		"WHERE category_number=$1;"
 	deleteCategory      = "DELETE FROM " + categoryTable + " WHERE category_name = $1;"
+	deleteCategoryByNum = "DELETE FROM " + categoryTable + " WHERE category_number = $1;"
 	getCategoryByName   = "SELECT * FROM " + categoryTable + " WHERE category_name=$1;"
 	getCategoryByNumber = "SELECT * FROM " + categoryTable + " WHERE category_number=$1;"
 	getAllCategories    = "SELECT * FROM " + categoryTable + " ;"
@@ -42,6 +43,11 @@ func (er *categoryPostgres) UpdateCategory(numberCategory int, category entities
 
 func (er *categoryPostgres) DeleteCategory(name string) error {
 	_, err := er.db.Exec(deleteCategory, name)
+	return err
+}
+
+func (er *categoryPostgres) DeleteCategoryByNum(name int) error {
+	_, err := er.db.Exec(deleteCategoryByNum, name)
 	return err
 }
 

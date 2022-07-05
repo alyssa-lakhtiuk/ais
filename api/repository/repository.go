@@ -27,6 +27,7 @@ type EmployeeRepo interface {
 	GetEmployeeByName(name string) (entities.Employee, error)
 	GetEmployeeById(id string) (entities.Employee, error)
 	GetAllEmployees() ([]entities.Employee, error)
+	GetEmployeeByRole(role string) ([]entities.Employee, error)
 }
 
 type ProductRepo interface {
@@ -50,6 +51,7 @@ type CategoryRepo interface {
 	CreateCategory(category entities.Category) (int, error)
 	UpdateCategory(categoryNum int, category entities.CategoryInput) error
 	DeleteCategory(name string) error
+	DeleteCategoryByNum(name int) error
 	GetCategoryByName(categoryName string) (entities.Category, error)
 	GetCategoryByNumber(categoryNumber int) (entities.Category, error)
 	GetAllCategories() ([]entities.Category, error)
@@ -83,6 +85,11 @@ type RoleRepo interface {
 	GetRoleByIdEmployee(id string) (entities.SignIn, error)
 }
 
+type Zvit interface {
+	GetPricesByCategories() ([]entities.PriceByCat, error)
+	GetChecksByCat(category string) ([]entities.CheckByCat, error)
+}
+
 type Repository struct {
 	EmployeeRepo
 	ProductRepo
@@ -92,6 +99,7 @@ type Repository struct {
 	CustomerCardRepo
 	SaleRepo
 	RoleRepo
+	Zvit
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
@@ -104,5 +112,6 @@ func NewRepository(db *sqlx.DB) *Repository {
 		CustomerCardRepo: NewCustomerCardPostgres(db),
 		SaleRepo:         NewSalePostgres(db),
 		RoleRepo:         NewRolesPostgres(db),
+		Zvit:             NewZvit(db),
 	}
 }
