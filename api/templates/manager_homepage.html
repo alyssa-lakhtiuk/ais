@@ -39,6 +39,7 @@
             height: 20px;
             margin-left: 120px;
             margin-top: 100px;
+            /*margin-bottom: 10px;*/
         }
 
         .button0 {
@@ -59,8 +60,8 @@
             border: 1px solid #50742b;
             background-color: #92D050;
             color: #ffffff;
-            padding-left: 40px;
-            padding-right: 40px;
+            padding-left: 20px;
+            padding-right: 20px;
             text-align: center;
             font-size: 25px;
             margin-top: 80px;
@@ -84,11 +85,20 @@
 
         .line4 {
             width: 1250px;
-            margin-bottom: -30px;
+            margin-bottom: -60px;
             margin-left: 100px;
             border-bottom: 1px solid black;
         }
+        .form-control {
+            font-family: cursive;
+            border: 1px solid #000000;
+            padding-left: 5px;
 
+            text-align: left;
+            font-size: 20px;
+            margin-left: 5px;
+            /*margin-bottom: 10px;*/
+        }
         .button2 {
             font-family: cursive;
             border: 1px solid #92D050;
@@ -100,17 +110,29 @@
             margin-top: 80px;
             margin-left: 125px;
         }
-
-        .button3 {
+        .button6 {
             font-family: cursive;
-            border: 1px solid #92D050;
-            background-color: #ffffff;
-            padding-left: 40px;
-            padding-right: 40px;
+            border: 1px solid #c23704;
+            background-color: #ff6e4d;
+            color: #ffffff;
+            padding-left: 20px;
+            padding-right: 20px;
             text-align: center;
             font-size: 25px;
-            margin-top: 80px;
-            margin-left: 22px;
+            margin-left: 20px;
+            margin-top: 40px;
+        }
+        .button7 {
+            font-family: cursive;
+            border: 1px solid #c23704;
+            background-color: #ff6e4d;
+            color: #ffffff;
+            padding-left: 20px;
+            padding-right: 20px;
+            text-align: center;
+            font-size: 25px;
+            margin-left: 20px;
+            margin-top: 10px;
         }
 
         .button4 {
@@ -138,6 +160,15 @@
             margin-top: 80px;
             margin-left: 20px;
         }
+        label{
+            font-family: cursive;
+
+            text-align: center;
+            font-size: 25px;
+            margin-left: 120px;
+            margin-top: 15px;
+        }
+
     </style>
 </head>
 
@@ -158,6 +189,7 @@
         <button formaction="/categories" class="button1">Categories</button>  <!--go to manager_category.html-->
         <button formaction="/products" class="button1">All products</button>
         <button formaction="/store-products" class="button1">Store products</button>
+        <button formaction="/print_report" class="button1">Checks</button>
     </form>
 
     <div class="line2"></div>
@@ -171,9 +203,31 @@
     <div class="line1"></div>
 
     <form method="GET">
-        <button formaction="/print_report" class="button2">Work with Checks</button>
+
 
     </form>
+
+
+    <form method="POST">
+        <label>⭐️Top checks – product's price more then: </label>
+        <input type="text" class="form-control" id="zvit_check_number" name="number">
+        <button formaction="/zvit-check-price" type="submit" class="button6">Search</button>
+    </form>
+    <form method="POST">
+        <label>⭐️Top checks – all products from one category: </label>
+        <input type="text" class="form-control" id="zvit_check_category" name="number">
+        <button formaction="/zvit-check-category" type="submit" class="button7">Search</button>
+    </form>
+    <form method="POST">
+        <label>⭐️Top cities – number of customers with card: </label>
+        <button formaction="/zvit-city" type="submit" class="button7">Search</button>
+    </form>
+    <form method="POST">
+        <label>⭐️Top categories – number of products in each: </label>
+        <button formaction="/zvit-city" type="submit" class="button7">Search</button>
+    </form>
+
+
 
     <div class="line2"></div>
     <div class="line3"></div>
