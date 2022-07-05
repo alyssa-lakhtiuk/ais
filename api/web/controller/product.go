@@ -26,10 +26,6 @@ func (h *Handler) productCreated(c *gin.Context) {
 		respondWithError(c, http.StatusBadRequest, "unable to create product, check is your data correct")
 	}
 	Tpl.ExecuteTemplate(c.Writer, "done_product.html", input)
-	//c.JSON(http.StatusOK, map[string]interface{}{
-	//	"productId": input.Id,
-	//	"id":        id,
-	//})
 }
 
 func (h *Handler) createProduct(c *gin.Context) {

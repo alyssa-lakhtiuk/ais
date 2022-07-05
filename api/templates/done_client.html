@@ -160,7 +160,7 @@
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
-      <label>Patronymic: {{ .CustomerPatronymic }}</label>
+      <label>Patronymic: {{ .CustomerPatronymic.String }}</label>
     </div>
   </div>
 
@@ -172,19 +172,19 @@
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
-      <label>City: {{ .City }}</label>
+      <label>City: {{ .City.String }}</label>
     </div>
   </div>
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
-      <label>Street: {{ .Street }}</label>
+      <label>Street: {{ .Street.String }}</label>
     </div>
   </div>
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
-      <label>Index: {{ .ZipCode }}</label>
+      <label>Index: {{ .ZipCode.String }}</label>
     </div>
   </div>
 

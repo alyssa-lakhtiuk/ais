@@ -1,23 +1,24 @@
 package entities
 
 import (
+	"database/sql"
 	_ "github.com/lib/pq"
 	"time"
 )
 
 type Employee struct {
-	ID          string  //`json:"id_employee" validate:"required"`
-	SurName     string  `json:"lastname" validate:"required"`
-	FirstName   string  `json:"firstname" validate:"required"`
-	Patronymic  string  `json:"patronymic"`
-	Role        string  `json:"role" validate:"required"`
-	Salary      float64 `json:"salary" validate:"required"`
-	DateOfBirth string  `json:"DateOfBirth" validate:"required"`
-	DateOfStart string  `json:"DateOfStart" validate:"required"`
-	PhoneNumber string  `json:"phoneNumber" validate:"required"`
-	City        string  `json:"city" validate:"required"`
-	Street      string  `json:"street" validate:"required"`
-	ZipCode     string  `json:"zipCode" validate:"required"`
+	ID          string         //`json:"id_employee" validate:"required"`
+	SurName     string         `json:"lastname" validate:"required"`
+	FirstName   string         `json:"firstname" validate:"required"`
+	Patronymic  sql.NullString `json:"patronymic"`
+	Role        string         `json:"role" validate:"required"`
+	Salary      float64        `json:"salary" validate:"required"`
+	DateOfBirth string         `json:"DateOfBirth" validate:"required"`
+	DateOfStart string         `json:"DateOfStart" validate:"required"`
+	PhoneNumber string         `json:"phoneNumber" validate:"required"`
+	City        string         `json:"city" validate:"required"`
+	Street      string         `json:"street" validate:"required"`
+	ZipCode     string         `json:"zipCode" validate:"required"`
 	//Password    string `json:"password" validate:"required"`
 	// or separate db relation for password
 }
@@ -30,12 +31,12 @@ type Product struct {
 }
 
 type StoreProduct struct {
-	UPC                string  `json:"upc" validate:"required"`
-	SellingPrice       float64 `json:"selling_price" validate:"required"`
-	PromotionalProduct bool    `json:"promotional_product" validate:"required"`
-	UPCProm            string  `json:"UPCProm" validate:"required"`
-	IDProduct          int     `json:"IDProduct" validate:"required"`
-	ProductsNumber     int     `json:"products_number" validate:"required"`
+	UPC                string         `json:"upc" validate:"required"`
+	SellingPrice       float64        `json:"selling_price" validate:"required"`
+	PromotionalProduct bool           `json:"promotional_product" validate:"required"`
+	UPCProm            sql.NullString `json:"UPCProm" validate:"required"`
+	IDProduct          int            `json:"IDProduct" validate:"required"`
+	ProductsNumber     int            `json:"products_number" validate:"required"`
 }
 
 type Category struct {
@@ -44,24 +45,24 @@ type Category struct {
 }
 
 type Check struct {
-	Number     string    `json:"number" validate:"required"`
-	IdEmployee string    `json:"idEmployee" validate:"required"`
-	CardNumber string    `json:"cardNumber"`
-	PrintDate  time.Time `json:"printDate" validate:"required"`
-	SumTotal   float64   `json:"sumTotal" validate:"required"`
-	Vat        float64   `json:"vat"`
+	Number     string         `json:"number" validate:"required"`
+	IdEmployee string         `json:"idEmployee" validate:"required"`
+	CardNumber sql.NullString `json:"cardNumber"`
+	PrintDate  time.Time      `json:"printDate" validate:"required"`
+	SumTotal   float64        `json:"sumTotal" validate:"required"`
+	Vat        float64        `json:"vat"`
 }
 
 type CustomerCard struct {
-	Number             string `json:"number"`
-	CustomerSurname    string `json:"customerSurname" validate:"required"`
-	CustomerName       string `json:"customerName" validate:"required"`
-	CustomerPatronymic string `json:"customerPatronymic" validate:"required"`
-	PhoneNumber        string `json:"phoneNumber" validate:"required"`
-	City               string `json:"city"`
-	Street             string `json:"street"`
-	ZipCode            string `json:"zipCode"`
-	Percent            int    `json:"percent" validate:"required"`
+	Number             string         `json:"number"`
+	CustomerSurname    string         `json:"customerSurname" validate:"required"`
+	CustomerName       string         `json:"customerName" validate:"required"`
+	CustomerPatronymic sql.NullString `json:"customerPatronymic" validate:"required"`
+	PhoneNumber        string         `json:"phoneNumber" validate:"required"`
+	City               sql.NullString `json:"city"`
+	Street             sql.NullString `json:"street"`
+	ZipCode            sql.NullString `json:"zipCode"`
+	Percent            int            `json:"percent" validate:"required"`
 }
 
 type Sale struct {

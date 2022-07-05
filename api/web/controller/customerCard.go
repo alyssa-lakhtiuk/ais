@@ -13,11 +13,11 @@ func (h *Handler) customerCardCreated(c *gin.Context) {
 	input.Number = c.Request.FormValue("card_number")
 	input.CustomerSurname = c.Request.FormValue("lastname")
 	input.CustomerName = c.Request.FormValue("firstname")
-	input.CustomerPatronymic = c.Request.FormValue("patronymic")
+	input.CustomerPatronymic.String = c.Request.FormValue("patronymic")
 	input.PhoneNumber = c.Request.FormValue("telephone")
-	input.City = c.Request.FormValue("city_name")
-	input.Street = c.Request.FormValue("street")
-	input.ZipCode = c.Request.FormValue("index")
+	input.City.String = c.Request.FormValue("city_name")
+	input.Street.String = c.Request.FormValue("street")
+	input.ZipCode.String = c.Request.FormValue("index")
 	input.Percent, err = strconv.Atoi(c.Request.FormValue("percents"))
 	//if err := c.BindJSON(&input); err != nil {
 	//	// throw error response

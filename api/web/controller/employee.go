@@ -17,8 +17,7 @@ func (h *Handler) employeeCreated(c *gin.Context) {
 	input.ID = c.Request.FormValue("lastname")
 	input.SurName = c.Request.FormValue("lastname")
 	input.FirstName = c.Request.FormValue("firstname")
-	input.Patronymic = ""
-	input.Patronymic = c.Request.FormValue("patronymic")
+	input.Patronymic.String = c.Request.FormValue("patronymic")
 	input.Role = c.Request.FormValue("emp_role")
 	input.Salary, err = strconv.ParseFloat(c.Request.FormValue("salary"), 64)
 	//std := c.Request.FormValue("start_day")

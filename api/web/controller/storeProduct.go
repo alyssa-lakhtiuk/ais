@@ -45,7 +45,8 @@ func (h *Handler) getAllStoreProducts(c *gin.Context) {
 		//return
 		// throw error response
 	}
-	c.JSON(http.StatusOK, products)
+	Tpl.ExecuteTemplate(c.Writer, "manager_stock_product.html", products)
+	//c.JSON(http.StatusOK, products)
 }
 
 func (h *Handler) getStoreProductByUpc(c *gin.Context) {
