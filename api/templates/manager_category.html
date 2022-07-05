@@ -68,12 +68,28 @@
 
     }
     th {
-        font-size: 24px;
+        font-size: 26px;
         font-family: cursive;
         font-weight: 50;
         color: #000000;
-        padding-left: 15px;
-        padding-bottom: 15px;
+        padding-right: 65px;
+        padding-left: 25px;
+    }
+    td {
+        font-size: 20px;
+        font-family: cursive;
+        color: #000000;
+        padding-right: 10px;
+        padding-left: 60px;
+
+    }
+
+    label{
+        font-family: cursive;
+        text-align: center;
+        font-size: 25px;
+        margin-left: 10px;
+        margin-bottom: 15px;
     }
 
     .button4 {
@@ -101,6 +117,35 @@
         margin-top: 160px;
         margin-left: 20px;
     }
+    .form-control {
+        font-family: cursive;
+        border: 1px solid #000000;
+        padding-left: 5px;
+        padding-right: 120px;
+        text-align: left;
+        font-size: 20px;
+        margin-left: 20px;
+        margin-bottom: 30px;
+    }
+    .button1 {
+        font-family: cursive;
+        border: 1px solid #c23704;
+        background-color: #ff6e4d;
+        color: #ffffff;
+        padding-left: 20px;
+        padding-right: 20px;
+        text-align: center;
+        font-size: 25px;
+        margin-left: 20px;
+        margin-top: 35px;
+    }
+    .line1 {
+        width: 1300px;
+        /*margin-left: 70px;*/
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border-bottom: 0.5px solid black;
+    }
 </style>
 </head>
 
@@ -123,48 +168,45 @@
     </select>
 </form>
 
+
 <h3>Sort by Name: </h3>
+
+<div class="line1"></div>
 
 <table >
     <!-- Table header -->
     <thead>
     <tr>
-        <th scope="col">Category ID</th>
+        <th scope="col">Category Number</th>
         <th scope="col">Category Name</th>
 
-        <th scope="col">Edit</th>
-        <th scope="col">Delete</th>
     </tr>
     </thead>
     <!-- Table footer -->
-    <tfoot>
-    <tr>
-        <td>END</td>
-    </tr>
-    </tfoot>
+<!--    <tfoot>-->
+<!--    <tr>-->
+<!--        <td>END</td>-->
+<!--    </tr>-->
+<!--    </tfoot>-->
     <!-- Table body -->
     <tbody>
     {{ range . }}
-    <form method="GET">
     <tr>
         <td>{{ .Number }}</td>
         <td>{{ .Name }}</td>
-        <button formaction="/edit_category">edit</button>
-
-        <!--            <td><input type="button"-->
-        <!--                       value="submit" onclick="show()" /></td>-->
-        <!--                       formaction="" /></td>-->
-
-
-        <!-- може бути не назва атрибутів -->
     </tr>
-    </form>
-
     {{ end }}
     </tbody>
 </table>
+<div class="line1"></div>
+<form method="GET">
+<label>Category Number: </label>
+    <input type="text" class="form-control" id="number_category" name="id">
+    <button formaction="/edit_category" type="submit" class="button1">Edit</button>
+    <button formaction="/delete_category" type="submit" class="button1">Delete</button>
+</form>
 
-<form method="POST">
+<form method="POST">      <!-- question method -->
     <button formaction="/manager_homepage" class="button4">Homepage</button>
     <button formaction="/log_out" class="button5">Log out</button>
 </form>
