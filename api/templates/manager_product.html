@@ -17,8 +17,6 @@
             margin-top: 20px;
             margin-bottom: 20px;
         }
-
-
         .button2 {
             font-family: cursive;
             border: 1px solid #000000;
@@ -68,12 +66,20 @@
 
         }
         th {
-            font-size: 11px;
+            font-size: 16px;
             font-family: cursive;
             font-weight: 50;
             color: #000000;
+            padding-right: 35px;
+            padding-left: 35px;
         }
-
+        td {
+            font-size: 12px;
+            font-family: cursive;
+            color: #000000;
+            padding-right: 10px;
+            padding-left: 40px;
+        }
         .button4 {
             font-family: cursive;
             border: 1px solid #ffb14d;
@@ -86,7 +92,6 @@
             margin-top: 160px;
             margin-left: 30px;
         }
-
         .button5 {
             font-family: cursive;
             border: 1px solid #ffb14d;
@@ -99,7 +104,6 @@
             margin-top: 160px;
             margin-left: 20px;
         }
-
         label{
             font-family: cursive;
 
@@ -108,7 +112,6 @@
             margin-left: 20px;
             margin-bottom: 15px;
         }
-
         .button1 {
             font-family: cursive;
             border: 1px solid #c27004;
@@ -121,7 +124,34 @@
             margin-left: 20px;
             margin-top: 5px;
         }
-
+        .line1 {
+            width: 1300px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-bottom: 0.5px solid black;
+        }
+        .form-control {
+            font-family: cursive;
+            border: 1px solid #000000;
+            padding-left: 5px;
+            padding-right: 120px;
+            text-align: left;
+            font-size: 20px;
+            margin-left: 20px;
+            margin-bottom: 30px;
+        }
+        .button0 {
+            font-family: cursive;
+            border: 1px solid #c23704;
+            background-color: #ff6e4d;
+            color: #ffffff;
+            padding-left: 20px;
+            padding-right: 20px;
+            text-align: center;
+            font-size: 25px;
+            margin-left: 20px;
+            margin-top: 35px;
+        }
     </style>
 
 </head>
@@ -154,26 +184,18 @@
     </select>
     <button type="submit" class="button1">Search</button>
 </form>
-
+<div class="line1"></div>
 <table >
     <!-- Table header -->
     <thead>
     <tr>
         <th scope="col">Product ID</th>
-        <th scope="col">Category Name</th>
+        <th scope="col">Category Number</th>
         <th scope="col">Product Name</th>
-        <th scope="col">Description</th>
-
-        <th scope="col">Edit</th>
-        <th scope="col">Delete</th>
+        <th scope="col">Characteristics</th>
     </tr>
     </thead>
-    <!-- Table footer -->
-    <tfoot>
-    <tr>
-        <td>END</td>
-    </tr>
-    </tfoot>
+
     <!-- Table body -->
     <tbody>
     {{ range . }}
@@ -182,40 +204,26 @@
         <td>{{ .CategoryNum }}</td>
         <td>{{ .Name }}</td>
         <td>{{ .Characteristics }}</td>
-        <button>knopka</button>
-
-        <!--            <td><input type="button"-->
-        <!--                       value="submit" onclick="show()" /></td>-->
-        <!--                       formaction="" /></td>-->
-
-
-        <!-- може бути не назва атрибутів -->
     </tr>
 
     {{ end }}
     </tbody>
 </table>
 
+<div class="line1"></div>
+
 <form method="POST">
+    <label>Product ID: </label>
+    <input type="text" class="form-control" id="product_id" name="id">
+    <button formaction="/edit_product" type="submit" class="button0">Edit</button>
+    <button formaction="/delete_product" type="submit" class="button0">Delete</button>
+</form>
+
+<form method="GET">
     <button formaction="/manager_homepage" class="button4">Homepage</button>
     <button formaction="/log_out" class="button5">Log out</button>
 </form>
-<script>
-    function show() {
-        var rowId =
-            event.target.parentNode.parentNode.id;
-        //this gives id of tr whose button was clicked
-        var data =
-            document.getElementById(rowId).querySelectorAll(".row-data");
-        /*returns array of all elements with
-        "row-data" class within the row with given id*/
 
-        var name = data[0].innerHTML;
-        var age = data[1].innerHTML;
-
-        alert("Name: " + name + "\nAge: " + age);
-    }
-</script>
 </body>
 
 </html>

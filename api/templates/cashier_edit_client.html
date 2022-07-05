@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>add new customer</title>
+  <title>edit client</title>
   <style>
     h1 {
       font-size: 72px;
@@ -50,6 +50,8 @@
       margin-left: 720px;
       margin-bottom: 15px;
     }
+
+
     .form-control {
       font-family: cursive;
       border: 1px solid #000000;
@@ -148,7 +150,7 @@
 <body>
 
 <div class="heading">
-  <h1>Customer 😻</h1>
+  <h1>Customer 😺</h1>
 </div>
 
 <div class="title1">
@@ -156,75 +158,75 @@
 </div>
 
 
-<form action="/customer-card" method="POST"> <!--чого тут пост-->
+<form action="/customer-card" method="POST">
 
   <div class="line1"></div>
   <div class="form-row form-group">
     <div class="form-group col-md-4">
       <label>Card number:</label>
-      <input type="text" class="form-control" id="c_number" name="card_number">
+      <input type="text" class="form-control" id="c_number" name="card_number" value="{{ .Number }}">
     </div>
   </div>
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
       <label>Surname:</label>
-      <input type="text" class="form-control" id="last" name="lastname">
+      <input type="text" class="form-control" id="sur" name="surname" value="{{ .CustomerSurname }}">
     </div>
   </div>
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
       <label>First name:</label>
-      <input type="text" class="form-control" id="first" name="firstname">
+      <input type="text" class="form-control" id="first" name="firstname" value="{{ .CustomerName }}">
     </div>
   </div>
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
       <label>Patronymic:</label>
-      <input type="text" class="form-control" id="patron" name="patronymic">
+      <input type="text" class="form-control" id="patron" name="patronymic" value="{{ .CustomerPatronymic }}">
     </div>
   </div>
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
       <label>Phone number:</label>
-      <input type="tel" class="form-control" id="telep" name="telephone" placeholder="(050)-123-45-67">
+      <input type="tel" class="form-control" id="telep" name="telephone" placeholder="(050)-123-45-67" value="{{ .PhoneNumber }}">
     </div>
   </div>
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
       <label>City:</label>
-      <input type="text" class="form-control" id="city" name="city_name">
+      <input type="text" class="form-control" id="city" name="city_name" value="{{ .City }}">
     </div>
   </div>
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
       <label>Street:</label>
-      <input type="text" class="form-control" id="str" name="street">
+      <input type="text" class="form-control" id="str" name="street" value="{{ .Street }}">
     </div>
   </div>
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
-      <label>Index:</label>
-      <input type="text" class="form-control" id="ind" name="index">
+      <label>Zipcode:</label>
+      <input type="text" class="form-control" id="ind" name="index" value="{{ .ZipCode }}">
     </div>
   </div>
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
       <label>Percentage:</label>
-      <input type="text" class="form-control" id="per" name="percents" placeholder="%">
+      <input type="text" class="form-control" id="per" name="percents" placeholder="%" value="{{ .Percent }}">
     </div>
   </div>
 
   <div class="form-row form-group">
     <div class="form-group col-md-4">
-      <button type="submit" class="button1">Save</button>
+      <button type="submit" class="button1">Edit</button>
     </div>
   </div>
 
@@ -236,7 +238,7 @@
 <p>mistake_mistake_mistake_mistake_mistake</p>
 
 <form method="GET">
-  <button formaction="/manager_homepage" class="button4">Homepage</button>
+  <button formaction="/cashier_homepage" class="button4">Homepage</button>
   <button formaction="/log_out" class="button5">Log out</button>
 </form>
 

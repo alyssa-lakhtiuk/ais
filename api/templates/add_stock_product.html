@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>add new product in stock</title>
+    <title>add new product in store</title>
     <style>
         h1 {
             font-size: 65px;
@@ -170,7 +170,7 @@
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <label>Product:</label>
+            <label>ProductID:</label>
             <select id="prod" name="product">
                 <option value="without_value" selected disabled>Choose</option>
                 {{ range . }}
@@ -190,8 +190,8 @@
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <label>Quantity:</label>
-            <input type="number" class="form-control" id="quan" name="quantit">
+            <label>Number:</label>
+            <input type="number" class="form-control" id="number" name="number">
         </div>
     </div>
 

@@ -141,7 +141,6 @@
     }
     .line1 {
         width: 1300px;
-        /*margin-left: 70px;*/
         margin-top: 10px;
         margin-bottom: 10px;
         border-bottom: 0.5px solid black;
@@ -199,14 +198,14 @@
     </tbody>
 </table>
 <div class="line1"></div>
-<form method="GET">
+<form method="POST">
 <label>Category Number: </label>
     <input type="text" class="form-control" id="number_category" name="id">
     <button formaction="/edit_category" type="submit" class="button1">Edit</button>
     <button formaction="/delete_category" type="submit" class="button1">Delete</button>
 </form>
 
-<form method="POST">      <!-- question method -->
+<form method="GET">      <!-- question method -->
     <button formaction="/manager_homepage" class="button4">Homepage</button>
     <button formaction="/log_out" class="button5">Log out</button>
 </form>

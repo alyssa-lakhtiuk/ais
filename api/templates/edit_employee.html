@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>add new employee</title>
+    <title>edit employee</title>
     <style>
         h1 {
             font-size: 72px;
@@ -38,21 +38,6 @@
             margin-bottom: 25px;
             border-bottom: 1px solid black;
         }
-
-        .button3 {
-            font-family: cursive;
-            border: 1px solid #50742b;
-            background-color: #92D050;
-            color: #ffffff;
-            padding-left: 40px;
-            padding-right: 40px;
-            text-align: center;
-            font-size: 25px;
-            margin-top: 80px;
-            margin-left: 22px;
-        }
-
-
         label{
             font-family: cursive;
             /*padding-left: px;*/
@@ -62,8 +47,6 @@
             margin-left: 720px;
             margin-bottom: 15px;
         }
-
-
         .form-control {
             font-family: cursive;
             border: 1px solid #000000;
@@ -83,7 +66,7 @@
             padding-left: 5px;
             padding-right: 380px;
             text-align: left;
-            font-size: 25px;
+            font-size: 20px;
             margin-bottom: 20px;
         }
 
@@ -172,7 +155,7 @@
 </div>
 
 
-<form action="/edit_employee_process" method="GET">
+<form action="/edit_employee" method="POST">
 
     <div class="line1"></div>
     <div class="form-row form-group">
@@ -200,7 +183,7 @@
         <div class="form-group col-md-4">
             <label class="label1">Role:</label>
             <select id="role" name="emp_role">
-                <option value="Patronymic">{{ .Role }}</option>
+                <option value="{{ .Role }}">{{ .Role }}</option>
                 <option value="manager">Manager</option>
                 <option value="cashier">Cashier</option>
             </select>

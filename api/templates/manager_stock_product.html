@@ -69,12 +69,7 @@
             margin-top: -60px;
 
         }
-        th {
-            font-size: 11px;
-            font-family: cursive;
-            font-weight: 50;
-            color: #000000;
-        }
+
 
         .button4 {
             font-family: cursive;
@@ -146,6 +141,39 @@
             margin-left: 20px;
             margin-bottom: 30px;
         }
+        .line1 {
+            width: 1300px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-bottom: 0.5px solid black;
+        }
+        .button0 {
+            font-family: cursive;
+            border: 1px solid #c23704;
+            background-color: #ff6e4d;
+            color: #ffffff;
+            padding-left: 20px;
+            padding-right: 20px;
+            text-align: center;
+            font-size: 25px;
+            margin-left: 20px;
+            margin-top: 35px;
+        }
+        th {
+            font-size: 20px;
+            font-family: cursive;
+            font-weight: 50;
+            color: #000000;
+            padding-right: 35px;
+            padding-left: 40px;
+        }
+        td {
+            font-size: 16px;
+            font-family: cursive;
+            color: #000000;
+            padding-right: 10px;
+            padding-left: 35px;
+        }
     </style>
 </head>
 
@@ -155,7 +183,7 @@
     <h1>Product in Store 🧀</h1>
 </div>
 
-<form method="POST">
+<form method="GET">
     <button formaction="/add_stock_product" class="button2">Add new product</button>
     <button formaction="/print_report_stock_product" class="button3">Print report</button>
 </form>
@@ -165,13 +193,13 @@
     <select id="sort_product_st_num" name="sort_product_st_number">
         <option value="asc">ASC</option>
         <option value="desc">DESC</option>
-        <!--        <input type="submit" value="Submit">-->
+
     </select>
     <label>Sort by name: </label>
     <select id="sort_product_st_name" name="sort_product_st_name">
         <option value="asc">ASC</option>
         <option value="desc">DESC</option>
-        <!--        <input type="submit" value="Submit">-->
+
     </select>
     <input class="check" type="checkbox" id="check_with_prom" name="check_with" checked>
     <label class="lab1">promotion</label>
@@ -181,72 +209,50 @@
     <input type="text" class="form-control" id="upc" name="upccc">
     <button type="submit" class="button1">Search</button>
 </form>
-
+<div class="line1"></div>
 <table >
     <!-- Table header -->
     <thead>
     <tr>
         <th scope="col">UPC</th>
-        <th scope="col">ID Product</th>
         <th scope="col">Selling price</th>
-        <th scope="col">Number</th>
         <th scope="col">Promotional</th>
-        <th scope="col">Product Name</th>
-        <th scope="col">Characteristics</th>
-        <th scope="col">Edit</th>
-        <th scope="col">Delete</th>
+        <th scope="col">UPCProm</th>
+        <th scope="col">ID Product</th>
+        <th scope="col">Products Number</th>
     </tr>
     </thead>
-    <!-- Table footer -->
-    <tfoot>
-    <tr>
-        <td>END</td>
-    </tr>
-    </tfoot>
+
     <!-- Table body -->
     <tbody>
     {{ range . }}
     <tr>
         <td>{{ .UPC }}</td>
-        <td>{{ .IDProduct }}</td>
         <td>{{ .SellingPrice }}</td>
-        <td>{{ .Number }}</td>
-        <td>{{ .Promotional }}</td>
-        <td>{{ .ProductName }}</td>
-        <td>{{ .Characteristics }}</td>
+        <td>{{ .PromotionalProduct }}</td>
+        <td>{{ .UPCProm }}</td>
+        <td>{{ .IDProduct }}</td>
+        <td>{{ .ProductsNumber }}</td>
 
-        <!--            <td><input type="button"-->
-        <!--                       value="submit" onclick="show()" /></td>-->
-        <!--                       formaction="" /></td>-->
-
-
-        <!-- може бути не назва атрибутів -->
     </tr>
 
     {{ end }}
     </tbody>
 </table>
+<div class="line1"></div>
 
 <form method="POST">
+    <label>UPC: </label>
+    <input type="text" class="form-control" id="upc_id" name="upc_id">
+    <button formaction="/edit_stock_product" type="submit" class="button0">Edit</button>
+    <button formaction="/delete_stock_product" type="submit" class="button0">Delete</button>
+</form>
+
+<form method="GET">
     <button formaction="/manager_homepage" class="button4">Homepage</button>
     <button formaction="/log_out" class="button5">Log out</button>
 </form>
-<script>
-    function show() {
-        var rowId =
-            event.target.parentNode.parentNode.id;
-        //this gives id of tr whose button was clicked
-        var data =
-            document.getElementById(rowId).querySelectorAll(".row-data");
-        /*returns array of all elements with
-        "row-data" class within the row with given id*/
 
-        var name = data[0].innerHTML;
-        var age = data[1].innerHTML;
-
-        alert("Name: " + name + "\nAge: " + age);
-    }
-</script>
 </body>
 
 </html>

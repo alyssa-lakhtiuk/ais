@@ -120,6 +120,12 @@
     /*  padding-right: 10px;*/
     /*  padding-left: 10px;*/
     /*}*/
+    .line1 {
+      width: 1300px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border-bottom: 0.5px solid black;
+    }
   </style>
 </head>
 
@@ -129,7 +135,7 @@
   <h1>Products in Store 🍸</h1>
 </div>
 
-<form action="/cas_request_st_prod" method="GET">
+<form action="/cas_request_st_prod" method="POST">
   <label>Sort by number: </label>
   <select id="sort_product_st_num" name="sort_product_st_number">
     <option value="asc">ASC</option>
@@ -150,45 +156,38 @@
   <input type="text" class="form-control" id="upc" name="upccc">
   <button type="submit" class="button1">Search</button>
 </form>
-
+<div class="line1"></div>
 <table >
   <!-- Table header -->
   <thead>
   <tr>
     <th scope="col">UPC</th>
-    <th scope="col">ID Product</th>
     <th scope="col">Selling price</th>
-    <th scope="col">Number</th>
     <th scope="col">Promotional</th>
-    <th scope="col">Product Name</th>
-    <th scope="col">Characteristics</th>
-
+    <th scope="col">UPCProm</th>
+    <th scope="col">ID Product</th>
+    <th scope="col">Products Number</th>
   </tr>
   </thead>
-  <!-- Table footer -->
-  <tfoot>
-  <tr>
-    <td>END</td>
-  </tr>
-  </tfoot>
+
   <!-- Table body -->
   <tbody>
   {{ range . }}
   <tr>
     <td>{{ .UPC }}</td>
-    <td>{{ .IDProduct }}</td>
     <td>{{ .SellingPrice }}</td>
-    <td>{{ .Number }}</td>
-    <td>{{ .Promotional }}</td>
-    <td>{{ .ProductName }}</td>
-    <td class="characteristics">{{ .Characteristics }}</td>
+    <td>{{ .PromotionalProduct }}</td>
+    <td>{{ .UPCProm }}</td>
+    <td>{{ .IDProduct }}</td>
+    <td>{{ .ProductsNumber }}</td>
+
   </tr>
 
   {{ end }}
   </tbody>
 </table>
-
-<form method="POST">
+<div class="line1"></div>
+<form method="GET">
   <button formaction="/cashier_homepage" class="button4">Homepage</button>
   <button formaction="/log_out" class="button5">Log out</button>
 </form>
