@@ -4,6 +4,7 @@ import (
 	"ais/entities"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"strconv"
 )
 
 func (h *Handler) pricesByCat(c *gin.Context) {
@@ -21,4 +22,24 @@ func (h *Handler) checksByCat(c *gin.Context) {
 		res[i].Cat = category
 	}
 	c.JSON(http.StatusOK, res)
+}
+
+/////
+func (h *Handler) countCities(c *gin.Context) {
+	//category := c.Request.FormValue("")
+	//category := c.Param("id")
+	var res []entities.CountCustomersCities
+	res, _ = h.services.Zvit.GetCountByCities()
+	c.JSON(http.StatusOK, res) // тут темплейт, замість цього рядка
+
+}
+
+func (h *Handler) checksByPrice(c *gin.Context) {
+	//price, _ := strconv.Atoi(c.Request.FormValue("нейм з темплейта")) //
+	price, _ := strconv.Atoi(c.Param("id")) // це з лінка бере параметр
+	var res []entities.SecondStruct
+	res, _ = h.services.Zvit.GetChecksByPrice(price)
+
+	c.JSON(http.StatusOK, res) // тут темплейт
+
 }

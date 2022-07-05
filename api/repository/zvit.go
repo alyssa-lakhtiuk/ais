@@ -21,6 +21,19 @@ const (
 		"WHERE id_product NOT IN (SELECT id_product FROM product" +
 		" WHERE category_number IN (SELECT category_number " +
 		"FROM category WHERE category_name = $1))) AND SL.bill_number = bill_number);"
+
+	countCities = "SELECT city, COUNT(*)" +
+		"FROM customer_card INNER JOIN bill ON  customer_card.number = bill.card_number" +
+		"GROUP BY customer_card.city"
+
+	checksByPrice = "SELECT bill_number " +
+		"FROM bill b " +
+		"WHERE NOT EXIST (SELECT * " +
+		"FROM sale s " +
+		"WHERE NOT EXIST " +
+		"(SELECT * " +
+		"FROM store_product sp " +
+		"WHERE selling_ price < $1 AND b.bill_number = s.bill_number AND s.upc = sp.upc; "
 )
 
 type zvit struct {
@@ -60,6 +73,45 @@ func (er *zvit) GetChecksByCat(category string) ([]entities.CheckByCat, error) {
 	defer rows.Close()
 	for rows.Next() {
 		cc := entities.CheckByCat{}
+		err := rows.Scan(&cc.Check)
+		if err != nil {
+			return nil, err
+		}
+		ccs = append(ccs, cc)
+	}
+	return ccs, nil
+}
+
+//////
+func (er *zvit) CountCities() ([]entities.CountCustomersCities, error) {
+	var ccs []entities.CountCustomersCities
+
+	rows, err := er.db.Query(countCities)
+	if err != nil {
+		return nil, fmt.Errorf("unable to execute the query")
+	}
+	defer rows.Close()
+	for rows.Next() {
+		cc := entities.CountCustomersCities{}
+		err := rows.Scan(&cc.City, &cc.CheckCardNumber)
+		if err != nil {
+			return nil, err
+		}
+		ccs = append(ccs, cc)
+	}
+	return ccs, nil
+}
+
+func (er *zvit) ChecksByPrice(price int) ([]entities.SecondStruct, error) {
+	var ccs []entities.SecondStruct
+
+	rows, err := er.db.Query(checksByPrice, price)
+	if err != nil {
+		return nil, fmt.Errorf("unable to execute the query")
+	}
+	defer rows.Close()
+	for rows.Next() {
+		cc := entities.SecondStruct{}
 		err := rows.Scan(&cc.Check)
 		if err != nil {
 			return nil, err

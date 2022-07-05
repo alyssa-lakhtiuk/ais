@@ -3,6 +3,7 @@ module ais
 go 1.17
 
 require (
+	github.com/SebastiaanKlippert/go-wkhtmltopdf v1.7.2
 	github.com/gin-gonic/gin v1.8.1
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/lib/pq v1.10.6
