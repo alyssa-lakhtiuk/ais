@@ -263,6 +263,7 @@ cashiers:
 	"street" :"Rock Stars",
 	"zipCode" :"1879564"
 }
+secret
 
 {
 	"firstname" :"Till",
@@ -276,6 +277,7 @@ cashiers:
 	"street" :"Green",
 	"zipCode" :"001458"
 }
+secretc
 
 Store products:
 {

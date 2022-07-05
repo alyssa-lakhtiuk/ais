@@ -17,6 +17,7 @@ func (h *Handler) employeeCreated(c *gin.Context) {
 	input.ID = c.Request.FormValue("lastname")
 	input.SurName = c.Request.FormValue("lastname")
 	input.FirstName = c.Request.FormValue("firstname")
+	input.Patronymic = ""
 	input.Patronymic = c.Request.FormValue("patronymic")
 	input.Role = c.Request.FormValue("emp_role")
 	input.Salary, err = strconv.ParseFloat(c.Request.FormValue("salary"), 64)
@@ -53,15 +54,12 @@ func (h *Handler) employeeCreated(c *gin.Context) {
 	_, err = h.services.Employee.Create(input)
 	if err != nil {
 		// throw error response
-		respondWithError(c, http.StatusBadRequest, "fail to create employee, check if your data is correct")
-		c.JSON(http.StatusOK, err)
+		//respondWithError(c, http.StatusBadRequest, "fail to create employee, check if your data is correct")
+		//c.JSON(http.StatusOK, err)
 		//return
 	}
 	//c.JSON(http.StatusOK, input)
 	err = Tpl.ExecuteTemplate(c.Writer, "done_employee.html", input)
-	if err != nil {
-		return
-	}
 }
 
 func (h *Handler) createEmployee(c *gin.Context) {
@@ -84,8 +82,8 @@ func (h *Handler) getEmployeeByName(c *gin.Context) {
 	employee, err := h.services.Employee.GetByName(employeeName)
 	if err != nil {
 		// throw error response
-		respondWithError(c, http.StatusBadRequest, "employee with such name doesn't exist")
-		return
+		//respondWithError(c, http.StatusBadRequest, "employee with such name doesn't exist")
+		//return
 	}
 	c.JSON(http.StatusOK, employee)
 }
@@ -95,8 +93,8 @@ func (h *Handler) getEmployeeById(c *gin.Context) {
 	employee, err := h.services.Employee.GetById(employeeID)
 	if err != nil {
 		// throw error response
-		respondWithError(c, http.StatusBadRequest, "employee with such id doesn't exist")
-		return
+		//respondWithError(c, http.StatusBadRequest, "employee with such id doesn't exist")
+		//return
 	}
 	c.JSON(http.StatusOK, employee)
 }

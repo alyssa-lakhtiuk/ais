@@ -33,19 +33,13 @@ func NewStoreProductRepo(db *sqlx.DB) *storeProductPostgres {
 
 func (er *storeProductPostgres) CreateStoreProduct(product entities.StoreProduct) (int, error) {
 	//var id int
-	if product.UPCProm == "" {
-		_, err := er.db.Exec(createStoreProductWithoutUpc, product.UPC, product.SellingPrice, product.PromotionalProduct,
-			product.ProductsNumber, product.IDProduct)
-		if err != nil {
-			return 0, err
-		}
-	} else {
-		_, err := er.db.Exec(createStoreProduct, product.UPC, product.SellingPrice, product.PromotionalProduct,
-			product.ProductsNumber, product.UPCProm, product.IDProduct)
-		if err != nil {
-			return 0, err
-		}
+
+	_, err := er.db.Exec(createStoreProduct, product.UPC, product.SellingPrice, product.PromotionalProduct,
+		product.ProductsNumber, product.UPCProm, product.IDProduct)
+	if err != nil {
+		return 0, err
 	}
+
 	//row := er.db.QueryRow(createStoreProduct, product.UPC, product.SellingPrice, product.PromotionalProduct,
 	//	product.ProductsNumber, product.UPCProm, product.IDProduct)
 	//if err := row.Scan(&id); err != nil {

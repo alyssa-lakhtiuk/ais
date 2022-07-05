@@ -44,31 +44,30 @@ func (er *checkPostgres) CreateCheck(randomStr string, checkInput []entities.Che
 		sumTotal += float64(checkInput[i].ProductNumber) * stProduct.SellingPrice
 	}
 	//var chechInDB entities.Check
-	checkInDB := entities.Check{Number: randomStr, PrintDate: time.Now(), SumTotal: sumTotal,
-		Vat: sumTotal * 0.2, CardNumber: checkInput[0].CustomerNumber, IdEmployee: checkInput[0].IDEmployee}
-	row := tx.QueryRow(createCheck, randomStr, time.Now(), sumTotal, sumTotal*0.2, checkInput[0].IDEmployee, checkInput[0].CustomerNumber)
-	err2 := row.Scan(&id)
-	if err2 != nil {
-		tx.Rollback()
-		return 0, err
-	}
-	for j := 0; j < len(checkInput); j++ {
-		var stProduct entities.StoreProduct
-
-		//if err := er.db.Get(&stProduct, getStoreProductByName, checkInput[j].UPC); err != nil {
-		//	return 0, err
-		//}
-		row := er.db.QueryRow(getStoreProductByName, checkInput[j].UPC)
-		err := row.Scan(&stProduct.UPC, &stProduct.SellingPrice, &stProduct.PromotionalProduct, &stProduct.ProductsNumber,
-			&stProduct.UPCProm, &stProduct.IDProduct)
-		saleInCheck := entities.Sale{UPC: checkInput[j].UPC, SellingPrice: stProduct.SellingPrice,
-			CheckNumber: checkInDB.Number, ProductNumber: checkInput[j].ProductNumber}
-		_, err = tx.Exec(createSale, saleInCheck.ProductNumber, saleInCheck.SellingPrice, saleInCheck.UPC, saleInCheck.CheckNumber)
-		if err != nil {
-			tx.Rollback()
-			return 0, err
-		}
-	}
+	//checkInDB := entities.Check{Number: randomStr, PrintDate: time.Now(), SumTotal: sumTotal,
+	//	Vat: sumTotal * 0.2, CardNumber: checkInput[0].CustomerNumber, IdEmployee: checkInput[0].IDEmployee}
+	_ = tx.QueryRow(createCheck, randomStr, time.Now(), sumTotal, sumTotal*0.2, checkInput[0].IDEmployee, checkInput[0].CustomerNumber)
+	//err2 := row.Scan(&id)
+	//if err2 != nil {
+	//	tx.Rollback()
+	//	return 0, err
+	//}
+	//for j := 0; j < len(checkInput); j++ {
+	//	var stProduct entities.StoreProduct
+	//	//if err := er.db.Get(&stProduct, getStoreProductByName, checkInput[j].UPC); err != nil {
+	//	//	return 0, err
+	//	//}
+	//	row := er.db.QueryRow(getStoreProductByName, checkInput[j].UPC)
+	//	err := row.Scan(&stProduct.UPC, &stProduct.SellingPrice, &stProduct.PromotionalProduct, &stProduct.ProductsNumber,
+	//		&stProduct.UPCProm, &stProduct.IDProduct)
+	//	saleInCheck := entities.Sale{UPC: checkInput[j].UPC, SellingPrice: stProduct.SellingPrice,
+	//		CheckNumber: checkInDB.Number, ProductNumber: checkInput[j].ProductNumber}
+	//	_, err = tx.Exec(createSale, saleInCheck.ProductNumber, saleInCheck.SellingPrice, saleInCheck.UPC, saleInCheck.CheckNumber)
+	//	if err != nil {
+	//		tx.Rollback()
+	//		return 0, err
+	//	}
+	//}
 	//var id int
 	//row := er.db.QueryRow(createCheck, check.Number, check.PrintDate, check.SumTotal, check.Vat, check.IdEmployee, check.CardNumber)
 	//if err := row.Scan(&id); err != nil {

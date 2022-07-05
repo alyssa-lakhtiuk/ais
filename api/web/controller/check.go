@@ -16,8 +16,8 @@ func (h *Handler) createCheck(c *gin.Context) {
 	id, err := h.services.Check.Create(input)
 	if err != nil {
 		// throw error response
-		respondWithError(c, http.StatusBadRequest, "unable to create check")
-		return
+		//respondWithError(c, http.StatusBadRequest, "unable to create check")
+		//return
 	}
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"id": id,

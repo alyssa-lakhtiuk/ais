@@ -27,8 +27,8 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	router.POST("/sign-in", h.signIn)
 	router.GET("/manager_homepage", h.signIn)
 
-	router.GET("/employees", h.getAllEmployees)      // помилка
-	router.GET("/create-employee", h.createEmployee) // створило, але не додало дати
+	router.GET("/employees", h.getAllEmployees)      //
+	router.GET("/create-employee", h.createEmployee) //
 	router.POST("/employee", h.employeeCreated)      // не відкривається
 	router.GET("/employee/:id", h.getEmployeeByName) // by name  // з Brad не працює
 	router.GET("/employees/:id", h.getEmployeeById)  // by id  // помилка

@@ -35,25 +35,15 @@ func NewEmployeePostgres(db *sqlx.DB) *employeePostgres {
 }
 
 func (er *employeePostgres) CreateEmployee(employee entities.Employee) (int, error) {
-	var err error
 	var id int
-	if employee.Patronymic != "" {
-		_, err = er.db.Exec(createEmployee, employee.ID, employee.SurName, employee.FirstName, employee.Patronymic,
-			employee.Role, employee.Salary, employee.DateOfBirth, employee.DateOfStart, employee.PhoneNumber, employee.City,
-			employee.Street, employee.ZipCode)
-	} else {
-		row := er.db.QueryRow(createEmployeeWithoutPatronymic, employee.ID, employee.SurName, employee.FirstName,
-			employee.Role, employee.Salary, employee.DateOfBirth, employee.DateOfStart, employee.PhoneNumber, employee.City, employee.Street, employee.ZipCode)
-		if err := row.Scan(&id); err != nil {
-			return 0, err
-		}
-		//_, err = er.db.Exec(createEmployeeWithoutPatronymic, employee.ID, employee.SurName, employee.FirstName,
-		//	employee.Role, employee.Salary, employee.DateOfBirth, employee.DateOfStart, employee.PhoneNumber, employee.Street, employee.ZipCode)
-	}
-	if err != nil {
+	row := er.db.QueryRow(createEmployee, employee.ID, employee.SurName, employee.FirstName, employee.Patronymic,
+		employee.Role, employee.Salary, employee.DateOfBirth, employee.DateOfStart, employee.PhoneNumber, employee.City,
+		employee.Street, employee.ZipCode)
+	if err := row.Scan(&id); err != nil {
 		return 0, err
 	}
-	return 1, nil
+
+	return id, nil
 }
 
 func (er *employeePostgres) UpdateEmployee(idEmployee string, employee entities.EmployeeInput) error {
