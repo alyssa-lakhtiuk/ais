@@ -39,13 +39,25 @@ func (h *Handler) createStoreProduct(c *gin.Context) {
 }
 
 func (h *Handler) getAllStoreProducts(c *gin.Context) {
+	authHeader, err := c.Request.Cookie("Authorization")
+	if err != nil {
+		c.HTML(http.StatusUnauthorized, "authorization first", nil)
+	}
+	currentEmplId := authHeader.Value
+	roleDromDB, err := h.services.Role.GetByIdEmployee(currentEmplId)
+
 	products, err := h.services.StoreProduct.GetAll()
 	if err != nil {
 		//c.JSON(http.StatusBadRequest, err)
 		//return
 		// throw error response
 	}
-	Tpl.ExecuteTemplate(c.Writer, "manager_stock_product.html", products)
+	if roleDromDB.Role == "manager" {
+		Tpl.ExecuteTemplate(c.Writer, "manager_stock_product.html", products)
+	} else {
+		Tpl.ExecuteTemplate(c.Writer, "cashier_stock_product.html", products)
+	}
+
 	//c.JSON(http.StatusOK, products)
 }
 

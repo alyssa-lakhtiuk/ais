@@ -20,36 +20,12 @@ func (h *Handler) employeeCreated(c *gin.Context) {
 	input.Patronymic.String = c.Request.FormValue("patronymic")
 	input.Role = c.Request.FormValue("emp_role")
 	input.Salary, err = strconv.ParseFloat(c.Request.FormValue("salary"), 64)
-	//std := c.Request.FormValue("start_day")
-	//c.JSON(http.StatusOK, std)
-	//c.JSON(http.StatusOK, "|||")
-	//c.JSON(http.StatusOK, c.Request.FormValue("day_of_birth"))
-	//c.JSON(http.StatusOK, "//")
-	//layout := "2006-01-02"
 	input.DateOfStart = c.Request.FormValue("day_of_start_job")
-	//c.JSON(http.StatusOK, inputStDate)
-	//c.JSON(http.StatusOK, "**")
-	//helpArr := strings.Split(inputStDate, "-")
-	//inputStDate = fmt.Sprintf("%s-%s-%s", helpArr[2], helpArr[1], helpArr[0])
-	//k := strings.Split(inputStDate, ".")
-	//strStartDate := fmt.Sprintf("%s-%s-%s", k[0], k[1], k[2])
-	//startTime, _ := time.Parse(layout, inputStDate)
-	//input.DateOfStart = startTime
-	//c.JSON(http.StatusOK, input.DateOfStart)
-	//c.JSON(http.StatusOK, "**")
 	input.DateOfBirth = c.Request.FormValue("day_of_birth")
-	//helpArr2 := strings.Split(inputBDate, ".")
-	//BDate := fmt.Sprintf("%s-%s-%s", helpArr2[0], helpArr2[1], helpArr2[2])
-	//BTime, _ := time.Parse(layout, inputBDate)
-	//input.DateOfBirth = BTime
-	//c.JSON(http.StatusOK, input.DateOfBirth)
 	input.PhoneNumber = c.Request.FormValue("telephone")
 	input.City = c.Request.FormValue("city_name")
 	input.Street = c.Request.FormValue("street")
 	input.ZipCode = c.Request.FormValue("index")
-	//c.JSON(http.StatusOK, input.DateOfBirth)
-	//c.JSON(http.StatusOK, "|||")
-	//c.JSON(http.StatusOK, input.DateOfStart)
 	_, err = h.services.Employee.Create(input)
 	if err != nil {
 		// throw error response
@@ -98,20 +74,40 @@ func (h *Handler) getEmployeeById(c *gin.Context) {
 	c.JSON(http.StatusOK, employee)
 }
 
+var inputtedId string
+
+func (h *Handler) updateEmployeeOpen(c *gin.Context) {
+	inputtedId = c.Request.FormValue("id")
+	employeeToEdit, _ := h.services.Employee.GetById(inputtedId)
+	Tpl.ExecuteTemplate(c.Writer, "edit_employee.html", employeeToEdit)
+}
+
 func (h *Handler) updateEmployee(c *gin.Context) {
-	id := c.Param("id")
 	var input entities.EmployeeInput
-	if err := c.BindJSON(&input); err != nil {
-		// throw error response
-		respondWithError(c, http.StatusBadRequest, "unable to read input data, check is it correct")
-		return
-	}
+	id := inputtedId
+	//input.ID = c.Request.FormValue("lastname")
+	input.SurName = c.Request.FormValue("lastname")
+	input.FirstName = c.Request.FormValue("firstname")
+	input.Patronymic.String = c.Request.FormValue("patronymic")
+	input.Role = c.Request.FormValue("emp_role")
+	input.Salary, _ = strconv.ParseFloat(c.Request.FormValue("salary"), 64)
+	input.DateOfStart = c.Request.FormValue("day_of_start_job")
+	input.DateOfBirth = c.Request.FormValue("day_of_birth")
+	input.PhoneNumber = c.Request.FormValue("telephone")
+	input.City = c.Request.FormValue("city_name")
+	input.Street = c.Request.FormValue("street")
+	input.ZipCode = c.Request.FormValue("index")
+	//if err := c.BindJSON(&input); err != nil {
+	//	// throw error response
+	//	respondWithError(c, http.StatusBadRequest, "unable to read input data, check is it correct")
+	//	return
+	//}
 	if err := h.services.Employee.Update(id, input); err != nil {
 		// throw error response
 		respondWithError(c, http.StatusBadRequest, "unable to update")
 		return
 	}
-	c.JSON(http.StatusOK, id)
+	Tpl.ExecuteTemplate(c.Writer, "edit_employee.html", entities.Message{Mess: "employee updated"})
 }
 
 func (h *Handler) deleteEmployee(c *gin.Context) {

@@ -46,12 +46,12 @@ func (er *checkPostgres) CreateCheck(randomStr string, checkInput []entities.Che
 	//var chechInDB entities.Check
 	//checkInDB := entities.Check{Number: randomStr, PrintDate: time.Now(), SumTotal: sumTotal,
 	//	Vat: sumTotal * 0.2, CardNumber: checkInput[0].CustomerNumber, IdEmployee: checkInput[0].IDEmployee}
-	row := tx.QueryRow(createCheck, randomStr, time.Now(), sumTotal, sumTotal*0.2, checkInput[0].IDEmployee, checkInput[0].CustomerNumber)
-	err2 := row.Scan(&id)
-	if err2 != nil {
-		tx.Rollback()
-		return 0, err
-	}
+	_ = tx.QueryRow(createCheck, randomStr, time.Now(), sumTotal, sumTotal*0.2, checkInput[0].IDEmployee, checkInput[0].CustomerNumber)
+	//err2 := row.Scan(&id)
+	//if err2 != nil {
+	//	tx.Rollback()
+	//	return 0, err
+	//}
 	for j := 0; j < len(checkInput); j++ {
 		var stProduct entities.StoreProduct
 		//if err := er.db.Get(&stProduct, getStoreProductByName, checkInput[j].UPC); err != nil {

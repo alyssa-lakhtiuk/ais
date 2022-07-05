@@ -25,14 +25,15 @@ func (h *Handler) NewRoutes() *gin.Engine {
 
 	router.GET("/sign-in-input", h.signInInput)
 	router.POST("/sign-in", h.signIn)
-	router.GET("/manager_homepage", h.signIn)
+	router.GET("/homepage", h.goToHomePage)
 
 	router.GET("/employees", h.getAllEmployees)      //
 	router.GET("/create-employee", h.createEmployee) //
-	router.POST("/employee", h.employeeCreated)      // не відкривається
+	router.POST("/employee", h.employeeCreated)      //
 	router.GET("/employee/:id", h.getEmployeeByName) // by name  // з Brad не працює
 	router.GET("/employees/:id", h.getEmployeeById)  // by id  // помилка
-	router.PUT("/employee/:id", h.updateEmployee)
+	router.POST("/edit-employee", h.updateEmployeeOpen)
+	router.GET("/edit-employee", h.updateEmployee)
 	router.DELETE("/employee/:id", h.deleteEmployee)
 	// Category pages
 	router.GET("/create-category", h.createCategory)     // html
@@ -50,6 +51,8 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	router.GET("/products/:id", h.getProductByNumber) // by id // працює
 	router.DELETE("/product/:id", h.deleteProduct)
 	router.PUT("/product/:id", h.updateProduct)
+	router.PUT("/edit-product", h.updateProductOpen)
+	router.GET("/edit-product", h.updateProduct)
 	// Customer card pages
 	router.GET("/create-customer-card", h.createCustomerCard)   // html
 	router.POST("/customer-card", h.customerCardCreated)        //html
@@ -57,6 +60,8 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	router.GET("/customer-cards", h.getAllCustomerCards)        // html
 	router.DELETE("/customer-cards/:id", h.deleteCustomerCard)
 	router.PUT("/customer-card/:id", h.updateCustomerCard)
+	router.POST("/edit-customer-card", h.updateCustomerCardOpen)
+	router.GET("/edit-customer-card", h.updateCustomerCard)
 	// Store product pages
 	router.GET("/create-store-product", h.createStoreProduct) // треба випадний список
 	router.POST("/store-product", h.storeProductCreated)
