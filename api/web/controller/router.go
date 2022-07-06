@@ -35,7 +35,7 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	router.POST("/edit-employee", h.updateEmployee)
 	router.POST("/request-employee", h.onlyOneEmployeeCategory)
 	router.GET("/edit-employee", h.updateEmployeeOpen)
-	router.GET("/print_report_employee", h.GeneratePdfFromHTML)
+	router.GET("/print_report_employee", h.createEmployeeReport)
 	//router.DELETE("/employee/:id", h.deleteEmployee)
 	router.DELETE("/delete-employee", h.deleteEmployee)
 	//router.DELETE("/employee/:id", h.deleteEmployee)

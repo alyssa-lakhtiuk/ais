@@ -2,7 +2,6 @@ package controller
 
 import (
 	"ais/entities"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"sort"
@@ -197,25 +196,10 @@ func (h *Handler) WhoAmI(c *gin.Context) {
 		//c.JSON(http.StatusOK, err)
 		//return
 	}
-	//c.JSON(http.StatusOK, input)
 	err = Tpl.ExecuteTemplate(c.Writer, "cashier_who_am_i.html", employee)
 }
 
-func (h *Handler) GeneratePdfFromHTML(c *gin.Context) {
-	r := NewRequestPdf("")
-	templatePath := "templates/sample1.html"
-
-	//path for download pdf
-	outputPath := "storage/example.pdf"
-
-	//html template data
-	var employees []entities.Employee
-	employees, _ = h.services.Employee.GetAll()
-	if err := r.ParseTemplate(templatePath, employees); err == nil {
-		ok, _ := r.GeneratePDF(outputPath)
-		fmt.Println(ok, "pdf generated successfully")
-	} else {
-		fmt.Println(err)
-	}
-	h.getAllEmployees(c)
+func (h *Handler) createEmployeeReport(c *gin.Context) {
+	employees, _ := h.services.Employee.GetAll()
+	Tpl.ExecuteTemplate(c.Writer, "zvit_employee.html", employees)
 }
