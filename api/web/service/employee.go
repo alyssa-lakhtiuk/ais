@@ -7,7 +7,8 @@ import (
 )
 
 type EmployeeService struct {
-	repo repository.EmployeeRepo
+	repo     repository.EmployeeRepo
+	repoRole repository.RoleRepo
 }
 
 func (s *EmployeeService) Update(employeeId string, employee entities.EmployeeInput) error {
@@ -34,8 +35,8 @@ func (s *EmployeeService) GetAllByCategory(role string) ([]entities.Employee, er
 	return s.repo.GetEmployeeByRole(role)
 }
 
-func NewEmployeeService(repo repository.EmployeeRepo) *EmployeeService {
-	return &EmployeeService{repo: repo}
+func NewEmployeeService(repo repository.EmployeeRepo, repoRole repository.RoleRepo) *EmployeeService {
+	return &EmployeeService{repo: repo, repoRole: repoRole}
 }
 
 func (s *EmployeeService) Create(employee entities.Employee) (int, error) {
@@ -47,6 +48,8 @@ func (s *EmployeeService) Create(employee entities.Employee) (int, error) {
 			break
 		}
 	}
+	password := generatePasswordHash("secret")
+	s.repoRole.CreateUserRole(password, employee.ID, employee.Role, employee.PhoneNumber)
 	//if time.Now().Year()-employee.DateOfBirth.Year() < 18 {
 	//	return 0, fmt.Errorf("employee must be adult")
 	//}

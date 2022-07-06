@@ -133,21 +133,21 @@
     <h1>Check 🧮</h1>
 </div>
 
-<form method="POST">
-    <button formaction="/cashier_add_check" class="button2">Add check</button>
+<form method="GET">
+    <button formaction="/add-product-to-check" class="button2">Add check</button>
 </form>
 
-<form action="/cas_request_check" method="POST">
+<form action="/specific-check" method="POST">
 
 
-    <label>Time:</label>
-    <select id="search_product_caty" name="/search_product_category">
-        <option value="all_time">All</option>
-        <option value="day">Day</option>
-        <option value="week">Week</option>
-        <option value="month">Month</option>
-        <option value="year">Year</option>
-    </select>
+<!--    <label>Time:</label>-->
+<!--    <select id="search_product_caty" name="/search_product_category">-->
+<!--        <option value="all_time">All</option>-->
+<!--        <option value="day">Day</option>-->
+<!--        <option value="week">Week</option>-->
+<!--        <option value="month">Month</option>-->
+<!--        <option value="year">Year</option>-->
+<!--    </select>-->
 
     <label>Check Number:</label>
     <select id="spec_product" name="specific_product">
@@ -169,9 +169,9 @@
         <th scope="col">Cashier ID</th>
         <th scope="col">Customer Card</th>
         <th scope="col">Date</th>
-        <th scope="col">UPC</th>
-        <th scope="col">Product Number</th>
-        <th scope="col">Selling Price</th>
+<!--        <th scope="col">UPC</th>-->
+<!--        <th scope="col">Product Number</th>-->
+<!--        <th scope="col">Selling Price</th>-->
         <th scope="col">Sum Total</th>
         <th scope="col">Vat</th>
 
@@ -186,9 +186,9 @@
         <td>{{ .IdEmployee }}</td>
         <td>{{ .CardNumber }}</td>
         <td>{{ .PrintDate }}</td>
-        <td>{{ .UPC }}</td>
-        <td>{{ .ProductNumber }}</td>
-        <td>{{ .SellingPrice }}</td>
+<!--        <td>{{ .UPC }}</td>-->
+<!--        <td>{{ .ProductNumber }}</td>-->
+<!--        <td>{{ .SellingPrice }}</td>-->
         <td>{{ .SumTotal }}</td>
         <td>{{ .Vat }}</td>
 

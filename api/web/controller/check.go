@@ -7,6 +7,9 @@ import (
 	"strconv"
 )
 
+func (h *Handler) addProductToCheckOpen(c *gin.Context) {
+	Tpl.ExecuteTemplate(c.Writer, "add_check.html", nil)
+}
 func (h *Handler) addProductToCheck(c *gin.Context) {
 	var chIn []entities.CheckInput
 	var chF entities.CheckInput
@@ -24,19 +27,42 @@ func (h *Handler) addProductToCheck(c *gin.Context) {
 	chF2.ProductNumber, _ = strconv.Atoi(c.Request.FormValue("number2"))
 	chF2.IDEmployee = chF.IDEmployee
 	chF2.CustomerNumber = chF.CustomerNumber
+	if chF2.UPC != "" {
+		chIn = append(chIn, chF2)
+	}
 	var chF3 entities.CheckInput
 	chF3.UPC = c.Request.FormValue("upc3")
 	chF3.ProductNumber, _ = strconv.Atoi(c.Request.FormValue("number3"))
 	chF3.IDEmployee = chF.IDEmployee
 	chF3.CustomerNumber = chF.CustomerNumber
+	if chF3.UPC != "" {
+		chIn = append(chIn, chF3)
+	}
 	var chF4 entities.CheckInput
 	chF4.UPC = c.Request.FormValue("upc4")
 	chF4.ProductNumber, _ = strconv.Atoi(c.Request.FormValue("number4"))
 	chF4.IDEmployee = chF.IDEmployee
 	chF4.CustomerNumber = chF.CustomerNumber
+	if chF4.UPC != "" {
+		chIn = append(chIn, chF4)
+	}
 	h.services.Check.Create(chIn)
 	h.getAllChecks(c)
 }
+
+func (h *Handler) whoAmI(c *gin.Context) {
+	authHeader, err := c.Request.Cookie("Authorization")
+	if err != nil {
+		c.HTML(http.StatusUnauthorized, "authorization first", nil)
+	}
+	currentEmplId := authHeader.Value // id
+	emplFromDB, err := h.services.Employee.GetById(currentEmplId)
+	Tpl.ExecuteTemplate(c.Writer, "who_am_i.html", emplFromDB)
+}
+
+//func (h *Handler) createCheck(c *gin.Context) {
+//
+//}
 
 func (h *Handler) createCheck(c *gin.Context) {
 	var input []entities.CheckInput

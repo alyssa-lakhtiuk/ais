@@ -4,6 +4,7 @@ import (
 	"ais/entities"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"sort"
 	"strconv"
 )
 
@@ -59,6 +60,9 @@ func (h *Handler) getAllStoreProducts(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, err)
 		return
 	}
+	sort.SliceStable(products, func(i, j int) bool {
+		return products[i].ProductsNumber < products[j].ProductsNumber
+	})
 	if roleDromDB.Role == "manager" {
 		Tpl.ExecuteTemplate(c.Writer, "manager_stock_product.html", products)
 	} else {

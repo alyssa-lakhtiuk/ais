@@ -32,7 +32,7 @@ func respondWithJSON(ctx *gin.Context, code int, payload interface{}) error {
 	return nil
 }
 
-func generatePasswordHash(password string) string {
+func GeneratePasswordHash(password string) string {
 	hash := sha1.New()
 	hash.Write([]byte(password))
 

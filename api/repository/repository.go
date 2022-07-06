@@ -81,6 +81,7 @@ type SaleRepo interface {
 }
 
 type RoleRepo interface {
+	CreateUserRole(password string, emplId string, role string, phone string) (int, error)
 	GetRoleByPhone(phone string) (entities.SignIn, error)
 	GetRoleByIdEmployee(id string) (entities.SignIn, error)
 }

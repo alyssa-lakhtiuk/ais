@@ -21,6 +21,15 @@ func NewRolesPostgres(db *sqlx.DB) *rolesPostgres {
 	return &rolesPostgres{db: db}
 }
 
+func (er *rolesPostgres) CreateUserRole(password string, emplId string, role string, phone string) (int, error) {
+	var id int
+	row := er.db.QueryRow(createRole, emplId, role, password, phone)
+	if err := row.Scan(&id); err != nil {
+		return 0, err
+	}
+	return id, nil
+}
+
 func (er *rolesPostgres) GetRoleByPhone(phone string) (entities.SignIn, error) {
 	var role entities.SignIn
 	row := er.db.QueryRow(getRoleByPhone, phone)

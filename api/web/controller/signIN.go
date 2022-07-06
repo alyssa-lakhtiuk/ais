@@ -11,7 +11,7 @@ func (h *Handler) signIn(c *gin.Context) {
 	var data entities.SignIn
 	data.Phone = c.Request.FormValue("phone_number")
 	inputtedPassword := c.Request.FormValue("password")
-	hashedPassword := generatePasswordHash(inputtedPassword)
+	hashedPassword := GeneratePasswordHash(inputtedPassword)
 	dataFromDB, err := h.services.Role.GetByPhone(data.Phone)
 	if err != nil {
 
@@ -23,6 +23,7 @@ func (h *Handler) signIn(c *gin.Context) {
 		Name:    "Authorization",
 		Value:   dataFromDB.IdEmployee,
 		Expires: time.Now().Add(48 * time.Hour)})
+
 	if dataFromDB.Role == "manager" {
 		Tpl.ExecuteTemplate(c.Writer, "manager_homepage.html", nil)
 	} else if dataFromDB.Role == "cashier" {

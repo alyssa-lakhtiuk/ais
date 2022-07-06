@@ -74,6 +74,7 @@ type Check interface {
 type Role interface {
 	GetByPhone(phone string) (entities.SignIn, error)
 	GetByIdEmployee(id string) (entities.SignIn, error)
+	CreateRole(password string, emplId string, role string, phone string) (int, error)
 }
 
 type Zvit interface {
@@ -98,7 +99,7 @@ type Service struct {
 
 func NewService(repos *repository.Repository) *Service {
 	return &Service{
-		Employee:     NewEmployeeService(repos.EmployeeRepo),
+		Employee:     NewEmployeeService(repos.EmployeeRepo, repos.RoleRepo),
 		Category:     NewCategoryService(repos.CategoryRepo),
 		Product:      NewProductService(repos.ProductRepo, repos.CategoryRepo),
 		StoreProduct: NewStoreProductService(repos.ProductRepo, repos.StoreProductRepo),

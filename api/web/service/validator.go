@@ -1,6 +1,9 @@
 package service
 
 import (
+	"ais/config"
+	"crypto/sha1"
+	"fmt"
 	"math/rand"
 	"regexp"
 	"time"
@@ -35,4 +38,11 @@ func GenerateRandomStr(length int) string {
 		b[i] = random[y1.Int63()%int64(len(random))]
 	}
 	return string(b)
+}
+
+func generatePasswordHash(password string) string {
+	hash := sha1.New()
+	hash.Write([]byte(password))
+
+	return fmt.Sprintf("%x", hash.Sum([]byte(config.Salt)))
 }

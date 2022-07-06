@@ -35,8 +35,8 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	router.POST("/edit-employee", h.updateEmployee)
 	router.POST("/request-employee", h.onlyOneEmployeeCategory)
 	router.GET("/edit-employee", h.updateEmployeeOpen)
-	router.DELETE("/employee/:id", h.deleteEmployee)
-	router.POST("/delete-employee", h.deleteEmployee)
+	//router.DELETE("/employee/:id", h.deleteEmployee)
+	router.DELETE("/delete-employee", h.deleteEmployee)
 	// Category pages
 	router.GET("/create-category", h.createCategory)     // html
 	router.POST("/category", h.categoryCreated)          // html
@@ -84,8 +84,9 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	router.POST("/check", h.createCheck)
 	router.GET("/checks", h.getAllChecks)
 	router.DELETE("/check/:id", h.deleteCheck)
-	router.GET("/add-product-to-check", h.addProductToCheck)
+	router.GET("/add-product-to-check", h.addProductToCheckOpen)
 	router.POST("/add-product-to-check", h.addProductToCheck)
+	router.GET("/who-am-i", h.whoAmI)
 
 	// Zvit
 	router.GET("/quantity-category", h.quantitiesByCat)

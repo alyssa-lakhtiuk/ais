@@ -146,3 +146,6 @@ type CountCustomersCities struct {
 type SecondStruct struct {
 	Check string
 }
+
+type CheckWithSales struct {
+}

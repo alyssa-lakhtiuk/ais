@@ -108,8 +108,8 @@ func (h *Handler) updateEmployee(c *gin.Context) {
 	//}
 	if err := h.services.Employee.Update(id, input); err != nil {
 		// throw error response
-		respondWithError(c, http.StatusBadRequest, "unable to update")
-		return
+		//respondWithError(c, http.StatusBadRequest, "unable to update")
+		//return
 	}
 	h.getAllEmployees(c)
 	//Tpl.ExecuteTemplate(c.Writer, "manager_employee.html", )
