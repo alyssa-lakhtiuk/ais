@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>products in store</title>
+  <title>report product in store</title>
   <style>
     h1 {
       font-size: 72px;
@@ -17,13 +17,29 @@
       margin-top: 20px;
       margin-bottom: 100px;
     }
-    .form-control {
+
+    .button2 {
       font-family: cursive;
       border: 1px solid #000000;
-      padding-left: 5px;
-      text-align: left;
-      font-size: 20px;
-      margin-bottom: 30px;
+      background-color: #ffffff;
+      padding-left: 40px;
+      padding-right: 40px;
+      text-align: center;
+      font-size: 25px;
+      margin-left: 625px;
+      margin-bottom: 25px;
+
+    }
+
+    .button3 {
+      font-family: cursive;
+      border: 1px solid #000000;
+      background-color: #ffffff;
+      padding-left: 40px;
+      padding-right: 40px;
+      text-align: center;
+      font-size: 25px;
+      margin-left: 40px;
     }
 
     select {
@@ -38,14 +54,8 @@
       font-size: 25px;
       margin-bottom: 20px;
       margin-top: 50px;
-    }
+      margin-left: 5px;
 
-    label{
-      font-family: cursive;
-      text-align: center;
-      font-size: 25px;
-      margin-left: 10px;
-      margin-bottom: 15px;
     }
 
     h3 {
@@ -58,36 +68,8 @@
       margin-top: -60px;
 
     }
-    th {
-      font-size: 18px;
-      font-family: cursive;
-      font-weight: 50;
-      color: #000000;
-      padding-right: 65px;
-      padding-left: 25px;
-    }
-    td {
-      font-size: 16px;
-      font-family: cursive;
-      color: #000000;
-      padding-right: 10px;
-      padding-left: 10px;
 
-    }
 
-    .button1 {
-      font-family: cursive;
-      border: 1px solid #c27004;
-      background-color: #ffb14d;
-      color: #ffffff;
-      padding-left: 10px;
-      padding-right: 10px;
-      text-align: center;
-      font-size: 25px;
-      margin-left: 20px;
-      margin-top: 5px;
-
-    }
     .button4 {
       font-family: cursive;
       border: 1px solid #ffb14d;
@@ -113,18 +95,83 @@
       margin-top: 160px;
       margin-left: 20px;
     }
-    /*.characteristics{*/
-    /*  font-size: 10px;*/
-    /*  font-family: cursive;*/
-    /*  color: #000000;*/
-    /*  padding-right: 10px;*/
-    /*  padding-left: 10px;*/
-    /*}*/
+
+    .lab1 {
+      font-family: cursive;
+      text-align: center;
+      font-size: 25px;
+      margin-right: 20px;
+    }
+
+    label{
+      font-family: cursive;
+      text-align: center;
+      font-size: 25px;
+      margin-left: 20px;
+      margin-bottom: 15px;
+    }
+
+    .button1 {
+      font-family: cursive;
+      border: 1px solid #c27004;
+      background-color: #ffb14d;
+      color: #ffffff;
+      padding-left: 10px;
+      padding-right: 10px;
+      text-align: center;
+      font-size: 25px;
+      margin-left: 20px;
+      margin-top: 5px;
+    }
+
+    .check {
+      font-family: cursive;
+      text-align: center;
+      font-size: 25px;
+      margin-bottom: 15px;
+    }
+
+    .form-control {
+      font-family: cursive;
+      border: 1px solid #000000;
+
+      text-align: left;
+      font-size: 20px;
+      margin-left: 20px;
+      margin-bottom: 30px;
+    }
     .line1 {
       width: 1300px;
       margin-top: 10px;
       margin-bottom: 10px;
       border-bottom: 0.5px solid black;
+    }
+    .button0 {
+      font-family: cursive;
+      border: 1px solid #c23704;
+      background-color: #ff6e4d;
+      color: #ffffff;
+      padding-left: 20px;
+      padding-right: 20px;
+      text-align: center;
+      font-size: 25px;
+      margin-left: 20px;
+      margin-top: 35px;
+    }
+    th {
+      font-size: 20px;
+      font-family: cursive;
+      font-weight: 50;
+      color: #000000;
+      padding-right: 35px;
+      padding-left: 40px;
+    }
+    td {
+      font-size: 16px;
+      font-family: cursive;
+      color: #000000;
+      padding-right: 10px;
+      padding-left: 35px;
     }
   </style>
 </head>
@@ -132,20 +179,9 @@
 <body>
 
 <div class="heading">
-  <h1>Products in Store 🍸</h1>
+  <h1>Product in Store</h1>
 </div>
 
-<form action="/cas_request_st_prod" method="POST">
-
-
-  <input class="check" type="checkbox" id="check_with_prom" name="check_with" checked>
-  <label class="lab1">promotion</label>
-  <input class="check" type="checkbox" id="check_without_prom" name="check_without" checked>
-  <label class="lab1">no promotion</label>
-  <label>UPC:</label>
-  <input type="text" class="form-control" id="upc" name="upc">
-  <button type="submit" class="button1">Search</button>
-</form>
 <div class="line1"></div>
 <table >
   <!-- Table header -->
@@ -177,10 +213,6 @@
   </tbody>
 </table>
 <div class="line1"></div>
-<form method="GET">
-  <button formaction="/homepage" class="button4">Homepage</button>
-  <button formaction="/sign-in-input" class="button5">Log out</button>
-</form>
 
 </body>
 

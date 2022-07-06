@@ -83,6 +83,7 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	router.POST("/edit-store-product", h.updateStoreProduct)
 	router.GET("/edit-store-product", h.updateStoreProductOpen)
 	router.POST("/delete-store-product", h.deleteStoreProduct)
+	router.POST("/store-products-upc", h.searchStoreProductsUPC)
 	// Sale pages
 	// Check pages
 	router.POST("/check", h.createCheck)

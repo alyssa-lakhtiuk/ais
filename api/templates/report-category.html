@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> report category</title>
+    <style>
+        h1 {
+            font-size: 72px;
+            font-family: cursive;
+            font-weight: 50;
+            color: #000000;
+            height: 20px;
+            margin-left: 50px;
+            margin-top: 20px;
+            margin-bottom: 100px;
+        }
+
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -webkit-border-radius: 0px;
+            font-family: cursive;
+            border: 1px solid #000000;
+            padding-left: 30px;
+            padding-right: 30px;
+            text-align: center;
+            font-size: 25px;
+            margin-bottom: 20px;
+            margin-top: 50px;
+            margin-left: 250px;
+
+        }
+
+        h3 {
+            font-size: 25px;
+            font-family: cursive;
+            font-weight: 50;
+            color: #000000;
+            height: 20px;
+            margin-left: 50px;
+            margin-top: -60px;
+
+        }
+        th {
+            font-size: 26px;
+            font-family: cursive;
+            font-weight: 50;
+            color: #000000;
+            padding-right: 65px;
+            padding-left: 25px;
+        }
+        td {
+            font-size: 20px;
+            font-family: cursive;
+            color: #000000;
+            padding-right: 10px;
+            padding-left: 60px;
+
+        }
+
+        label{
+            font-family: cursive;
+            text-align: center;
+            font-size: 25px;
+            margin-left: 10px;
+            margin-bottom: 15px;
+        }
+
+        .line1 {
+            width: 1300px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-bottom: 0.5px solid black;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="heading">
+    <h1>Category</h1>
+</div>
+
+<div class="line1"></div>
+
+<table >
+    <!-- Table header -->
+    <thead>
+    <tr>
+        <th scope="col">Category Number</th>
+        <th scope="col">Category Name</th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+    {{ range . }}
+    <tr>
+        <td>{{ .Number }}</td>
+        <td>{{ .Name }}</td>
+    </tr>
+    {{ end }}
+    </tbody>
+</table>
+<div class="line1"></div>
+
+
+</body>
+
+</html>
