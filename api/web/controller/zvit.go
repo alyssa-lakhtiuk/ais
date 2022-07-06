@@ -32,7 +32,8 @@ func (h *Handler) countCities(c *gin.Context) {
 	//category := c.Param("id")
 	var res []entities.CountCustomersCities
 	res, _ = h.services.Zvit.GetCountByCities()
-	c.JSON(http.StatusOK, res) // тут темплейт, замість цього рядка
+	//c.JSON(http.StatusOK, res) // тут темплейт, замість цього рядка
+	Tpl.ExecuteTemplate(c.Writer, "query_count_city.html", res)
 
 }
 
