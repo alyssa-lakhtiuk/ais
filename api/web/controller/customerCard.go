@@ -47,7 +47,7 @@ func (h *Handler) getAllCustomerCards(c *gin.Context) {
 	if roleDromDB.Role == "manager" {
 		Tpl.ExecuteTemplate(c.Writer, "manager_client.html", cc)
 	} else {
-		Tpl.ExecuteTemplate(c.Writer, "cashier_client.html", cc)
+		Tpl.ExecuteTemplate(c.Writer, "cashier_clients.html", cc)
 	}
 
 }

@@ -10,7 +10,8 @@ import (
 func (h *Handler) pricesByCat(c *gin.Context) {
 	var res []entities.PriceByCat
 	res, _ = h.services.Zvit.GetPricesByCategory()
-	c.JSON(http.StatusOK, res)
+	Tpl.ExecuteTemplate(c.Writer, "query_price_category.html", res)
+	//c.JSON(http.StatusOK, res)
 }
 
 func (h *Handler) checksByCat(c *gin.Context) {
@@ -21,7 +22,8 @@ func (h *Handler) checksByCat(c *gin.Context) {
 	for i := 0; i < len(res); i++ {
 		res[i].Cat = category
 	}
-	c.JSON(http.StatusOK, res)
+	Tpl.ExecuteTemplate(c.Writer, "query_product_sell.html", res)
+	//c.JSON(http.StatusOK, res)
 }
 
 /////
