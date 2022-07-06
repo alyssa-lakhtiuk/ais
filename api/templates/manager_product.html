@@ -168,12 +168,12 @@
 </form>
 
 <form action="/request_product" method="POST">
-    <label>Sort by Name: </label>
-    <select id="sort_product" name="sort_product_name">
-        <option value="asc">ASC</option>
-        <option value="desc">DESC</option>
-        <!--        <input type="submit" value="Submit">-->
-    </select>
+<!--    <label>Sort by Name: </label>-->
+<!--    <select id="sort_product" name="sort_product_name">-->
+<!--        <option value="asc">ASC</option>-->
+<!--        <option value="desc">DESC</option>-->
+<!--        &lt;!&ndash;        <input type="submit" value="Submit">&ndash;&gt;-->
+<!--    </select>-->
     <label>Search by category:</label>
 
     <select id="search_product_caty" name="/search_product_category">
@@ -221,12 +221,13 @@
 <form method="POST">
     <button formaction="/delete-product" type="submit" class="button0">Delete</button>
 </form>
-<p>{{.Mess}}</p>
+
 
 <form method="GET">
     <button formaction="/homepage" class="button4">Homepage</button>
     <button formaction="/sign-in-input" class="button5">Log out</button>
 </form>
+<p>{{.Mess}}</p>
 
 </body>
 

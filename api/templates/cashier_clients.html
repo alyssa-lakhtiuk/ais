@@ -170,17 +170,12 @@
   <h1>Customer 😽</h1>
 </div>
 
-<form method="POST">
-  <button formaction="/cashier_add_client" class="button2">Add new customer</button>
+<form method="GET">
+  <button formaction="/create-customer-card" class="button2">Add new customer</button>
 
 </form>
 
-<form action="/cas_request_client" method="POST">
-  <label>Sort by surname: </label>
-  <select id="cas_sort_surname" name="cas_sort_surname">
-    <option value="asc">ASC</option>
-    <option value="desc">DESC</option>
-  </select>
+<form action="/request_client" method="POST">
   <label>Search by surname: </label>
   <input type="text" class="form-control" id="cas_ser_sur" name="cas_search_surname">
   <button type="submit" class="button1">Search</button>
@@ -222,10 +217,10 @@
 </table>
 <div class="line1"></div>
 
-<form method="POST">
+<form method="GET">
   <label>Card Number: </label>
   <input type="text" class="form-control" id="number_card" name="number_card">
-  <button formaction="/cashier_edit_client" type="submit" class="button0">Edit</button>
+  <button formaction="/edit-customer-card" type="submit" class="button0">Edit</button>
 
 </form>
 

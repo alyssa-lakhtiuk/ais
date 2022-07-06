@@ -122,6 +122,11 @@ type CategoryProduct struct {
 	P Product
 }
 
+type CategoriesProducts struct {
+	C []Category
+	P []Product
+}
+
 type ProductStoreProductUpc struct {
 	Pr  []Product
 	Stp StoreProduct

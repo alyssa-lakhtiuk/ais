@@ -37,6 +37,7 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	router.GET("/edit-employee", h.updateEmployeeOpen)
 	router.DELETE("/employee/:id", h.deleteEmployee)
 	router.POST("/delete-employee", h.deleteEmployee)
+	router.GET("/who-am-i", h.WhoAmI)
 	// Category pages
 	router.GET("/create-category", h.createCategory)     // html
 	router.POST("/category", h.categoryCreated)          // html
@@ -84,6 +85,7 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	router.POST("/check", h.createCheck)
 	router.GET("/checks", h.getAllChecks)
 	router.DELETE("/check/:id", h.deleteCheck)
+	// Cashier
 
 	// Zvit
 	router.GET("/quantity-category", h.pricesByCat)
