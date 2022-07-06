@@ -35,29 +35,36 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	router.POST("/edit-employee", h.updateEmployee)
 	router.POST("/request-employee", h.onlyOneEmployeeCategory)
 	router.GET("/edit-employee", h.updateEmployeeOpen)
-	router.GET("/print_report_employee", h.createEmployeeReport)
+	// Reports
+	router.GET("/report-employee", h.createEmployeeReport)
+	router.GET("/report-customer", h.createCustomerReport)
+	router.GET("/report-product", h.createProductReport)
+	router.GET("/report-category", h.createCategoryReport)
+	router.GET("/report-check", h.createCheckReport)
+	router.GET("/report-store-product", h.createStoreReport)
 	//router.DELETE("/employee/:id", h.deleteEmployee)
 	router.DELETE("/delete-employee", h.deleteEmployee)
 	//router.DELETE("/employee/:id", h.deleteEmployee)
 	//router.POST("/delete-employee", h.deleteEmployee)
 	//router.GET("/who-am-i", h.WhoAmI)
 	// Category pages
-	router.GET("/create-category", h.createCategory)     // html
-	router.POST("/category", h.categoryCreated)          // html
-	router.GET("/category/:id", h.getCategoryByName)     // by name // працює
-	router.GET("/categories/:id", h.getCategoryByNumber) // by number  // кидає помилку
-	router.GET("/categories", h.getAllCategories)        // html
+	router.GET("/create-category", h.createCategory)
+	router.POST("/category", h.categoryCreated)
+	router.GET("/category/:id", h.getCategoryByName)
+	router.GET("/categories/:id", h.getCategoryByNumber)
+	router.GET("/categories", h.getAllCategories)
 	router.DELETE("/category/:name", h.deleteCategory)
 	//router.PUT("/category/:id", h.updateCategory)
-	router.POST("/edit-category", h.updateCategory)
+	router.PUT("/edit-category", h.updateCategory)
 	router.GET("/edit-category", h.updateCategoryOpen)
-	router.POST("/delete-category", h.deleteCategory)
+	router.DELETE("/delete-category", h.deleteCategory)
+	router.GET("/delete-category", h.deleteCategory)
 	// Product pages
 	router.GET("/create-product", h.createProduct)
-	router.POST("/product", h.productCreated)         // випадний список сука
-	router.GET("/products", h.getAllProducts)         // html
-	router.GET("/product/:name", h.getProductByName)  // by name // працює
-	router.GET("/products/:id", h.getProductByNumber) // by id // працює
+	router.POST("/product", h.productCreated)
+	router.GET("/products", h.getAllProducts)
+	router.GET("/product/:name", h.getProductByName)
+	router.GET("/products/:id", h.getProductByNumber)
 	router.DELETE("/delete-product", h.deleteProduct)
 	//router.PUT("/product/:id", h.updateProduct)
 	router.POST("/edit-product", h.updateProduct)
@@ -78,7 +85,7 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	router.POST("/store-product", h.storeProductCreated)
 	router.GET("/store-products", h.getAllStoreProducts)       // html
 	router.GET("/store-products/:upc", h.getStoreProductByUpc) // by upc
-	router.DELETE("/store-product/:id", h.deleteStoreProduct)
+	router.DELETE("/delete-store-product", h.deleteStoreProduct)
 	//router.PUT("/store-product/:id", h.updateStoreProduct)
 	router.POST("/edit-store-product", h.updateStoreProduct)
 	router.GET("/edit-store-product", h.updateStoreProductOpen)

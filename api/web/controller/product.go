@@ -169,3 +169,8 @@ func (h *Handler) onlyOneProductCategory(c *gin.Context) {
 	cpr.P = products
 	Tpl.ExecuteTemplate(c.Writer, "manager_employee.html", cpr)
 }
+
+func (h *Handler) createProductReport(c *gin.Context) {
+	employees, _ := h.services.Product.GetAll()
+	Tpl.ExecuteTemplate(c.Writer, "report_product.html", employees)
+}

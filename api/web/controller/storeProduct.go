@@ -30,6 +30,8 @@ func (h *Handler) storeProductCreated(c *gin.Context) {
 		respondWithError(c, http.StatusBadRequest, "fail to create store product")
 		return
 	}
+	h.getAllStoreProducts(c)
+	//Tpl.ExecuteTemplate(c.Writer, "")
 	//c.JSON(http.StatusOK, map[string]interface{}{
 	//	"productId": input.UPC,
 	//	"id":        id,
@@ -166,4 +168,9 @@ func (h *Handler) searchStoreProductsUPC(c *gin.Context) {
 	}
 
 	//c.JSON(http.StatusOK, products)
+}
+
+func (h *Handler) createStoreReport(c *gin.Context) {
+	employees, _ := h.services.StoreProduct.GetAll()
+	Tpl.ExecuteTemplate(c.Writer, "report_stock_product.html", employees)
 }

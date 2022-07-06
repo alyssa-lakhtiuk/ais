@@ -169,32 +169,20 @@
         <th scope="col">Cashier ID</th>
         <th scope="col">Customer Card</th>
         <th scope="col">Date</th>
-<!--        <th scope="col">UPC</th>-->
-<!--        <th scope="col">Product Number</th>-->
-<!--        <th scope="col">Selling Price</th>-->
         <th scope="col">Sum Total</th>
         <th scope="col">Vat</th>
-
     </tr>
     </thead>
-
     <tbody>
-
     {{ range . }}
     <tr>
         <td>{{ .Number }}</td>
         <td>{{ .IdEmployee }}</td>
         <td>{{ .CardNumber }}</td>
         <td>{{ .PrintDate }}</td>
-<!--        <td>{{ .UPC }}</td>-->
-<!--        <td>{{ .ProductNumber }}</td>-->
-<!--        <td>{{ .SellingPrice }}</td>-->
         <td>{{ .SumTotal }}</td>
         <td>{{ .Vat }}</td>
-
     </tr>
-    <!--  <div class="line1"></div>-->
-
     {{ end }}
     </tbody>
 </table>

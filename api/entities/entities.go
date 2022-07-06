@@ -154,3 +154,10 @@ type SecondStruct struct {
 
 type CheckWithSales struct {
 }
+
+type Upcs struct {
+	StPr1 []StoreProduct
+	StPr2 []StoreProduct
+	StPr3 []StoreProduct
+	StPr4 []StoreProduct
+}

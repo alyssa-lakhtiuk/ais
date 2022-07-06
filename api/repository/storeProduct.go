@@ -22,7 +22,8 @@ const (
 	getStoreProductByName = "SELECT upc, selling_price, promotional_product, product_number, " +
 		"upc_prom, fk_id_product FROM " + storeProductTable + " WHERE upc=$1;"
 	getAllStoreProducts = "SELECT * FROM " + storeProductTable + " ;"
-	searchByUPC         = "SELECT * FROM " + storeProductTable + " WHERE upc LIKE '$1%' ;"
+	searchByUPC         = "SELECT upc, selling_price, promotional_product, product_number, upc_prom, fk_id_product " +
+		"FROM " + storeProductTable + " WHERE upc LIKE '$1%' ;"
 )
 
 type storeProductPostgres struct {

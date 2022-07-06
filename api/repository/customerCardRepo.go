@@ -61,10 +61,6 @@ func (er *customerCardPostgres) GetCustomerCardByNumber(num string) (entities.Cu
 		return cc, err
 	}
 	return cc, nil
-	//if err := er.db.Get(&cc, getCustomerCardByNumber, num); err != nil {
-	//	return entities.CustomerCard{}, err
-	//}
-	//return cc, nil
 }
 
 func (er *customerCardPostgres) GetCustomerCardByName(name string) (entities.CustomerCard, error) {

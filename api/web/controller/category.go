@@ -82,39 +82,31 @@ func (h *Handler) updateCategoryOpen(c *gin.Context) {
 
 }
 func (h *Handler) updateCategory(c *gin.Context) {
-	//id, err := strconv.Atoi(c.Param("id"))
-	//if err != nil {
-	//	respondWithError(c, http.StatusBadRequest, "unable to parse input url")
-	//	c.JSON(http.StatusOK, id)
-	//	return
-	//	// throw error response
-	//}
 	var input entities.CategoryInput
 	id, _ := strconv.Atoi(c.Request.FormValue("num_category"))
 	input.Name = c.Request.FormValue("name_category")
-	//if err := c.BindJSON(&input); err != nil {
-	//	// throw error response
-	//	respondWithError(c, http.StatusBadRequest, "unable to parse input data")
-	//	return
-	//}
 	if err := h.services.Category.Update(id, input); err != nil {
 		// throw error response
 		respondWithError(c, http.StatusBadRequest, "unable to update")
 		return
 	}
 	h.getAllCategories(c)
-	//c.JSON(http.StatusOK, "updated")
 }
 
 func (h *Handler) deleteCategory(c *gin.Context) {
 	categoryNum, _ := strconv.Atoi(c.Request.FormValue("id"))
 	err := h.services.Category.DeleteByNum(categoryNum)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, err)
-		return
+		//c.JSON(http.StatusBadRequest, err)
+		///return
 	}
 	h.getAllCategories(c)
 	//c.JSON(http.StatusOK, categoryNum)
+}
+
+func (h *Handler) createCategoryReport(c *gin.Context) {
+	employees, _ := h.services.Category.GetAll()
+	Tpl.ExecuteTemplate(c.Writer, "report-category.html", employees)
 }
 
 //func (h *Handler) createReportCategory(c *gin.Context) {

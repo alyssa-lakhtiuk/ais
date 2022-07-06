@@ -9,7 +9,12 @@ import (
 
 func (h *Handler) addProductToCheckOpen(c *gin.Context) {
 	upcs, _ := h.services.StoreProduct.GetAll()
-	Tpl.ExecuteTemplate(c.Writer, "add_check.html", upcs)
+	var allUPCS entities.Upcs
+	allUPCS.StPr1 = upcs
+	allUPCS.StPr2 = upcs
+	allUPCS.StPr3 = upcs
+	allUPCS.StPr4 = upcs
+	Tpl.ExecuteTemplate(c.Writer, "add_check.html", allUPCS)
 }
 func (h *Handler) addProductToCheck(c *gin.Context) {
 	var chIn []entities.CheckInput
@@ -108,4 +113,9 @@ func (h *Handler) deleteCheck(c *gin.Context) {
 		return
 	}
 	//c.JSON(http.StatusOK, id)
+}
+
+func (h *Handler) createCheckReport(c *gin.Context) {
+	employees, _ := h.services.Check.GetAll()
+	Tpl.ExecuteTemplate(c.Writer, "report_check.html", employees)
 }

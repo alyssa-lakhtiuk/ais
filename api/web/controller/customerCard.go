@@ -108,3 +108,8 @@ func (h *Handler) deleteCustomerCard(c *gin.Context) {
 	//c.JSON(http.StatusOK, id)
 	h.getAllCustomerCards(c)
 }
+
+func (h *Handler) createCustomerReport(c *gin.Context) {
+	employees, _ := h.services.CustomerCard.GetAll()
+	Tpl.ExecuteTemplate(c.Writer, "report_client.html", employees)
+}
