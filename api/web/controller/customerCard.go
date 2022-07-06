@@ -19,9 +19,6 @@ func (h *Handler) customerCardCreated(c *gin.Context) {
 	input.Street.String = c.Request.FormValue("street")
 	input.ZipCode.String = c.Request.FormValue("index")
 	input.Percent, err = strconv.Atoi(c.Request.FormValue("percents"))
-	//if err := c.BindJSON(&input); err != nil {
-	//	// throw error response
-	//}
 	_, err = h.services.CustomerCard.Create(input)
 	if err != nil {
 		// throw error response

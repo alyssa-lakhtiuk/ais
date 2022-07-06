@@ -137,3 +137,12 @@ type CheckByCat struct {
 	Check string `json:"check" validate:"required"`
 	Cat   string `json:"cat"`
 }
+
+type CountCustomersCities struct {
+	City            string
+	CheckCardNumber int
+}
+
+type SecondStruct struct {
+	Check string
+}

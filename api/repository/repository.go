@@ -88,6 +88,9 @@ type RoleRepo interface {
 type Zvit interface {
 	GetPricesByCategories() ([]entities.PriceByCat, error)
 	GetChecksByCat(category string) ([]entities.CheckByCat, error)
+	/////
+	CountCities() ([]entities.CountCustomersCities, error)
+	ChecksByPrice(price int) ([]entities.SecondStruct, error)
 }
 
 type Repository struct {

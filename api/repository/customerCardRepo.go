@@ -31,8 +31,8 @@ func NewCustomerCardPostgres(db *sqlx.DB) *customerCardPostgres {
 func (er *customerCardPostgres) CreateCustomerCard(customerCard entities.CustomerCard) (int, error) {
 	var id int
 	row := er.db.QueryRow(createCustomerCard, customerCard.Number, customerCard.CustomerSurname, customerCard.CustomerName,
-		customerCard.CustomerPatronymic, customerCard.PhoneNumber, customerCard.City, customerCard.Street,
-		customerCard.ZipCode, customerCard.Percent)
+		customerCard.CustomerPatronymic.String, customerCard.PhoneNumber, customerCard.City.String, customerCard.Street.String,
+		customerCard.ZipCode.String, customerCard.Percent)
 	if err := row.Scan(&id); err != nil {
 		return 0, err
 	}

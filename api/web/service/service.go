@@ -79,6 +79,8 @@ type Role interface {
 type Zvit interface {
 	GetPricesByCategory() ([]entities.PriceByCat, error)
 	GetChecksByCategory(category string) ([]entities.CheckByCat, error)
+	GetCountByCities() ([]entities.CountCustomersCities, error)
+	GetChecksByPrice(price int) ([]entities.SecondStruct, error)
 }
 
 type Service struct {

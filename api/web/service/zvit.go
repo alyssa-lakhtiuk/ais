@@ -21,10 +21,10 @@ func (s *zvitService) GetChecksByCategory(category string) ([]entities.CheckByCa
 	return s.repo.GetChecksByCat(category)
 }
 
-//func (s *zvitService) GetСountByCities() ( error) {
-//	return s.repo.GetСountByCities()
-//}
-//
-//func (s *zvitService) GetChecksByPrice() ( error) {
-//	return s.repo.GetChecksByPrice()
-//}
+func (s *zvitService) GetCountByCities() ([]entities.CountCustomersCities, error) {
+	return s.repo.CountCities()
+}
+
+func (s *zvitService) GetChecksByPrice(price int) ([]entities.SecondStruct, error) {
+	return s.repo.ChecksByPrice(price)
+}
