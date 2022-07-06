@@ -23,14 +23,14 @@ const (
 		"FROM category WHERE category_name = $1))) AND SL.bill_number = bill_number);"
 
 	countCities = "SELECT city, COUNT(*)" +
-		"FROM customer_card INNER JOIN bill ON  customer_card.card_number = bill.fk_card_number" +
+		"FROM customer_card INNER JOIN bill ON  customer_card.card_number = bill.fk_card_number " +
 		"GROUP BY customer_card.city"
 
 	checksByPrice = "SELECT bill_number " +
-		"FROM bill" +
+		"FROM bill " +
 		"WHERE NOT EXISTS (SELECT * " +
-		"FROM sale" +
-		"WHERE bill.bill_number = sale.fk_check_number AND NOT EXISTS" +
+		"FROM sale " +
+		"WHERE bill.bill_number = sale.fk_check_number AND NOT EXISTS " +
 		"(SELECT * " +
 		"FROM store_product sp " +
 		"WHERE sp.selling_price > 300 AND sale.fk_upc = sp.upc));"

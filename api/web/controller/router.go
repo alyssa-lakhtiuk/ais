@@ -89,7 +89,7 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	router.POST("/quantity-category", h.pricesByCat)
 	router.POST("/checks-category/:id", h.checksByCat)
 	///////
-	router.POST("/count-cities", h.countCities)
+	router.GET("/count-cities", h.countCities)
 	router.POST("/checks-price", h.checksByPrice)
 	return router
 }
