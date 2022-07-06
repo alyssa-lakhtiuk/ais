@@ -2,6 +2,7 @@ package controller
 
 import (
 	"ais/entities"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"sort"
@@ -130,7 +131,8 @@ func (h *Handler) deleteEmployee(c *gin.Context) {
 func (h *Handler) onlyOneEmployeeCategory(c *gin.Context) {
 	role := c.Request.FormValue("sort_role")
 	if role != "manager" && role != "cashier" {
-		return
+		h.getAllEmployees(c)
+		return //Tpl.ExecuteTemplate(c.Writer, "manager_employee.html", allEmployees)
 	}
 	employees, err := h.services.Employee.GetAllByCategory(role)
 	if err != nil {
@@ -197,4 +199,23 @@ func (h *Handler) WhoAmI(c *gin.Context) {
 	}
 	//c.JSON(http.StatusOK, input)
 	err = Tpl.ExecuteTemplate(c.Writer, "cashier_who_am_i.html", employee)
+}
+
+func (h *Handler) GeneratePdfFromHTML(c *gin.Context) {
+	r := NewRequestPdf("")
+	templatePath := "templates/sample1.html"
+
+	//path for download pdf
+	outputPath := "storage/example.pdf"
+
+	//html template data
+	var employees []entities.Employee
+	employees, _ = h.services.Employee.GetAll()
+	if err := r.ParseTemplate(templatePath, employees); err == nil {
+		ok, _ := r.GeneratePDF(outputPath)
+		fmt.Println(ok, "pdf generated successfully")
+	} else {
+		fmt.Println(err)
+	}
+	h.getAllEmployees(c)
 }

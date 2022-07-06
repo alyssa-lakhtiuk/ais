@@ -178,7 +178,7 @@
 
     <select id="search_product_caty" name="/search_product_category">
         <option value="without_value" selected disabled>Choose</option>
-        {{ range . }}
+        {{ range .C }}
         <option value="{{ .Number }}">{{ .Name }}</option>
         {{ end }}
     </select>
@@ -198,7 +198,7 @@
 
     <!-- Table body -->
     <tbody>
-    {{ range . }}
+    {{ range .P }}
     <tr>
         <td>{{ .Id }}</td>
         <td>{{ .CategoryNum }}</td>

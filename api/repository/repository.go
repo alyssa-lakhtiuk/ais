@@ -37,6 +37,7 @@ type ProductRepo interface {
 	GetProductByName(name string) (entities.Product, error)
 	GetProductByNumber(number int) (entities.Product, error)
 	GetAllProducts() ([]entities.Product, error)
+	GetProductByCategory(category string) ([]entities.Product, error)
 }
 
 type StoreProductRepo interface {

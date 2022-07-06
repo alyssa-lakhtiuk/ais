@@ -4,6 +4,7 @@ import (
 	"ais/entities"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"sort"
 	"strconv"
 )
 
@@ -57,9 +58,16 @@ func (h *Handler) getAllProducts(c *gin.Context) {
 		return
 		// throw error response
 	}
+	categories, err := h.services.Category.GetAll()
+	var cpr entities.CategoriesProducts
+	cpr.C = categories
+	cpr.P = products
 	//c.JSON(http.StatusOK, products)
+	sort.SliceStable(products, func(i, j int) bool {
+		return products[i].Name < products[j].Name
+	})
 	if roleDromDB.Role == "manager" {
-		Tpl.ExecuteTemplate(c.Writer, "manager_product.html", products)
+		Tpl.ExecuteTemplate(c.Writer, "manager_product.html", cpr)
 	} else {
 		Tpl.ExecuteTemplate(c.Writer, "cashier_product.html", products)
 	}
@@ -137,4 +145,27 @@ func (h *Handler) updateProduct(c *gin.Context) {
 	//c.JSON(http.StatusOK, "updated")
 	h.getAllProducts(c)
 	//Tpl.ExecuteTemplate(c.Writer, "edit_product.html", entities.Message{Mess: "employee updated"})
+}
+
+func (h *Handler) onlyOneProductCategory(c *gin.Context) {
+	role := c.Request.FormValue("sort_cat")
+	//if role != "manager" && role != "cashier" {
+	//	h.getAllEmployees(c)
+	//	//Tpl.ExecuteTemplate(c.Writer, "manager_employee.html", allEmployees)
+	//}
+	products, err := h.services.Product.GetAllByCategory(role)
+	if err != nil {
+		// throw error response
+		//respondWithError(c, http.StatusBadRequest, "can't get all employees, maybe there is no even one")
+		//return
+	}
+	//c.JSON(http.StatusOK, employees)
+	sort.SliceStable(products, func(i, j int) bool {
+		return products[i].Name < products[j].Name
+	})
+	categories, err := h.services.Category.GetAll()
+	var cpr entities.CategoriesProducts
+	cpr.C = categories
+	cpr.P = products
+	Tpl.ExecuteTemplate(c.Writer, "manager_employee.html", cpr)
 }

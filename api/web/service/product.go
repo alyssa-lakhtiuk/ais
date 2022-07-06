@@ -46,6 +46,10 @@ func (s *productService) GetAll() ([]entities.Product, error) {
 	return s.repo.GetAllProducts()
 }
 
+func (s *productService) GetAllByCategory(category string) ([]entities.Product, error) {
+	return s.repo.GetProductByCategory(category)
+}
+
 func NewProductService(repo repository.ProductRepo, repoCategory repository.CategoryRepo) *productService {
 	return &productService{repo: repo, repoCategory: repoCategory}
 }

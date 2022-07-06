@@ -8,7 +8,8 @@ import (
 )
 
 func (h *Handler) addProductToCheckOpen(c *gin.Context) {
-	Tpl.ExecuteTemplate(c.Writer, "add_check.html", nil)
+	upcs, _ := h.services.StoreProduct.GetAll()
+	Tpl.ExecuteTemplate(c.Writer, "add_check.html", upcs)
 }
 func (h *Handler) addProductToCheck(c *gin.Context) {
 	var chIn []entities.CheckInput

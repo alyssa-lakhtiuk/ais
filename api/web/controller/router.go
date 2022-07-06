@@ -35,6 +35,7 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	router.POST("/edit-employee", h.updateEmployee)
 	router.POST("/request-employee", h.onlyOneEmployeeCategory)
 	router.GET("/edit-employee", h.updateEmployeeOpen)
+	router.GET("/print_report_employee", h.GeneratePdfFromHTML)
 	//router.DELETE("/employee/:id", h.deleteEmployee)
 	router.DELETE("/delete-employee", h.deleteEmployee)
 	//router.DELETE("/employee/:id", h.deleteEmployee)
@@ -76,7 +77,7 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	router.GET("/create-store-product", h.createStoreProduct) // треба випадний список
 	router.POST("/store-product", h.storeProductCreated)
 	router.GET("/store-products", h.getAllStoreProducts)       // html
-	router.GET("/store-products/:upc", h.getStoreProductByUpc) // by upc // не працює, потестити
+	router.GET("/store-products/:upc", h.getStoreProductByUpc) // by upc
 	router.DELETE("/store-product/:id", h.deleteStoreProduct)
 	//router.PUT("/store-product/:id", h.updateStoreProduct)
 	router.POST("/edit-store-product", h.updateStoreProduct)
