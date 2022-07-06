@@ -37,6 +37,9 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	router.GET("/edit-employee", h.updateEmployeeOpen)
 	//router.DELETE("/employee/:id", h.deleteEmployee)
 	router.DELETE("/delete-employee", h.deleteEmployee)
+	//router.DELETE("/employee/:id", h.deleteEmployee)
+	//router.POST("/delete-employee", h.deleteEmployee)
+	//router.GET("/who-am-i", h.WhoAmI)
 	// Category pages
 	router.GET("/create-category", h.createCategory)     // html
 	router.POST("/category", h.categoryCreated)          // html

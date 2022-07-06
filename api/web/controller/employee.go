@@ -162,3 +162,39 @@ func (h *Handler) searchEmployee(c *gin.Context) {
 	})
 	Tpl.ExecuteTemplate(c.Writer, "manager_employee.html", employees)
 }
+
+func (h *Handler) WhoAmI(c *gin.Context) {
+	authHeader, err := c.Request.Cookie("Authorization")
+	if err != nil {
+		c.HTML(http.StatusUnauthorized, "authorization first", nil)
+	}
+	currentEmplId := authHeader.Value
+	//roleDromDB, err := h.services.Role.GetByIdEmployee(currentEmplId)
+	//employeeID := c.Param("id")
+	employee, err := h.services.Employee.GetById(currentEmplId)
+	//employeeID := c.Param("id")
+	//employee, err := h.services.Employee.GetById(employeeID)
+
+	//var input entities.Employee
+	//input.ID = c.Request.FormValue("lastname")
+	//input.SurName = c.Request.FormValue("lastname")
+	//input.FirstName = c.Request.FormValue("firstname")
+	//input.Patronymic.String = c.Request.FormValue("patronymic")
+	//input.Role = c.Request.FormValue("emp_role")
+	//input.Salary, err = strconv.ParseFloat(c.Request.FormValue("salary"), 64)
+	//input.DateOfStart = c.Request.FormValue("day_of_start_job")
+	//input.DateOfBirth = c.Request.FormValue("day_of_birth")
+	//input.PhoneNumber = c.Request.FormValue("telephone")
+	//input.City = c.Request.FormValue("city_name")
+	//input.Street = c.Request.FormValue("street")
+	//input.ZipCode = c.Request.FormValue("index")
+	//_, err = h.services.Employee.Create(input)
+	if err != nil {
+		// throw error response
+		//respondWithError(c, http.StatusBadRequest, "fail to create employee, check if your data is correct")
+		//c.JSON(http.StatusOK, err)
+		//return
+	}
+	//c.JSON(http.StatusOK, input)
+	err = Tpl.ExecuteTemplate(c.Writer, "cashier_who_am_i.html", employee)
+}

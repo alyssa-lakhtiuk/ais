@@ -168,42 +168,29 @@
     <h1>Checks with Customer card by city</h1>
 </div>
 
-<!--<form method="GET">-->
-<!--    <button formaction="/print_report_check" class="button2">Print report</button>-->
-<!--</form>-->
 
-<form method="POST">
+<form method="GET">
 <div class="line1"></div>
 <table >
-    <!-- Table header -->
     <thead>
-    <tr>
-        <th scope="col">City</th>
-        <th scope="col">Number of checks with customer card</th>
-
-    </tr>
+        <tr>
+            <th scope="col">City</th>
+            <th scope="col">Number of checks with customer card</th>
+        </tr>
     </thead>
-
     <tbody>
-
     {{ range . }}
-    <tr>
-        <td>{{ .City }}</td>
-        <td>{{ .CheckCardNumber }}</td>
-
-    </tr>
-    <!--  <div class="line1"></div>-->
-
+        <tr>
+            <td>{{ .City }}</td>
+            <td>{{ .CheckCardNumber }}</td>
+        </tr>
     {{ end }}
     </tbody>
 </table>
+
 <div class="line1"></div>
 </form>
 
-<!--<form method="GET">-->
-<!--    <button formaction="/manager_homepage" class="button4">Homepage</button>-->
-<!--    <button formaction="/log_out" class="button5">Log out</button>-->
-<!--</form>-->
 
 </body>
 
