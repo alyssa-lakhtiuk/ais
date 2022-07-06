@@ -33,7 +33,7 @@ const (
 		"WHERE bill.bill_number = sale.fk_check_number AND NOT EXISTS " +
 		"(SELECT * " +
 		"FROM store_product sp " +
-		"WHERE sp.selling_price > 300 AND sale.fk_upc = sp.upc));"
+		"WHERE sp.selling_price > $1 AND sale.fk_upc = sp.upc));"
 )
 
 type zvit struct {

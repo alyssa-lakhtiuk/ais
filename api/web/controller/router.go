@@ -86,8 +86,8 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	router.DELETE("/check/:id", h.deleteCheck)
 
 	// Zvit
-	router.POST("/quantity-category", h.pricesByCat)
-	router.POST("/checks-category/:id", h.checksByCat)
+	router.GET("/quantity-category", h.pricesByCat)
+	router.POST("/checks-category", h.checksByCat)
 	///////
 	router.GET("/count-cities", h.countCities)
 	router.POST("/checks-price", h.checksByPrice)

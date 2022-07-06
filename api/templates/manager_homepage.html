@@ -231,21 +231,21 @@
 
     <form method="POST">
         <label>⭐️Top checks – product's price more then: </label>
-        <input type="text" class="form-control" id="zvit_check_number" name="number">
-        <button formaction="/zvit-check-price" type="submit" class="button6">Search</button>
+        <input type="text" class="form-control" id="price" name="price">
+        <button formaction="/checks-price" type="submit" class="button6">Search</button>
     </form>
     <form method="POST">
         <label>⭐️Top checks – all products from one category: </label>
         <input type="text" class="form-control" id="zvit_check_category" name="number">
-        <button formaction="/zvit-check-category" type="submit" class="button7">Search</button>
+        <button formaction="/check-category" type="submit" class="button7">Search</button>
     </form>
-    <form method="POST">
+    <form method="GET">
         <label>⭐️Top cities – checks in cities by customers with card: </label>
-        <button formaction="/zvit-city" type="submit" class="button7">Search</button>
+        <button formaction="/count-cities" type="submit" class="button7">Search</button>
     </form>
-    <form method="POST">
+    <form method="GET">
         <label>⭐️Top categories – number of products in each: </label>
-        <button formaction="/zvit-city" type="submit" class="button7">Search</button>
+        <button formaction="/quantity-category" type="submit" class="button7">Search</button>
     </form>
 
 

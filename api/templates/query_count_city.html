@@ -172,28 +172,22 @@
 <form method="GET">
 <div class="line1"></div>
 <table >
-    <!-- Table header -->
     <thead>
-    <tr>
-        <th scope="col">City</th>
-        <th scope="col">Number of checks with customer card</th>
-
-    </tr>
+        <tr>
+            <th scope="col">City</th>
+            <th scope="col">Number of checks with customer card</th>
+        </tr>
     </thead>
-
     <tbody>
-
     {{ range . }}
-    <tr>
-        <td>{{ .City }}</td>
-        <td>{{ .CheckCardNumber }}</td>
-
-    </tr>
-    <!--  <div class="line1"></div>-->
-
+        <tr>
+            <td>{{ .City }}</td>
+            <td>{{ .CheckCardNumber }}</td>
+        </tr>
     {{ end }}
     </tbody>
 </table>
+
 <div class="line1"></div>
 </form>
 
