@@ -13,8 +13,8 @@ func NewZvitService(repo repository.Zvit) *zvitService {
 	return &zvitService{repo: repo}
 }
 
-func (s *zvitService) GetPricesByCategory() ([]entities.PriceByCat, error) {
-	return s.repo.GetPricesByCategories()
+func (s *zvitService) GetQuantitiesByCategory() ([]entities.QuantityByCat, error) {
+	return s.repo.GetQuantitiesByCategories()
 }
 
 func (s *zvitService) GetChecksByCategory(category string) ([]entities.CheckByCat, error) {

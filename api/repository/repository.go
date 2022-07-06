@@ -86,7 +86,7 @@ type RoleRepo interface {
 }
 
 type Zvit interface {
-	GetPricesByCategories() ([]entities.PriceByCat, error)
+	GetQuantitiesByCategories() ([]entities.QuantityByCat, error)
 	GetChecksByCat(category string) ([]entities.CheckByCat, error)
 	/////
 	CountCities() ([]entities.CountCustomersCities, error)

@@ -128,9 +128,9 @@ type ProductStoreProductUpc struct {
 	UpC []StoreProduct
 }
 
-type PriceByCat struct {
-	Cat   string  `json:"cat" validate:"required"`
-	Price float64 `json:"price" validate:"required"`
+type QuantityByCat struct {
+	Cat      string  `json:"cat" validate:"required"`
+	Quantity float64 `json:"quantity" validate:"required"`
 }
 
 type CheckByCat struct {

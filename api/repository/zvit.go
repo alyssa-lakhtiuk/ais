@@ -12,9 +12,14 @@ const (
 		"INNER JOIN store_product ON store_product.fk_id_product=product.id_product " +
 		"GROUP BY category_name"
 
-	checksByCat = "SELECT distinct fk_check_number FROM sale SL WHERE NOT EXISTS (SELECT * FROM sale WHERE fk_upc IN" +
-		" (SELECT upc FROM store_product WHERE fk_id_product NOT IN (SELECT id_product FROM product WHERE fk_category_number" +
-		" IN (SELECT category_number FROM category WHERE category_name = '$1'))) AND SL.fk_check_number = fk_check_number);"
+	checksByCat = "SELECT distinct fk_check_number " +
+		"FROM sale SL " +
+		"WHERE NOT EXISTS (SELECT * " +
+		"FROM sale " +
+		"WHERE fk_upc IN (SELECT upc FROM store_product " +
+		"WHERE fk_id_product NOT IN (SELECT id_product FROM product " +
+		"WHERE fk_category_number IN (SELECT category_number FROM category " +
+		"WHERE category_name = $1))) AND SL.fk_check_number = fk_check_number);"
 
 	countCities = "SELECT city, COUNT(*)" +
 		"FROM customer_card INNER JOIN bill ON  customer_card.card_number = bill.fk_card_number" +
@@ -38,8 +43,8 @@ func NewZvit(db *sqlx.DB) *zvit {
 	return &zvit{db: db}
 }
 
-func (er *zvit) GetPricesByCategories() ([]entities.PriceByCat, error) {
-	var ccs []entities.PriceByCat
+func (er *zvit) GetQuantitiesByCategories() ([]entities.QuantityByCat, error) {
+	var ccs []entities.QuantityByCat
 
 	rows, err := er.db.Query(priceByCategory)
 	if err != nil {
@@ -47,8 +52,8 @@ func (er *zvit) GetPricesByCategories() ([]entities.PriceByCat, error) {
 	}
 	defer rows.Close()
 	for rows.Next() {
-		cc := entities.PriceByCat{}
-		err := rows.Scan(&cc.Cat, &cc.Price)
+		cc := entities.QuantityByCat{}
+		err := rows.Scan(&cc.Cat, &cc.Quantity)
 		if err != nil {
 			return nil, err
 		}

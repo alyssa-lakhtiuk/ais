@@ -8,7 +8,7 @@
     <title>price category</title>
     <style>
         h1 {
-            font-size: 72px;
+            font-size: 62px;
             font-family: cursive;
             font-weight: 50;
             color: #000000;
@@ -67,6 +67,7 @@
             margin-top: 60px;
 
         }
+
         th {
             font-size: 20px;
             font-family: cursive;
@@ -75,6 +76,7 @@
             padding-right: 15px;
             padding-left: 15px;
         }
+
         td {
             font-size: 14px;
             font-family: cursive;
@@ -109,7 +111,7 @@
         /*    margin-left: 20px;*/
         /*}*/
 
-        label{
+        label {
             font-family: cursive;
 
             text-align: center;
@@ -147,6 +149,7 @@
             margin-bottom: 5px;
             border-bottom: 0.5px solid black;
         }
+
         /*.button0 {*/
         /*    font-family: cursive;*/
         /*    border: 1px solid #c23704;*/
@@ -165,41 +168,27 @@
 <body>
 
 <div class="heading">
-    <h1>Sum selling price for each category</h1>
+    <h1>Quantity of store products for each category</h1>
 </div>
 
-<!--<form method="GET">-->
-<!--    <button formaction="/print_report_check" class="button2">Print report</button>-->
-<!--</form>-->
-
-
 <div class="line1"></div>
-<table >
-    <!-- Table header -->
+<table>
     <thead>
     <tr>
         <th scope="col">Category Name</th>
-        <th scope="col">Sum of selling price</th>
-
+        <th scope="col">Quantity</th>
     </tr>
     </thead>
-
     <tbody>
-
     {{ range . }}
     <tr>
         <td>{{ .Cat }}</td>
-        <td>{{ .Price }}</td>
-
+        <td>{{ .Quantity }}</td>
     </tr>
-    <!--  <div class="line1"></div>-->
-
     {{ end }}
     </tbody>
 </table>
 <div class="line1"></div>
-
-
 <!--<form method="GET">-->
 <!--    <button formaction="/manager_homepage" class="button4">Homepage</button>-->
 <!--    <button formaction="/log_out" class="button5">Log out</button>-->

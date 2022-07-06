@@ -174,11 +174,11 @@
 </div>
 <div class="line1"></div>
 
-<form method="POST">
+<form method="GET">
     <div class="form-row form-group">
         <div class="form-group col-md-4">
             <label>UPC:</label>
-            <select name="upc" id="upc-st">
+            <select name="upc1" id="upc-st1">
                 <option selected disabled>Choose</option>
                 {{range .}}
                 <option value="{{.Number}}">{{.UPC}} {{.SellingPrice}} {{.ProductsNumber}}</option>
@@ -187,28 +187,89 @@
         </div>
     </div>
 
-    </div>
-
-    <!--    <div class="form-row form-group">-->
-    <!--        <div class="form-group col-md-4">-->
-    <!--            <label>Product:</label>-->
-    <!--            <input type="text" class="form-control" id="name_prod" name="name_prod">-->
-    <!--        </div>-->
-    <!--    </div>-->
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
             <label>Number:</label>
-            <input type="text" class="form-control" id="number" name="number">
+            <input type="text" class="form-control" id="number1" name="number1">
         </div>
     </div>
 
+<!--    <div class="form-row form-group">-->
+<!--        <div class="form-group col-md-4">-->
+<!--            <button type="submit" formaction="/add-product-to-check" name="add_product_check" class="button1">add product-->
+<!--            </button>-->
+<!--        </div>-->
+<!--    </div>-->
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <button type="submit" formaction="add-product" name="add_product_check" class="button1">add product
-            </button>
+            <label>UPC:</label>
+            <select name="upc2" id="upc-st2">
+                <option selected disabled>Choose</option>
+                {{range .}}
+                <option value="{{.Number}}">{{.UPC}} {{.SellingPrice}} {{.ProductsNumber}}</option>
+                {{end}}
+            </select>
         </div>
     </div>
+
+
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <label>Number:</label>
+            <input type="text" class="form-control" id="number2" name="number2">
+        </div>
+    </div>
+
+
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <label>UPC:</label>
+            <select name="upc3" id="upc-st3">
+                <option selected disabled>Choose</option>
+                {{range .}}
+                <option value="{{.Number}}">{{.UPC}} {{.SellingPrice}} {{.ProductsNumber}}</option>
+                {{end}}
+            </select>
+        </div>
+    </div>
+
+
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <label>Number:</label>
+            <input type="text" class="form-control" id="number3" name="number3">
+        </div>
+    </div>
+
+
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <label>UPC:</label>
+            <select name="upc4" id="upc-st4">
+                <option selected disabled>Choose</option>
+                {{range .}}
+                <option value="{{.Number}}">{{.UPC}} {{.SellingPrice}} {{.ProductsNumber}}</option>
+                {{end}}
+            </select>
+        </div>
+    </div>
+
+
+    <div class="form-row form-group">
+        <div class="form-group col-md-4">
+            <label>Number:</label>
+            <input type="text" class="form-control" id="number4" name="number4">
+        </div>
+    </div>
+
+
+<!--    <div class="form-row form-group">-->
+<!--        <div class="form-group col-md-4">-->
+<!--            <button type="submit" formaction="/add-product-to-check" name="add_product_check" class="button1">add product-->
+<!--            </button>-->
+<!--        </div>-->
+<!--    </div>-->
 
 </form>
 
@@ -226,7 +287,7 @@
 
     <div class="form-row form-group">
         <div class="form-group col-md-4">
-            <button type="submit" formaction="/finish-check" class="button2">finish check</button>
+            <button type="submit" formaction="/add-product-to-check" class="button2">finish check</button>
         </div>
     </div>
 

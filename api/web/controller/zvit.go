@@ -7,23 +7,21 @@ import (
 	"strconv"
 )
 
-func (h *Handler) pricesByCat(c *gin.Context) {
-	var res []entities.PriceByCat
-	res, _ = h.services.Zvit.GetPricesByCategory()
+func (h *Handler) quantitiesByCat(c *gin.Context) {
+	var res []entities.QuantityByCat
+	res, _ = h.services.Zvit.GetQuantitiesByCategory()
 	Tpl.ExecuteTemplate(c.Writer, "query_price_category.html", res)
-	//c.JSON(http.StatusOK, res)
 }
 
 func (h *Handler) checksByCat(c *gin.Context) {
-	//category := c.Request.FormValue("")
-	category := c.Param("id")
+	category := c.Request.FormValue("number2")
 	var res []entities.CheckByCat
 	res, _ = h.services.Zvit.GetChecksByCategory(category)
 	for i := 0; i < len(res); i++ {
 		res[i].Cat = category
 	}
-	Tpl.ExecuteTemplate(c.Writer, "query_product_sell.html", res)
 	//c.JSON(http.StatusOK, res)
+	Tpl.ExecuteTemplate(c.Writer, "query_product_sell_check.html", res)
 }
 
 /////

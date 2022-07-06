@@ -84,12 +84,14 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	router.POST("/check", h.createCheck)
 	router.GET("/checks", h.getAllChecks)
 	router.DELETE("/check/:id", h.deleteCheck)
+	router.GET("/add-product-to-check", h.addProductToCheck)
+	router.POST("/add-product-to-check", h.addProductToCheck)
 
 	// Zvit
-	router.GET("/quantity-category", h.pricesByCat)
-	router.GET("/checks-category/:id", h.checksByCat)
+	router.GET("/quantity-category", h.quantitiesByCat)
+	router.POST("/checks-category", h.checksByCat)
 	///////
-	router.POST("/count-cities", h.countCities)
+	router.GET("/count-cities", h.countCities)
 	router.POST("/checks-price", h.checksByPrice)
 	return router
 }

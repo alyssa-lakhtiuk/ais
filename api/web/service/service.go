@@ -77,7 +77,7 @@ type Role interface {
 }
 
 type Zvit interface {
-	GetPricesByCategory() ([]entities.PriceByCat, error)
+	GetQuantitiesByCategory() ([]entities.QuantityByCat, error)
 	GetChecksByCategory(category string) ([]entities.CheckByCat, error)
 	GetCountByCities() ([]entities.CountCustomersCities, error)
 	GetChecksByPrice(price int) ([]entities.SecondStruct, error)
