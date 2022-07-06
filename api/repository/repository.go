@@ -45,6 +45,7 @@ type StoreProductRepo interface {
 	DeleteStoreProduct(upc string) error
 	GetStoreProductByUpc(name string) (entities.StoreProduct, error)
 	GetAllStoreProducts() ([]entities.StoreProduct, error)
+	SearchByUPC(upc string) ([]entities.StoreProduct, error)
 }
 
 type CategoryRepo interface {

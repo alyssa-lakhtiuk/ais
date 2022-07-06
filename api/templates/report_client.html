@@ -15,7 +15,7 @@
             height: 20px;
             margin-left: 50px;
             margin-top: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 120px;
         }
 
         .button2 {
@@ -27,7 +27,6 @@
             text-align: center;
             font-size: 25px;
             margin-left: 525px;
-            margin-bottom: 25px;
         }
         .form-control {
             font-family: cursive;
@@ -165,24 +164,10 @@
 <body>
 
 <div class="heading">
-    <h1>Customers 😻</h1>
+    <h1>Customers </h1>
 </div>
 
-<form method="GET">
-    <button formaction="/create-customer-card" class="button2">Add new customer</button>
-    <button formaction="/report-customer" class="button3">Customers report</button>
-    </form>
 
-<form action="/request_client" method="POST">
-<!--    <label>Sort by surname: </label>-->
-<!--    <select id="sort_surname" name="sort_surname">-->
-<!--        <option value="asc">ASC</option>-->
-<!--        <option value="desc">DESC</option>-->
-<!--    </select>-->
-    <label>Search by percentage: </label>
-    <input type="number" class="form-control" id="ser_per" name="search_percentage" placeholder="%">
-    <button type="submit" class="button1">Search</button>
-</form>
 <div class="line1"></div>
 <table >
     <!-- Table header -->
@@ -220,20 +205,6 @@
 </table>
 <div class="line1"></div>
 
-<form method="GET">
-    <label>Card Number: </label>
-    <input type="text" class="form-control" id="number_card" name="number_card">
-    <button formaction="/edit-customer-card" type="submit" class="button0">Edit</button>
-</form>
-<form method="POST">
-<button formaction="/delete-client" type="submit" class="button0">Delete</button>
-</form>
-    <!--<p>{{.Mess}}</p>-->
-
-<form method="GET">
-    <button formaction="/homepage" class="button4">Homepage</button>
-    <button formaction="/sign-in-input" class="button5">Log out</button>
-</form>
 
 </body>
 

@@ -3,7 +3,6 @@ package controller
 import (
 	"ais/entities"
 	"github.com/gin-gonic/gin"
-	"net/http"
 	"strconv"
 )
 

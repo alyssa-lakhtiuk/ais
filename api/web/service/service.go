@@ -46,6 +46,7 @@ type StoreProduct interface {
 	Delete(upc string) error
 	GetByName(productName string) (entities.StoreProduct, error) // ? add func getByID
 	GetAll() ([]entities.StoreProduct, error)
+	SearchUPC(upc string) ([]entities.StoreProduct, error)
 }
 
 type Sale interface {

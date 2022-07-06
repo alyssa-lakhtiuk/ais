@@ -41,3 +41,7 @@ func (s *storeProductService) GetAll() ([]entities.StoreProduct, error) {
 func NewStoreProductService(repo repository.ProductRepo, repoStore repository.StoreProductRepo) *storeProductService {
 	return &storeProductService{repo: repoStore, repoAdditional: repo}
 }
+
+func (s *storeProductService) SearchUPC(upc string) ([]entities.StoreProduct, error) {
+	return s.repo.SearchByUPC(upc)
+}

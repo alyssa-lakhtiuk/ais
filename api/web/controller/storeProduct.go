@@ -141,3 +141,29 @@ func (h *Handler) updateStoreProduct(c *gin.Context) {
 	h.getAllStoreProducts(c)
 	//Tpl.ExecuteTemplate(c.Writer, "manager_stock_product.html", entities.Message{Mess: "employee updated"})
 }
+
+func (h *Handler) searchStoreProductsUPC(c *gin.Context) {
+	authHeader, err := c.Request.Cookie("Authorization")
+	if err != nil {
+		c.HTML(http.StatusUnauthorized, "authorization first", nil)
+	}
+	upc := c.Request.FormValue("upc")
+	currentEmplId := authHeader.Value
+	roleDromDB, err := h.services.Role.GetByIdEmployee(currentEmplId)
+
+	products, err := h.services.StoreProduct.SearchUPC(upc)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err)
+		return
+	}
+	sort.SliceStable(products, func(i, j int) bool {
+		return products[i].ProductsNumber < products[j].ProductsNumber
+	})
+	if roleDromDB.Role == "manager" {
+		Tpl.ExecuteTemplate(c.Writer, "manager_stock_product.html", products)
+	} else {
+		Tpl.ExecuteTemplate(c.Writer, "cashier_stock_product.html", products)
+	}
+
+	//c.JSON(http.StatusOK, products)
+}
