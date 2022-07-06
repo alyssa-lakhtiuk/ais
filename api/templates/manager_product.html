@@ -164,7 +164,7 @@
 
 <form method="GET">
     <button formaction="/create-product" class="button2">Add new product</button>
-    <button formaction="/report-product" class="button3">Add new product</button>
+    <button formaction="/report-product" class="button3">Report product</button>
 
 </form>
 
@@ -179,7 +179,7 @@
 
     <select id="search_product_caty" name="/search_product_category">
         <option value="without_value" selected disabled>Choose</option>
-        {{ range . }}
+        {{ range .C }}
         <option value="{{ .Number }}">{{ .Name }}</option>
         {{ end }}
     </select>
@@ -199,7 +199,7 @@
 
     <!-- Table body -->
     <tbody>
-    {{ range . }}
+    {{ range .P }}
     <tr>
         <td>{{ .Id }}</td>
         <td>{{ .CategoryNum }}</td>

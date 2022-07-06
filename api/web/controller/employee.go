@@ -130,7 +130,8 @@ func (h *Handler) deleteEmployee(c *gin.Context) {
 func (h *Handler) onlyOneEmployeeCategory(c *gin.Context) {
 	role := c.Request.FormValue("sort_role")
 	if role != "manager" && role != "cashier" {
-		return
+		h.getAllEmployees(c)
+		return //Tpl.ExecuteTemplate(c.Writer, "manager_employee.html", allEmployees)
 	}
 	employees, err := h.services.Employee.GetAllByCategory(role)
 	if err != nil {
@@ -195,6 +196,10 @@ func (h *Handler) WhoAmI(c *gin.Context) {
 		//c.JSON(http.StatusOK, err)
 		//return
 	}
-	//c.JSON(http.StatusOK, input)
 	err = Tpl.ExecuteTemplate(c.Writer, "cashier_who_am_i.html", employee)
+}
+
+func (h *Handler) createEmployeeReport(c *gin.Context) {
+	employees, _ := h.services.Employee.GetAll()
+	Tpl.ExecuteTemplate(c.Writer, "zvit_employee.html", employees)
 }

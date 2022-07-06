@@ -38,6 +38,7 @@ type Product interface {
 	GetByName(productName string) (entities.Product, error) // ? add func getByID
 	GetByNumber(productId int) (entities.Product, error)
 	GetAll() ([]entities.Product, error)
+	GetAllByCategory(category string) ([]entities.Product, error)
 }
 
 type StoreProduct interface {

@@ -2,6 +2,7 @@ package repository
 
 import (
 	"ais/entities"
+	"fmt"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 )
@@ -11,11 +12,12 @@ const (
 		"VALUES ($1, $2, $3, $4);"
 	updateProduct = "UPDATE " + productTable + " SET fk_category_number=$2, product_name=$3, description=$4 " +
 		"WHERE id_product=$1;"
-	deleteProduct        = "DELETE FROM " + productTable + " WHERE id_product = $1;"
-	getProductByName     = "SELECT * FROM " + productTable + " WHERE product_name = $1;"
-	getProductByCategory = "SELECT * FROM " + productTable + " WHERE fk_category_number = $1;"
-	getProductByNumber   = "SELECT * FROM " + productTable + " WHERE id_product = $1;"
-	getAllProducts       = "SELECT * FROM " + productTable + ";"
+	deleteProduct            = "DELETE FROM " + productTable + " WHERE id_product = $1;"
+	getProductByName         = "SELECT * FROM " + productTable + " WHERE product_name = $1;"
+	getProductByCategory     = "SELECT * FROM " + productTable + " WHERE fk_category_number = $1;"
+	getProductByNumber       = "SELECT * FROM " + productTable + " WHERE id_product = $1;"
+	getAllProducts           = "SELECT * FROM " + productTable + ";"
+	getAllProductsByCategory = "SELECT * FROM " + productTable + " WHERE category_name = $1;"
 )
 
 type ProductPostgres struct {
@@ -90,6 +92,24 @@ func (p *ProductPostgres) GetAllProducts() ([]entities.Product, error) {
 	//if err := p.db.Select(&products, getAllProducts); err != nil {
 	//	return []entities.Product{}, err
 	//}
+	return products, nil
+}
+
+func (er *ProductPostgres) GetProductByCategory(category string) ([]entities.Product, error) {
+	var products []entities.Product
+	rows, err := er.db.Query(getAllProductsByCategory, category)
+	if err != nil {
+		return nil, fmt.Errorf("unable to execute the query")
+	}
+	defer rows.Close()
+	for rows.Next() {
+		prod := entities.Product{}
+		err := rows.Scan(&prod.Id, &prod.Name, &prod.Characteristics, &prod.CategoryNum)
+		if err != nil {
+			return nil, err
+		}
+		products = append(products, prod)
+	}
 	return products, nil
 }
 

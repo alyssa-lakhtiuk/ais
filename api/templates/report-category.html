@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>report product</title>
+    <title> report category</title>
     <style>
         h1 {
             font-size: 72px;
@@ -17,6 +17,7 @@
             margin-top: 20px;
             margin-bottom: 100px;
         }
+
 
         select {
             appearance: none;
@@ -30,7 +31,7 @@
             font-size: 25px;
             margin-bottom: 20px;
             margin-top: 50px;
-            margin-left: 5px;
+            margin-left: 250px;
 
         }
 
@@ -45,86 +46,67 @@
 
         }
         th {
-            font-size: 16px;
+            font-size: 26px;
             font-family: cursive;
             font-weight: 50;
             color: #000000;
-            padding-right: 35px;
-            padding-left: 35px;
+            padding-right: 65px;
+            padding-left: 25px;
         }
         td {
-            font-size: 12px;
+            font-size: 20px;
             font-family: cursive;
             color: #000000;
             padding-right: 10px;
-            padding-left: 40px;
+            padding-left: 60px;
+
         }
 
         label{
             font-family: cursive;
-
             text-align: center;
             font-size: 25px;
-            margin-left: 20px;
+            margin-left: 10px;
             margin-bottom: 15px;
         }
-        .button1 {
-            font-family: cursive;
-            border: 1px solid #c27004;
-            background-color: #ffb14d;
-            color: #ffffff;
-            padding-left: 10px;
-            padding-right: 10px;
-            text-align: center;
-            font-size: 25px;
-            margin-left: 20px;
-            margin-top: 5px;
-        }
+
         .line1 {
             width: 1300px;
             margin-top: 10px;
             margin-bottom: 10px;
             border-bottom: 0.5px solid black;
         }
-
     </style>
-
 </head>
 
 <body>
 
 <div class="heading">
-    <h1>Product</h1>
+    <h1>Category</h1>
 </div>
 
 <div class="line1"></div>
+
 <table >
     <!-- Table header -->
     <thead>
     <tr>
-        <th scope="col">Product ID</th>
         <th scope="col">Category Number</th>
-        <th scope="col">Product Name</th>
-        <th scope="col">Characteristics</th>
+        <th scope="col">Category Name</th>
+
     </tr>
     </thead>
 
-    <!-- Table body -->
     <tbody>
     {{ range . }}
     <tr>
-        <td>{{ .Id }}</td>
-        <td>{{ .CategoryNum }}</td>
+        <td>{{ .Number }}</td>
         <td>{{ .Name }}</td>
-        <td>{{ .Characteristics }}</td>
     </tr>
-
     {{ end }}
     </tbody>
 </table>
-
 <div class="line1"></div>
-
 
 
 </body>
