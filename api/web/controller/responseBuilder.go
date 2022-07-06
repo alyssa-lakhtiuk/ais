@@ -14,7 +14,7 @@ const (
 )
 
 func respondWithError(ctx *gin.Context, code int, message string) error {
-	return respondWithJSON(ctx, code, ErrorMessage{Message: message})
+	return respondWithJSON(ctx, code, ErrorMessage{Mess: message})
 }
 
 func respondWithJSON(ctx *gin.Context, code int, payload interface{}) error {

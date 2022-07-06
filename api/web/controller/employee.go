@@ -23,6 +23,11 @@ func (h *Handler) employeeCreated(c *gin.Context) {
 	input.Salary, err = strconv.ParseFloat(c.Request.FormValue("salary"), 64)
 	input.DateOfStart = c.Request.FormValue("day_of_start_job")
 	input.DateOfBirth = c.Request.FormValue("day_of_birth")
+	year, _ := strconv.Atoi(input.DateOfBirth)
+	if year < 2004 {
+		Tpl.ExecuteTemplate(c.Writer, "errorMessage.html", ErrorMessage{Mess: "the employee must be older"})
+		return
+	}
 	input.PhoneNumber = c.Request.FormValue("telephone")
 	input.City = c.Request.FormValue("city_name")
 	input.Street = c.Request.FormValue("street")

@@ -1,7 +1,7 @@
 package controller
 
 type ErrorMessage struct {
-	Message string `json:"error"`
+	Mess string `json:"error"`
 }
 
 //var (

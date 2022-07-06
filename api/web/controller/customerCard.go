@@ -90,8 +90,8 @@ func (h *Handler) updateCustomerCard(c *gin.Context) {
 	//}
 	if err := h.services.CustomerCard.Update(cardNumber, input); err != nil {
 		// throw error response
-		respondWithError(c, http.StatusBadRequest, "unable to update")
-		return
+		//respondWithError(c, http.StatusBadRequest, "unable to update")
+		//return
 	}
 	h.getAllCustomerCards(c)
 	//Tpl.ExecuteTemplate(c.Writer, "edit_employee.html", entities.Message{Mess: "customer card updated"})

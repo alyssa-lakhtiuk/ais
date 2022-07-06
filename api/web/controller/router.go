@@ -58,7 +58,7 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	router.GET("/products", h.getAllProducts)         // html
 	router.GET("/product/:name", h.getProductByName)  // by name // працює
 	router.GET("/products/:id", h.getProductByNumber) // by id // працює
-	router.DELETE("/product/:id", h.deleteProduct)
+	router.DELETE("/delete-product", h.deleteProduct)
 	//router.PUT("/product/:id", h.updateProduct)
 	router.POST("/edit-product", h.updateProduct)
 	router.GET("/edit-product", h.updateProductOpen)
@@ -68,7 +68,7 @@ func (h *Handler) NewRoutes() *gin.Engine {
 	router.POST("/customer-card", h.customerCardCreated)        //html
 	router.GET("/customer-card/:id", h.getCustomerCardByNumber) // by name // працює ++
 	router.GET("/customer-cards", h.getAllCustomerCards)        // html
-	router.DELETE("/customer-cards/:id", h.deleteCustomerCard)
+	router.DELETE("/customer-card", h.deleteCustomerCard)
 	//router.PUT("/customer-card/:id", h.updateCustomerCard)
 	router.PUT("/edit-customer-card", h.updateCustomerCard)
 	router.GET("/edit-customer-card", h.updateCustomerCardOpen)
